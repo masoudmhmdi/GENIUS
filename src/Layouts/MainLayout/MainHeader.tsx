@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Slide from '@mui/material/Slide';
 import { Button } from '@mui/material';
+import BasicTabs from '@/Components/Tabs';
 
 interface Props {
   /**
@@ -40,8 +41,7 @@ export default function MainHeader(props: Props) {
       <HideOnScroll {...props}>
         <AppBar sx={{ backgroundColor: 'white' }}>
           <Toolbar sx={{ backgroundColor: 'white' }}>
-            <Button>hello</Button>
-            <Button>hello</Button>
+            <BasicTabs />
           </Toolbar>
         </AppBar>
       </HideOnScroll>
