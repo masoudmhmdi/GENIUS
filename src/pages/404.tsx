@@ -1,12 +1,12 @@
 import AuthLayout from '@/Layouts/AuthLayout/AuthLayout';
 import React, { ReactNode } from 'react';
 
-function Register() {
-  return <div>Register</div>;
+function NotFound() {
+  return <div>NotFound</div>;
 }
 
-export default Register;
+export default NotFound;
 
-Register.getLayout = function pageLayout(page: ReactNode) {
+NotFound.getLayout = function pageLayout(page: ReactNode) {
   return <AuthLayout>{page}</AuthLayout>;
 };

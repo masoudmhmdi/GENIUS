@@ -8,6 +8,16 @@ const btn = (): Components['MuiButton'] => ({
   },
 });
 
+const MuiToolbarStyle = (): Components['MuiToolbar'] => ({
+  styleOverrides: {
+    root: {
+      maxWidth: '1200px',
+      width: '100%',
+      margin: '0 auto',
+    },
+  },
+});
+
 export const theme = createTheme({
   palette: {
     primary: {
@@ -19,5 +29,6 @@ export const theme = createTheme({
   },
   components: {
     MuiButton: btn(),
+    MuiToolbar: MuiToolbarStyle(),
   },
 });
