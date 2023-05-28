@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { theme } from '@/theme';
 import MainLayout from '@/Layouts/MainLayout/MainLayout';
 import createEmotionCache from '../utils/createEmotionCache';
+import { CssBaseline } from '@mui/material';
 
 const clientSideEmotionCache = createEmotionCache();
 const client = new QueryClient();
@@ -19,6 +20,7 @@ export default function App({
       <QueryClientProvider client={client}>
         <ThemeProvider theme={theme}>
           <CacheProvider value={emotionCache}>
+            <CssBaseline />
             {Component.getLayout ? (
               Component.getLayout(<Component {...pageProps} />)
             ) : (

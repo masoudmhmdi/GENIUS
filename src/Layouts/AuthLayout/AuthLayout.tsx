@@ -12,7 +12,7 @@ function AuthLayout({ children }: { children: ReactNode }) {
           <Box sx={{ paddingTop: '70px' }}> {children}</Box>
         </Grid>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

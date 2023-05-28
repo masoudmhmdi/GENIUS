@@ -17,6 +17,13 @@ const MuiToolbarStyle = (): Components['MuiToolbar'] => ({
     },
   },
 });
+const MuiTextFieldStyle = (): Components['MuiTextField'] => ({
+  styleOverrides: {
+    root: {
+      borderRadius: '0px',
+    },
+  },
+});
 
 export const theme = createTheme({
   palette: {
@@ -30,5 +37,6 @@ export const theme = createTheme({
   components: {
     MuiButton: btn(),
     MuiToolbar: MuiToolbarStyle(),
+    MuiTextField: MuiTextFieldStyle(),
   },
 });
