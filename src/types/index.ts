@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios';
+
 export type IRegisterData = {
   payload: {
     token: any;
@@ -31,10 +33,10 @@ export type IRegisterData = {
       };
     };
   };
-  error: {
+  error: AxiosError<{
     status: string;
     message: string;
-  };
+  }>;
 };
 
 export type ILoginData = {
@@ -42,4 +44,31 @@ export type ILoginData = {
     username: string;
     password: string;
   };
+  response: {
+    status: string;
+    token: {
+      accessToken: string;
+      refreshToken: string;
+      data: {
+        user: {
+          _id: string;
+          firstname: string;
+          lastname: string;
+          username: string;
+          password: string;
+          phoneNumber: string;
+          address: string;
+          role: string;
+          createdAt: string;
+          updatedAt: string;
+          __v: number;
+          refreshToken: string;
+        };
+      };
+    };
+  };
+  error: AxiosError<{
+    status: string;
+    message: string;
+  }>;
 };

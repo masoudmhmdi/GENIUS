@@ -7,9 +7,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import useRegisterUser from '@/api/services/UseRegisterUser';
-import cookie from 'js-cookie';
+
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
+import { handleAuthErr } from '@/utils/handleAuthErr';
+import CircularProgress from '@mui/material/CircularProgress';
+import { setCookie } from '@/utils/setCookie';
 
 const schema = yup.object({
   firstname: yup.string().required('این فیلد ضروری است'),
@@ -30,31 +33,18 @@ function Register() {
     resolver: yupResolver(schema),
   });
   const router = useRouter();
-  const { mutate } = useRegisterUser({
-    onSuccess: (res) => {
-      cookie.set('accessToken', res.token.accessToken);
-      cookie.set('refreshToken', res.token.refreshToken);
+  const { mutate, isLoading } = useRegisterUser({
+    onSuccess: (res: any) => {
+      const { token } = res;
+      setCookie(token);
       router.push('/');
     },
     onError: (err) => {
-      switch (err.response?.status) {
-        case 400: {
-          const massage = err.response.data.message;
-          const field = massage.split(`"`)[1];
-          setError(field as keyof IRegisterData['payload'], {
-            message: massage,
-          });
-        }
-        default: {
-          console.log('default');
-          toast(err.response?.data.message as string);
-        }
-      }
+      handleAuthErr({ setError, err });
     },
   });
 
   const submitHandler = (d: IRegisterData['payload']) => {
-    console.log(d);
     mutate(d);
   };
   return (
@@ -196,11 +186,12 @@ function Register() {
         </Button>
 
         <Link
-          href="/auth/register"
+          href="/auth/login"
           sx={{ opacity: '1', cursor: 'pointer', margin: '0 3px' }}
         >
           ورود
         </Link>
+        {isLoading && <CircularProgress />}
       </Box>
     </Box>
   );

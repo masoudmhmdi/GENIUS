@@ -1,12 +1,17 @@
 import AuthLayout from '@/Layouts/AuthLayout/AuthLayout';
-import { Box, Button, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, Link, TextField } from '@mui/material';
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { ILoginData } from '@/types';
+import { ILoginData, IRegisterData } from '@/types';
 import { error } from 'console';
+import useLoginUser from '@/api/services/UseLoginUser';
+import { handleAuthErr } from '@/utils/handleAuthErr';
+import CircularProgress from '@mui/material/CircularProgress';
+import { setCookie } from '@/utils/setCookie';
+import { useRouter } from 'next/dist/client/router';
 
 const schema = yup.object({
   username: yup.string().required('این فیلد ضروری است'),
@@ -14,6 +19,7 @@ const schema = yup.object({
 });
 
 function Login() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -23,8 +29,19 @@ function Login() {
     resolver: yupResolver(schema),
   });
 
+  const { mutate, isLoading } = useLoginUser({
+    onSuccess: (res: any) => {
+      const { token } = res;
+      setCookie(token);
+      router.push('/');
+    },
+    onError: (err) => {
+      handleAuthErr({ setError, err });
+    },
+  });
+
   const submitHandler = (d: ILoginData['payload']) => {
-    console.log(d);
+    mutate(d);
   };
 
   return (
@@ -97,7 +114,7 @@ function Login() {
           fullWidth
           type="submit"
         >
-          jj
+          ورود
         </Button>
 
         <Link
@@ -106,6 +123,7 @@ function Login() {
         >
           ثبت نام کنید
         </Link>
+        {isLoading && <CircularProgress />}
       </Box>
     </Box>
   );
