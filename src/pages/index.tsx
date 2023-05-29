@@ -1,9 +1,19 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import { Button } from '@mui/material';
+import { useEffect } from 'react';
 const inter = Inter({ subsets: ['latin'] });
+import { useRouter } from 'next/router';
+import Cookie from 'js-cookie';
 
 export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    const isLogin = Cookie.get('accessToken');
+    if (!isLogin) {
+      router.push('/auth/login');
+    }
+  }, []);
   return (
     <>
       <Head>
