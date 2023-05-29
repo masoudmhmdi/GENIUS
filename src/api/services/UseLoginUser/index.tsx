@@ -10,6 +10,7 @@ function useLoginUser(
     ILoginData['response']
   >
 ) {
+  console.log('post');
   return useMutation({
     ...options,
     mutationFn: loginService,

@@ -31,6 +31,7 @@ function Login() {
 
   const { mutate, isLoading } = useLoginUser({
     onSuccess: (res: any) => {
+      console.log(res);
       const { token } = res;
       setCookie(token);
       router.push('/');
