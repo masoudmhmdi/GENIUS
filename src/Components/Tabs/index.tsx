@@ -34,8 +34,11 @@ export default function BasicTabs() {
       case '/':
         setValue(0);
         break;
-      case '/admin':
+      case '/cart':
         setValue(1);
+        break;
+      case '/admin':
+        setValue(2);
         break;
 
       default:
@@ -48,7 +51,7 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ width: '100%', height: '100%' }}>
+    <Box>
       <Tabs
         value={value}
         onChange={handleChange}

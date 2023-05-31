@@ -3,7 +3,7 @@ import { Components, createTheme } from '@mui/material';
 const btn = (): Components['MuiButton'] => ({
   styleOverrides: {
     root: {
-      borderRadius: '30px',
+      borderRadius: '0',
     },
   },
 });

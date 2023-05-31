@@ -8,9 +8,7 @@ function MainLayout({ children }: { children: ReactNode }) {
     <>
       <MainHeader />
       <Container>
-        <Grid>
-          <Box sx={{ paddingTop: '70px' }}> {children}</Box>
-        </Grid>
+        <Box sx={{ paddingTop: '70px' }}> {children}</Box>
       </Container>
       <Footer />
     </>

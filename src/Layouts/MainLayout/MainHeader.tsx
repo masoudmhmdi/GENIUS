@@ -1,17 +1,11 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Slide from '@mui/material/Slide';
-import { Button } from '@mui/material';
 import BasicTabs from '@/Components/Tabs';
-import { json } from 'stream/consumers';
-import getUserData from '@/utils/getUserData';
-import { GetStaticProps } from 'next';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Image from 'next/image';
 
 interface Props {
   /**
@@ -44,21 +38,25 @@ export default function MainHeader(props: Props) {
     <React.Fragment>
       <HideOnScroll {...props}>
         <AppBar sx={{ backgroundColor: 'white' }}>
-          <Toolbar sx={{ backgroundColor: 'white' }}>
+          <Toolbar
+            sx={{
+              backgroundColor: 'white',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
             <BasicTabs />
+            <Image
+              alt="lsdj"
+              width={179}
+              height={46}
+              style={{ width: '100%', maxWidth: '179px' }}
+              src={'/logo.png'}
+            />
           </Toolbar>
         </AppBar>
       </HideOnScroll>
     </React.Fragment>
   );
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   const data = localStorage.getItem('data');
-//   console.log(data);
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
