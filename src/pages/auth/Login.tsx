@@ -12,6 +12,7 @@ import { handleAuthErr } from '@/utils/handleAuthErr';
 import CircularProgress from '@mui/material/CircularProgress';
 import { setCookie } from '@/utils/setCookie';
 import { useRouter } from 'next/dist/client/router';
+import { persistData } from '@/utils/persistData';
 
 const schema = yup.object({
   username: yup.string().required('این فیلد ضروری است'),
@@ -34,6 +35,7 @@ function Login() {
       console.log(res);
       const { token } = res;
       setCookie(token);
+      persistData(res);
       router.push('/');
     },
     onError: (err) => {

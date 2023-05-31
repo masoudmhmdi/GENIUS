@@ -13,6 +13,7 @@ import toast from 'react-hot-toast';
 import { handleAuthErr } from '@/utils/handleAuthErr';
 import CircularProgress from '@mui/material/CircularProgress';
 import { setCookie } from '@/utils/setCookie';
+import { persistData } from '@/utils/persistData';
 
 const schema = yup.object({
   firstname: yup.string().required('این فیلد ضروری است'),
@@ -37,6 +38,7 @@ function Register() {
     onSuccess: (res: any) => {
       const { token } = res;
       setCookie(token);
+      persistData(res);
       router.push('/');
     },
     onError: (err) => {

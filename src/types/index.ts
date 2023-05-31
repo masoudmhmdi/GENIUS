@@ -49,21 +49,21 @@ export type ILoginData = {
     token: {
       accessToken: string;
       refreshToken: string;
-      data: {
-        user: {
-          _id: string;
-          firstname: string;
-          lastname: string;
-          username: string;
-          password: string;
-          phoneNumber: string;
-          address: string;
-          role: string;
-          createdAt: string;
-          updatedAt: string;
-          __v: number;
-          refreshToken: string;
-        };
+    };
+    data: {
+      user: {
+        firstname: string;
+        lastname: string;
+        username: string;
+        password: string;
+        phoneNumber: string;
+        address: string;
+        role: string;
+        _id: string;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+        refreshToken: string;
       };
     };
   };

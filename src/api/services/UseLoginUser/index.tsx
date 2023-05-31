@@ -7,7 +7,7 @@ function useLoginUser(
   options: UseMutationOptions<
     ILoginData['payload'],
     ILoginData['error'],
-    ILoginData['response']
+    unknown
   >
 ) {
   console.log('post');

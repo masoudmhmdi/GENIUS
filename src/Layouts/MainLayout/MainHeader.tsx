@@ -1,4 +1,3 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -9,6 +8,10 @@ import Container from '@mui/material/Container';
 import Slide from '@mui/material/Slide';
 import { Button } from '@mui/material';
 import BasicTabs from '@/Components/Tabs';
+import { json } from 'stream/consumers';
+import getUserData from '@/utils/getUserData';
+import { GetStaticProps } from 'next';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
   /**
@@ -17,6 +20,7 @@ interface Props {
    */
   window?: () => Window;
   children?: React.ReactElement;
+  data?: any;
 }
 
 function HideOnScroll(props: Props) {
@@ -48,3 +52,13 @@ export default function MainHeader(props: Props) {
     </React.Fragment>
   );
 }
+
+// export const getStaticProps: GetStaticProps = async () => {
+//   const data = localStorage.getItem('data');
+//   console.log(data);
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// };
