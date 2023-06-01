@@ -39,4 +39,8 @@ export const theme = createTheme({
     MuiToolbar: MuiToolbarStyle(),
     MuiTextField: MuiTextFieldStyle(),
   },
+  direction: 'rtl',
+  typography: {
+    fontFamily: 'vaz',
+  },
 });

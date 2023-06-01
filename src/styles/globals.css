@@ -3,3 +3,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: 'vaz';
+  src: url('../../public/Font/Vazirmatn-VariableFont_wght.ttf');
+}

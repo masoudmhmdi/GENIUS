@@ -1,15 +1,13 @@
 import AuthLayout from '@/Layouts/AuthLayout/AuthLayout';
 import { IRegisterData } from '@/types';
-import { Box, Button, Grid, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, Link, TextField } from '@mui/material';
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import useRegisterUser from '@/api/services/UseRegisterUser';
-
 import { useRouter } from 'next/router';
-import toast from 'react-hot-toast';
 import { handleAuthErr } from '@/utils/handleAuthErr';
 import CircularProgress from '@mui/material/CircularProgress';
 import { setCookie } from '@/utils/setCookie';
@@ -99,7 +97,7 @@ function Register() {
           }}
         />
         <TextField
-          label="lastname"
+          label="نام خانوادگی"
           error={Boolean(errors.lastname)}
           helperText={errors.lastname?.message}
           fullWidth
@@ -115,7 +113,7 @@ function Register() {
           }}
         />
         <TextField
-          label="username"
+          label="نام کاربری"
           error={Boolean(errors.username)}
           helperText={errors.username?.message}
           fullWidth
@@ -131,7 +129,7 @@ function Register() {
           }}
         />
         <TextField
-          label="hello"
+          label="رمز ورود"
           fullWidth
           error={Boolean(errors.password)}
           helperText={errors.password?.message}
@@ -144,10 +142,11 @@ function Register() {
               height: '50px',
             },
             ...register('password'),
+            type: 'password',
           }}
         />
         <TextField
-          label="hello"
+          label="شماره تماس"
           fullWidth
           error={Boolean(errors.phoneNumber)}
           helperText={errors.phoneNumber?.message}
@@ -163,7 +162,7 @@ function Register() {
           }}
         />
         <TextField
-          label="hello"
+          label="آدرس"
           error={Boolean(errors.address)}
           helperText={errors.address?.message}
           fullWidth
@@ -184,7 +183,7 @@ function Register() {
           fullWidth
           type="submit"
         >
-          ثبت تام
+          ثبت نام
         </Button>
 
         <Link

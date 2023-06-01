@@ -20,7 +20,6 @@ export const handleAuthErr = ({
     }
 
     default: {
-      console.log('default');
       toast(err.response?.data.message as string);
     }
   }
