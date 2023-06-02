@@ -8,13 +8,6 @@ import Cookie from 'js-cookie';
 import ProductCard from '@/Components/card';
 
 export default function Home() {
-  const router = useRouter();
-  useEffect(() => {
-    const isLogin = Cookie.get('accessToken');
-    if (!isLogin) {
-      router.push('/auth/login');
-    }
-  }, []);
   return (
     <>
       <Head>

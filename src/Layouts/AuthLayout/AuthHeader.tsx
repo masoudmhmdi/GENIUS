@@ -5,9 +5,10 @@ import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Slide from '@mui/material/Slide';
 import { Button } from '@mui/material';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 interface Props {
   /**
@@ -35,12 +36,20 @@ function HideOnScroll(props: Props) {
 }
 
 export default function AuthHeader(props: Props) {
+  const router = useRouter();
+  console.log(router.pathname);
   return (
     <React.Fragment>
       <HideOnScroll {...props}>
         <AppBar sx={{ backgroundColor: 'white' }}>
           <Toolbar sx={{ backgroundColor: 'white' }}>
-            <Typography color={'black'}>AUTH</Typography>
+            {/* <Image
+              alt="Logo"
+              width={179}
+              height={46}
+              style={{ width: '100%', maxWidth: '179px' }}
+              src={'/logo.png'}
+            /> */}
           </Toolbar>
         </AppBar>
       </HideOnScroll>
