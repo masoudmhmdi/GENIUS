@@ -30,14 +30,23 @@ export default function BasicTabs() {
       setIsAdmin(true);
     }
 
-    switch (router.pathname) {
+    const pathName = router.pathname;
+    console.log(pathName);
+
+    switch (pathName) {
       case '/':
         setValue(0);
         break;
       case '/cart':
         setValue(1);
         break;
-      case '/admin':
+      case '/admin/products':
+        setValue(2);
+        break;
+      case '/admin/orders':
+        setValue(2);
+        break;
+      case '/admin/inventory':
         setValue(2);
         break;
 
@@ -65,7 +74,7 @@ export default function BasicTabs() {
         />
         {isAdmin && (
           <Tab
-            onClick={() => router.push('/admin')}
+            onClick={() => router.push('/admin/products')}
             label="مدیریت"
             {...a11yProps(1)}
           />

@@ -11,38 +11,38 @@ export const serverReq = axios.create({
   baseURL,
 });
 
-serverReq.interceptors.request.use((req) => {
-  if (req.url !== 'auth/token') {
-    const accessToken = Cookies.get('accessToken');
-    req.headers.Authorization = accessToken;
-  }
-  return req;
-});
+// serverReq.interceptors.request.use((req) => {
+//   if (req.url !== 'auth/token') {
+//     const accessToken = Cookies.get('accessToken');
+//     req.headers.Authorization = accessToken;
+//   }
+//   return req;
+// });
 
-serverReq.interceptors.response.use(
-  (res) => {
-    return res;
-  },
-  (err: AxiosError) => {
-    const status = err.request.status;
-    const config = err.config;
+// serverReq.interceptors.response.use(
+//   (res) => {
+//     return res;
+//   },
+//   (err: AxiosError) => {
+//     const status = err.request.status;
+//     const config = err.config;
 
-    if (status === 401) {
-      if (config?.url === '/auth/token') {
-        const refreshToken = Cookies.get('refreshToken') || '';
-        console.log(refreshToken);
-        newAccessTokenService(refreshToken).then((res: any) => {
-          const accToken = res.token?.accessToken;
-          Cookies.set('accessToken', res.token?.accessToken);
-          config!.headers.Authorization = accToken;
-          return serverReq(config!);
-        });
-      } else if (config?.url === 'auth/token') {
-        Cookies.remove('accessToken');
-        Cookies.remove('refreshToken');
-        location.href = '/auth/login';
-      }
-    }
-    return Promise.reject(err);
-  }
-);
+//     if (status === 401) {
+//       if (config?.url === '/auth/token') {
+//         const refreshToken = Cookies.get('refreshToken') || '';
+//         console.log(refreshToken);
+//         newAccessTokenService(refreshToken).then((res: any) => {
+//           const accToken = res.token?.accessToken;
+//           Cookies.set('accessToken', res.token?.accessToken);
+//           config!.headers.Authorization = accToken;
+//           return serverReq(config!);
+//         });
+//       } else if (config?.url === 'auth/token') {
+//         Cookies.remove('accessToken');
+//         Cookies.remove('refreshToken');
+//         location.href = '/auth/login';
+//       }
+//     }
+//     return Promise.reject(err);
+//   }
+// );
