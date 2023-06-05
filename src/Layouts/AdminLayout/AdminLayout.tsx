@@ -10,8 +10,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <AdminHeader />
-
-      <Box sx={{ display: 'flex', gap: '10px' }}>
+      <Box sx={{ display: 'flex' }}>
         <AdminSidebar />
         <Box
           sx={{

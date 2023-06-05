@@ -11,6 +11,9 @@ import { store } from '@/Store/store';
 import { Toaster } from 'react-hot-toast';
 import Head from 'next/head';
 import { cacheRtl } from '@/theme/loadRtl';
+import Router from 'next/router';
+import { useState } from 'react';
+import NextNProgress from 'nextjs-progressbar';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -23,6 +26,7 @@ export interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -34,6 +38,7 @@ export default function MyApp(props: MyAppProps) {
             <CacheProvider value={cacheRtl}>
               <Provider store={store}>
                 <CssBaseline />
+                <NextNProgress color="#212529" />
                 {Component.getLayout ? (
                   Component.getLayout(<Component {...pageProps} />)
                 ) : (

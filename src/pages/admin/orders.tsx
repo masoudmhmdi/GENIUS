@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import AdminLayout from '@/Layouts/AdminLayout/AdminLayout';
+import { Box, Typography } from '@mui/material';
 
 const rows: GridRowsProp = [
   { id: 1, col1: 'Hello', col2: 'World' },
@@ -15,9 +16,14 @@ const columns: GridColDef[] = [
 
 export default function Orders() {
   return (
-    <div style={{ height: 300, width: '100%' }}>
-      <DataGrid rows={rows} columns={columns} />
-    </div>
+    <Box sx={{ marginTop: '40px', paddingX: '12px' }}>
+      <Box>
+        <Typography variant="h4">سفارشات</Typography>
+      </Box>
+      <Box sx={{ marginTop: '6px' }} style={{ height: 300, width: '100%' }}>
+        <DataGrid rows={rows} columns={columns} />
+      </Box>
+    </Box>
   );
 }
 

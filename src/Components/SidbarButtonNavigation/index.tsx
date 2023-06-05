@@ -86,7 +86,7 @@ function SidebarBottomNavigation() {
           موجودی
         </Button>
       </Link>
-      <Link href={'admin/products'}>
+      <Link href={'/admin/products'}>
         <Button
           fullWidth
           onClick={(e) => {
