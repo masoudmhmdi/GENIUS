@@ -4,6 +4,7 @@ import { Box, Container, Grid, Typography } from '@mui/material';
 import Footer from '../Footer';
 import AdminHeader from './AdminHeader';
 import SidebarBottomNavigation from '@/Components/SidbarButtonNavigation';
+import AdminSidebar from './AdminSidbar';
 
 function AdminLayout({ children }: { children: ReactNode }) {
   return (
@@ -11,19 +12,7 @@ function AdminLayout({ children }: { children: ReactNode }) {
       <AdminHeader />
 
       <Box sx={{ display: 'flex', gap: '10px' }}>
-        <Box
-          sx={{
-            width: '25%',
-            height: '100vh',
-            marginTop: '70px',
-            borderRight: '1px solid #d0d0d0',
-          }}
-        >
-          <Typography variant="h5" textAlign={'center'}>
-            پنل مدیریت فروشگاه
-          </Typography>
-          <SidebarBottomNavigation />
-        </Box>
+        <AdminSidebar />
         <Box
           sx={{
             marginTop: '70px',
