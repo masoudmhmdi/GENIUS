@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit/';
-import toastReducer from './toast.slice';
+import orderPaginateSlice from './orderPaginate.slice';
 
 export const store = configureStore({
   reducer: {
-    toast: toastReducer.reducer,
+    orderPaginate: orderPaginateSlice,
   },
   devTools: true,
 });
+
+export type RootState = ReturnType<typeof store.getState>;
