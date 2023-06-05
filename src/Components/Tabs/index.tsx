@@ -74,7 +74,7 @@ export default function BasicTabs() {
         />
         {isAdmin && (
           <Tab
-            onClick={() => router.push('/admin/products')}
+            onClick={() => router.push('/admin/orders')}
             label="مدیریت"
             {...a11yProps(1)}
           />

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import AdminLayout from '@/Layouts/AdminLayout/AdminLayout';
 
 const rows: GridRowsProp = [
   { id: 1, col1: 'Hello', col2: 'World' },
@@ -19,3 +20,7 @@ export default function Product() {
     </div>
   );
 }
+
+Product.getLayout = function pageLayout(page: React.ReactNode) {
+  return <AdminLayout>{page}</AdminLayout>;
+};
