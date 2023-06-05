@@ -15,7 +15,10 @@ function AdminLayout({ children }: { children: ReactNode }) {
         <Box
           sx={{
             marginTop: '70px',
-            width: '75%',
+            width: {
+              xs: '100%',
+              md: '75%',
+            },
             height: '100%',
           }}
         >

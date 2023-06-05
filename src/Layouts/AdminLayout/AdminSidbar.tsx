@@ -10,6 +10,10 @@ function AdminSidebar() {
         height: '100vh',
         marginTop: '70px',
         borderRight: '1px solid #d0d0d0',
+        display: {
+          xs: 'none',
+          md: 'block',
+        },
       }}
     >
       <Typography variant="h5" textAlign={'center'}>
