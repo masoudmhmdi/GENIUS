@@ -49,7 +49,7 @@ function SidebarBottomNavigation() {
       default:
         break;
     }
-  }, []);
+  }, [pathName]);
   return (
     <Box
       sx={{

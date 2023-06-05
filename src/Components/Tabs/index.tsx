@@ -53,7 +53,7 @@ export default function BasicTabs() {
       default:
         break;
     }
-  }, []);
+  }, [router.pathname]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import AdminLayout from '@/Layouts/AdminLayout/AdminLayout';
 import { Box, Typography } from '@mui/material';
+import { useGetOrders } from '@/api/services/useGetOrders';
 
 const rows: GridRowsProp = [
   { id: 1, col1: 'Hello', col2: 'World' },
@@ -15,6 +16,8 @@ const columns: GridColDef[] = [
 ];
 
 export default function Orders() {
+  const { data } = useGetOrders();
+  console.log(data);
   return (
     <Box sx={{ marginTop: '40px', paddingX: '12px' }}>
       <Box>
