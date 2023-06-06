@@ -5,7 +5,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { useGetOrders } from '@/api/services/useGetOrders';
 import { useDispatch, useSelector } from 'react-redux';
 import next from 'next/types';
-import { nextPage, prevPage, setPage } from '@/Store/slice/orderPaginate.slice';
+import { setPage } from '@/Store/slice/orderPaginate.slice';
 import { RootState } from '@/types';
 
 const columns: GridColDef[] = [
