@@ -1,8 +1,8 @@
 import { serverReq } from '@/api/constants';
 
-function getOrdersService(page: number) {
-  const res = serverReq.get(`/orders?page=${page}`);
-  return res;
+async function getOrdersService(page: number) {
+  const { data } = await serverReq.get(`/orders?page=${page}`);
+  return data;
 }
 
 export default getOrdersService;

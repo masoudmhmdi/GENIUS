@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import getOrdersService from './getOrdersService';
 import { useSelector } from 'react-redux';
-import { RootState, store } from '@/Store/store';
+import { store } from '@/Store/store';
+import { RootState } from '@/types';
 export const useGetOrders = () => {
   const page = useSelector((state: RootState) => state.orderPaginate);
 

@@ -1,3 +1,4 @@
+import { store } from '@/Store/store';
 import { AxiosError } from 'axios';
 
 export type IRegisterData = {
@@ -72,3 +73,7 @@ export type ILoginData = {
     message: string;
   }>;
 };
+
+export type AppDispatch = typeof store.dispatch;
+
+export type RootState = ReturnType<typeof store.getState>;

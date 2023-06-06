@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit/';
-import orderPaginateSlice from './orderPaginate.slice';
+import orderPaginateSlice from './slice/orderPaginate.slice';
 
 export const store = configureStore({
   reducer: {
@@ -7,5 +7,3 @@ export const store = configureStore({
   },
   devTools: true,
 });
-
-export type RootState = ReturnType<typeof store.getState>;
