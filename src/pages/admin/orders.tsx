@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import next from 'next/types';
 import { setPage } from '@/Store/slice/orderPaginate.slice';
 import { RootState } from '@/types';
+import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
 
 const columns: GridColDef[] = [
   { field: 'user', headerName: 'user id', width: 150 },
@@ -20,7 +21,7 @@ export default function Orders() {
   const orderPaginate = useSelector((state: RootState) => state.orderPaginate);
   const dispatch = useDispatch();
   const { data, isLoading } = useGetOrders();
-  if (isLoading) return;
+  if (isLoading) return <PanelAdminSkeleton />;
   console.log(orderPaginate);
 
   return (
@@ -28,7 +29,7 @@ export default function Orders() {
       <Box>
         <Typography variant="h4">سفارشات</Typography>
       </Box>
-      <Box sx={{ marginTop: '6px' }} style={{ height: 300, width: '100%' }}>
+      <Box sx={{ marginTop: '6px' }} style={{ height: '400px', width: '100%' }}>
         <DataGrid
           rows={data.data.orders}
           loading={isLoading}
