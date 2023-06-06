@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { store } from '@/Store/store';
 import { RootState } from '@/types';
 export const useGetOrders = () => {
-  const page = useSelector((state: RootState) => state.orderPaginate);
+  const { page } = useSelector((state: RootState) => state.orderPaginate);
 
   return useQuery({
     queryKey: ['orders', page],
