@@ -1,15 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import * as React from 'react';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import AdminLayout from '@/Layouts/AdminLayout/AdminLayout';
 import { Box, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetOrders } from '@/api/services/useGetOrders';
 import { RootState } from '@/types';
 import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
 import useGetProducts from '@/api/services/useGetProducts';
-import { setPage } from '@/Store/slice/orderPaginate.slice';
-import Image from 'next/image';
+import { productSetPage } from '@/Store/slice/products.slice';
 
 const columns: GridColDef[] = [
   { field: 'name', headerName: 'Column 1', width: 200 },
@@ -31,7 +29,6 @@ const columns: GridColDef[] = [
             alt="product-img"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
-          ;
         </Box>
       );
     },
@@ -39,7 +36,7 @@ const columns: GridColDef[] = [
 ];
 
 export default function Product() {
-  const orderPaginate = useSelector((state: RootState) => state.orderPaginate);
+  const orderPaginate = useSelector((state: RootState) => state.productsSlice);
   const dispatch = useDispatch();
   const { data, isLoading } = useGetProducts();
   if (isLoading) return <PanelAdminSkeleton />;
@@ -67,7 +64,7 @@ export default function Product() {
           getRowId={(row) => row._id}
           rowCount={data.total}
           pageSizeOptions={[5, 10, 20]}
-          onPaginationModelChange={(w) => dispatch(setPage(w))}
+          onPaginationModelChange={(w) => dispatch(productSetPage(w))}
           paginationModel={orderPaginate}
         />
       </Box>

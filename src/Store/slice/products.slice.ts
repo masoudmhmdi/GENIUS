@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const productsSlice = createSlice({
   name: 'productsSlice',
-  initialState: { page: 0, pageSize: 5, deliveryStatus: true },
+  initialState: { page: 0, pageSize: 5 },
   reducers: {
     productSetPage: (state, action) => {
       return { ...state, ...action.payload };
