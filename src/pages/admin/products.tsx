@@ -7,19 +7,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/types';
 import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
 import useGetProducts from '@/api/services/useGetProducts';
-import { productSetPage } from '@/Store/slice/products.slice';
+import {
+  handleSortingProducts,
+  productSetPage,
+} from '@/Store/slice/products.slice';
 
 const columns: GridColDef[] = [
-  { field: 'name', headerName: 'Column 1', width: 200 },
-  { field: 'price', headerName: 'Column 2', width: 150 },
-  { field: 'quantity', headerName: 'Column 2', width: 150 },
-  { field: 'brand', headerName: 'Column 2', width: 150 },
+  { field: 'name', headerName: 'name', width: 200 },
+  { field: 'price', headerName: 'price', width: 150 },
+  { field: 'quantity', headerName: 'quantity', width: 150 },
+  { field: 'brand', headerName: 'brand', width: 150 },
   {
     field: 'image',
     headerName: 'image',
     width: 150,
     renderCell: ({ row }) => {
-      console.log(row);
       const imageLink = row.images[0].split('8000');
 
       return (
@@ -41,7 +43,7 @@ export default function Product() {
   const { data, isLoading } = useGetProducts();
   if (isLoading) return <PanelAdminSkeleton />;
   const products = data.data.products;
-  console.log(data);
+  console.log(orderPaginate);
 
   return (
     <Box sx={{ marginTop: '40px', paddingX: '12px' }}>
@@ -61,6 +63,8 @@ export default function Product() {
           loading={isLoading}
           columns={columns}
           paginationMode="server"
+          sortingMode="server"
+          onSortModelChange={(i) => dispatch(handleSortingProducts(i))}
           getRowId={(row) => row._id}
           rowCount={data.total}
           pageSizeOptions={[5, 10, 20]}
