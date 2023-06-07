@@ -10,7 +10,7 @@ export const useGetOrders = () => {
   );
 
   return useQuery({
-    queryKey: ['orders', page, pageSize],
+    queryKey: ['orders', page, pageSize, deliveryStatus],
     queryFn: () => getOrdersService({ page, deliveryStatus, pageSize }),
     keepPreviousData: true,
   });

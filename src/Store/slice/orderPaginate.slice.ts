@@ -10,9 +10,12 @@ const orderPaginate = createSlice({
 
       return { ...state, ...action.payload };
     },
+    changeStatus: (state) => {
+      return { ...state, deliveryStatus: !state.deliveryStatus };
+    },
   },
 });
 
-export const { setPage } = orderPaginate.actions;
+export const { setPage, changeStatus } = orderPaginate.actions;
 
 export default orderPaginate.reducer;

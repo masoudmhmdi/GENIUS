@@ -1,11 +1,19 @@
 import * as React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import AdminLayout from '@/Layouts/AdminLayout/AdminLayout';
-import { Box, Button, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from '@mui/material';
 import { useGetOrders } from '@/api/services/useGetOrders';
 import { useDispatch, useSelector } from 'react-redux';
 import next from 'next/types';
-import { setPage } from '@/Store/slice/orderPaginate.slice';
+import { changeStatus, setPage } from '@/Store/slice/orderPaginate.slice';
 import { RootState } from '@/types';
 import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
 
@@ -26,8 +34,28 @@ export default function Orders() {
 
   return (
     <Box sx={{ marginTop: '40px', paddingX: '12px' }}>
-      <Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          paddingX: '12px',
+        }}
+      >
         <Typography variant="h4">سفارشات</Typography>
+
+        <Select
+          variant="standard"
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          label="Age"
+          onChange={() => {
+            dispatch(changeStatus());
+          }}
+          defaultValue={10}
+        >
+          <MenuItem value={10}>درحال انجام</MenuItem>
+          <MenuItem value={20}>به اتمام رسیده</MenuItem>
+        </Select>
       </Box>
       <Box sx={{ marginTop: '6px' }} style={{ height: '400px', width: '100%' }}>
         <DataGrid
