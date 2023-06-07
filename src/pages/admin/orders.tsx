@@ -37,10 +37,9 @@ export default function Orders() {
           paginationMode="server"
           getRowId={(row) => row._id}
           rowCount={data.total}
-          pageSizeOptions={[10]}
-          onPaginationModelChange={(w) => dispatch(setPage(w.page))}
+          pageSizeOptions={[5, 10, 20]}
+          onPaginationModelChange={(w) => dispatch(setPage(w))}
           paginationModel={orderPaginate}
-          autoPageSize
         />
       </Box>
     </Box>

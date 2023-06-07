@@ -2,10 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const orderPaginate = createSlice({
   name: 'orderPaginate',
-  initialState: { page: 1, pageSize: 10 },
+  initialState: { page: 0, pageSize: 5, deliveryStatus: true },
   reducers: {
     setPage: (state, action) => {
-      return { ...state, page: action.payload };
+      console.log('payload:', action.payload);
+      console.log('state:', state);
+
+      return { ...state, ...action.payload };
     },
   },
 });

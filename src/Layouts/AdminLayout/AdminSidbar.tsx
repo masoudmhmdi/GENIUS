@@ -8,7 +8,7 @@ function AdminSidebar() {
       sx={{
         width: '25%',
         height: '100vh',
-        marginTop: '70px',
+        paddingTop: '70px',
         borderRight: '1px solid #d0d0d0',
         display: {
           xs: 'none',
