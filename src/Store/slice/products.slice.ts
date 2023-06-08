@@ -5,20 +5,19 @@ const productsSlice = createSlice({
   initialState: {
     page: 0,
     pageSize: 5,
-    name: 'asc',
-    price: 'asc',
-    quantity: 'asc',
-    brand: 'asc',
+    field: '',
+    sort: '',
   },
   reducers: {
     productSetPage: (state, action) => {
       return { ...state, ...action.payload };
     },
     handleSortingProducts: (state, { payload }) => {
-      console.log(payload);
-      const x = payload[0];
-      if (payload.length) {
-        return { ...state, [x.field]: x.sort };
+      const [payloadObj] = payload;
+      console.log(payloadObj);
+
+      if (payloadObj) {
+        return { ...state, field: payloadObj.field, sort: payloadObj.sort };
       } else {
         return state;
       }

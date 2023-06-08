@@ -5,12 +5,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/types';
 
 function useGetProducts() {
-  const { page, pageSize, price } = useSelector(
+  const { page, pageSize, field, sort } = useSelector(
     (state: RootState) => state.productsSlice
   );
   return useQuery({
-    queryKey: ['GetProduct', page, pageSize, price],
-    queryFn: () => getProductService({ page, pageSize, price }),
+    queryKey: ['GetProduct', page, pageSize, field, sort],
+    queryFn: () => getProductService({ page, pageSize, field, sort }),
   });
 }
 

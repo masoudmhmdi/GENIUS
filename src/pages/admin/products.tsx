@@ -13,17 +13,43 @@ import {
 } from '@/Store/slice/products.slice';
 
 const columns: GridColDef[] = [
-  { field: 'name', headerName: 'name', width: 200 },
-  { field: 'price', headerName: 'price', width: 150 },
-  { field: 'quantity', headerName: 'quantity', width: 150 },
-  { field: 'brand', headerName: 'brand', width: 150 },
+  {
+    field: 'name',
+    headerName: 'name',
+    width: 200,
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+  },
+  {
+    field: 'price',
+    headerName: 'price',
+    width: 150,
+    headerAlign: 'center',
+    align: 'center',
+  },
+  {
+    field: 'quantity',
+    headerName: 'quantity',
+    width: 150,
+    headerAlign: 'center',
+    align: 'center',
+  },
+  {
+    field: 'brand',
+    headerName: 'brand',
+    width: 150,
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+  },
   {
     field: 'image',
     headerName: 'image',
+    headerAlign: 'center',
+    sortable: false,
     width: 150,
     renderCell: ({ row }) => {
-      const imageLink = row.images[0].split('8000');
-
       return (
         <Box sx={{ width: '150px', height: '150px' }}>
           <img
@@ -58,6 +84,11 @@ export default function Product() {
       </Box>
       <Box sx={{ marginTop: '6px' }} style={{ height: '100%', width: '100%' }}>
         <DataGrid
+          sx={{
+            '&.MuiDataGrid-root .MuiDataGrid-cell:focus-within': {
+              outline: 'none !important',
+            },
+          }}
           rowHeight={150}
           rows={products}
           loading={isLoading}

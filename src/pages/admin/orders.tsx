@@ -18,11 +18,46 @@ import { RootState } from '@/types';
 import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
 
 const columns: GridColDef[] = [
-  { field: 'user', headerName: 'user id', width: 150 },
-  { field: '_id', headerName: 'order id', width: 150 },
-  { field: 'deliveryDate', headerName: 'deliveryDate ', width: 150 },
-  { field: 'deliveryStatus', headerName: 'deliveryStatus', width: 150 },
-  { field: 'totalPrice', headerName: 'totalPrice', width: 150 },
+  {
+    field: 'user',
+    headerName: 'ای دی کاربر',
+    width: 150,
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+  },
+  {
+    field: 'deliveryDate',
+    headerName: 'تاریخ سفارش ',
+    width: 150,
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+  },
+
+  {
+    field: 'totalPrice',
+    headerName: 'مجموع قیمت',
+    width: 150,
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+  },
+  {
+    field: '',
+    headerName: '',
+    width: 150,
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+    renderCell: () => {
+      return (
+        <Button variant="contained" color={'success'}>
+          برسی سفارش
+        </Button>
+      );
+    },
+  },
 ];
 
 export default function Orders() {

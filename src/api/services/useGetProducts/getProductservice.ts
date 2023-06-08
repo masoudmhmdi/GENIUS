@@ -4,17 +4,19 @@ import { getProductQueryFnInput } from '@/types';
 async function getProductService({
   page,
   pageSize,
-  price,
+  field,
+  sort,
 }: getProductQueryFnInput) {
   let URL = `products?page=${
     page + 1
   }&limit=${pageSize}&fields=-rating,-createdAt,-updatedAt,-__v&&quantity[gte]=8`;
+  let sortValue = '';
 
-  if (price) {
-    console.log(price);
-    price === 'asc' && (URL += '&sort=price');
-    price === 'desc' && URL + '&sort=-price';
+  if (field) {
+    sort === `asc` ? (sortValue += `${field}`) : (sortValue += `-${field}`);
+    URL += `&sort=${sortValue}`;
   }
+
   console.log(URL);
   const res = await serverReq(URL);
 

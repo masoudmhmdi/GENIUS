@@ -81,5 +81,6 @@ export type RootState = ReturnType<typeof store.getState>;
 export type getProductQueryFnInput = {
   page: number;
   pageSize: number;
-  price: string;
+  field: string;
+  sort: string;
 };
