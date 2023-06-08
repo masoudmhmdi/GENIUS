@@ -60,6 +60,7 @@ const columns: GridColDef[] = [
 
 export default function Inventory() {
   const orderPaginate = useSelector((state: RootState) => state.productsSlice);
+  const { field, sort } = orderPaginate;
   const dispatch = useDispatch();
   const { data, isLoading } = useGetProducts();
 
@@ -93,6 +94,7 @@ export default function Inventory() {
           paginationMode="server"
           sortingMode="server"
           onSortModelChange={(i) => dispatch(handleSortingProducts(i))}
+          sortModel={[{ field, sort }]}
           getRowId={(row) => row._id}
           rowCount={data.total}
           pageSizeOptions={[5, 10, 20]}

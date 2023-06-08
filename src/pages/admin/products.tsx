@@ -23,7 +23,7 @@ const columns: GridColDef[] = [
     width: 150,
     renderCell: ({ row }) => {
       return (
-        <Box sx={{ width: '150px', height: '150px' }}>
+        <Box sx={{ minWidth: '150px', height: '150px' }}>
           <img
             src={`${row.images[0]}`}
             alt="product-img"

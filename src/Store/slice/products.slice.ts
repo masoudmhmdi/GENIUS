@@ -1,3 +1,4 @@
+import { getProductQueryFnInput } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 
 const productsSlice = createSlice({
@@ -6,7 +7,7 @@ const productsSlice = createSlice({
     page: 0,
     pageSize: 5,
     field: '',
-    sort: '',
+    sort: null,
   },
   reducers: {
     productSetPage: (state, action) => {
@@ -19,7 +20,7 @@ const productsSlice = createSlice({
       if (payloadObj) {
         return { ...state, field: payloadObj.field, sort: payloadObj.sort };
       } else {
-        return state;
+        return { ...state, field: undefined, sort: undefined };
       }
     },
   },

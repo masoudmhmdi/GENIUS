@@ -1,4 +1,5 @@
 import { store } from '@/Store/store';
+import { GridSortDirection } from '@mui/x-data-grid';
 import { AxiosError } from 'axios';
 
 export type IRegisterData = {
@@ -82,5 +83,5 @@ export type getProductQueryFnInput = {
   page: number;
   pageSize: number;
   field: string;
-  sort: string;
+  sort: GridSortDirection;
 };
