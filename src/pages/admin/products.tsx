@@ -44,11 +44,14 @@ const columns: GridColDef[] = [
 
   {
     field: 'brand',
-    headerName: 'برند',
+    headerName: 'دسته بندی',
     width: 150,
     sortable: false,
     headerAlign: 'center',
     align: 'center',
+    renderCell: ({ row }) => {
+      return <div>{`${row.subcategory.name}/${row.category.name}`}</div>;
+    },
   },
 
   {

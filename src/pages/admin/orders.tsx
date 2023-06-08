@@ -20,11 +20,15 @@ import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
 const columns: GridColDef[] = [
   {
     field: 'user',
-    headerName: 'ای دی کاربر',
+    headerName: ' نام کاربر',
     width: 150,
     sortable: false,
     headerAlign: 'center',
     align: 'center',
+    renderCell: ({ row }) => {
+      console.log(row);
+      return <div>{row.user.username}</div>;
+    },
   },
   {
     field: 'deliveryDate',
@@ -76,7 +80,7 @@ export default function Orders() {
   const dispatch = useDispatch();
   const { data, isLoading } = useGetOrders();
   if (isLoading) return <PanelAdminSkeleton />;
-  console.log(orderPaginate);
+  console.log(data);
 
   return (
     <Box sx={{ marginTop: '40px', paddingX: '12px' }}>
