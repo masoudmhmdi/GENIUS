@@ -46,3 +46,4 @@ export const serverReq = axios.create({
 //     return Promise.reject(err);
 //   }
 // );
+// instance.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;

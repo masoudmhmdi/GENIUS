@@ -33,6 +33,17 @@ const columns: GridColDef[] = [
     sortable: false,
     headerAlign: 'center',
     align: 'center',
+    renderCell: ({ row }) => {
+      return (
+        <div>
+          {new Date(row.createdAt).toLocaleString('fa-IR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </div>
+      );
+    },
   },
 
   {
@@ -46,13 +57,13 @@ const columns: GridColDef[] = [
   {
     field: '',
     headerName: '',
-    width: 150,
+    flex: 1,
     sortable: false,
     headerAlign: 'center',
     align: 'center',
     renderCell: () => {
       return (
-        <Button variant="contained" color={'success'}>
+        <Button size="large" variant="contained" color="success">
           برسی سفارش
         </Button>
       );
@@ -92,8 +103,13 @@ export default function Orders() {
           <MenuItem value={20}>به اتمام رسیده</MenuItem>
         </Select>
       </Box>
-      <Box sx={{ marginTop: '6px' }} style={{ height: '400px', width: '100%' }}>
+      <Box sx={{ marginTop: '6px' }} style={{ height: '100%', width: '100%' }}>
         <DataGrid
+          sx={{
+            '&.MuiDataGrid-root .MuiDataGrid-cell:focus-within': {
+              outline: 'none !important',
+            },
+          }}
           rows={data.data.orders}
           loading={isLoading}
           columns={columns}
@@ -112,3 +128,6 @@ export default function Orders() {
 Orders.getLayout = function pageLayout(page: React.ReactNode) {
   return <AdminLayout>{page}</AdminLayout>;
 };
+
+// background: rgb(33,37,41);
+// background:

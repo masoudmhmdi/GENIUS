@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import AdminLayout from '@/Layouts/AdminLayout/AdminLayout';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/types';
 import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
@@ -14,38 +14,10 @@ import {
 
 const columns: GridColDef[] = [
   {
-    field: 'name',
-    headerName: 'name',
-    width: 200,
-    sortable: false,
-    headerAlign: 'center',
-    align: 'center',
-  },
-  {
-    field: 'price',
-    headerName: 'price',
-    width: 150,
-    headerAlign: 'center',
-    align: 'center',
-  },
-  {
-    field: 'quantity',
-    headerName: 'quantity',
-    width: 150,
-    headerAlign: 'center',
-    align: 'center',
-  },
-  {
-    field: 'brand',
-    headerName: 'brand',
-    width: 150,
-    sortable: false,
-    headerAlign: 'center',
-    align: 'center',
-  },
-  {
     field: 'image',
-    headerName: 'image',
+    flex: 1,
+    align: 'center',
+    headerName: 'تصویر',
     headerAlign: 'center',
     sortable: false,
     width: 150,
@@ -61,13 +33,63 @@ const columns: GridColDef[] = [
       );
     },
   },
+  {
+    field: 'name',
+    headerName: 'نام',
+    width: 200,
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+  },
+
+  {
+    field: 'brand',
+    headerName: 'برند',
+    width: 150,
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+  },
+
+  {
+    field: 'edit',
+    headerName: '',
+    flex: 1,
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+    renderCell: () => {
+      return (
+        <Button size="large" variant="contained" color="success">
+          ویرایش
+        </Button>
+      );
+    },
+  },
+  {
+    field: 'delete',
+    headerName: '',
+    flex: 1,
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+    renderCell: () => {
+      return (
+        <Button size="large" variant="contained" color="error">
+          حذف
+        </Button>
+      );
+    },
+  },
 ];
 
 export default function Product() {
   const orderPaginate = useSelector((state: RootState) => state.productsSlice);
   const dispatch = useDispatch();
   const { data, isLoading } = useGetProducts();
+
   if (isLoading) return <PanelAdminSkeleton />;
+  console.log(data);
   const products = data.data.products;
   console.log(orderPaginate);
 
