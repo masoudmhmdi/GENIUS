@@ -57,12 +57,7 @@ export default function MainHeader(props: Props) {
                 alignItems: 'center',
               }}
             >
-              <Box sx={{ display: 'flex' }}>
-                <Sidebar />
-                <Box sx={{ display: 'none' }}>
-                  <BasicTabs />
-                </Box>
-              </Box>
+              <BasicTabs />
               <Image
                 alt="lsdj"
                 width={179}
