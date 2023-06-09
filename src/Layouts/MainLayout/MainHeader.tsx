@@ -8,6 +8,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import Sidebar from '@/Components/sidebar';
 
 interface Props {
   /**
@@ -56,27 +57,11 @@ export default function MainHeader(props: Props) {
                 alignItems: 'center',
               }}
             >
-              <Box
-                sx={{
-                  display: {
-                    sx: 'flex',
-                    md: 'none',
-                  },
-                }}
-              >
-                <Button>
-                  <MenuIcon fontSize="large" />
-                </Button>
-              </Box>
-              <Box
-                sx={{
-                  display: {
-                    xs: 'none',
-                    md: 'block',
-                  },
-                }}
-              >
-                <BasicTabs />
+              <Box sx={{ display: 'flex' }}>
+                <Sidebar />
+                <Box sx={{ display: 'none' }}>
+                  <BasicTabs />
+                </Box>
               </Box>
               <Image
                 alt="lsdj"

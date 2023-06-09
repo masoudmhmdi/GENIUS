@@ -27,16 +27,18 @@ export default function AdminHeader() {
               alignItems: 'center',
             }}
           >
-            <Box
-              sx={{
-                display: {
-                  xs: 'none',
-                  md: 'block',
-                },
-              }}
-            >
+            <Box>
               <Sidebar />
-              <BasicTabs />
+              <Box
+                sx={{
+                  display: {
+                    xs: 'none',
+                    md: 'block',
+                  },
+                }}
+              >
+                <BasicTabs />
+              </Box>
             </Box>
             <Image
               alt="lsdj"
