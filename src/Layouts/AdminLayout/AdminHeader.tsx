@@ -4,7 +4,8 @@ import BasicTabs from '@/Components/Tabs';
 import React from 'react';
 import Image from 'next/image';
 import { Box, Button } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+
+import Sidebar from '@/Components/sidebar';
 
 export default function AdminHeader() {
   return (
@@ -29,23 +30,12 @@ export default function AdminHeader() {
             <Box
               sx={{
                 display: {
-                  sx: 'flex',
-                  md: 'none',
-                },
-              }}
-            >
-              <Button>
-                <MenuIcon fontSize="large" />
-              </Button>
-            </Box>
-            <Box
-              sx={{
-                display: {
                   xs: 'none',
                   md: 'block',
                 },
               }}
             >
+              <Sidebar />
               <BasicTabs />
             </Box>
             <Image

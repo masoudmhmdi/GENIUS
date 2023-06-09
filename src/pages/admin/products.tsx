@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/types';
 import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
 import useGetProducts from '@/api/services/useGetProducts';
+import Image from 'next/image';
 import {
   handleSortingProducts,
   productSetPage,
@@ -23,9 +24,10 @@ const columns: GridColDef[] = [
     width: 150,
     renderCell: ({ row }) => {
       return (
-        <Box sx={{ minWidth: '150px', height: '150px' }}>
-          <img
-            src={`${row.images[0]}`}
+        <Box sx={{ minWidth: '150px', height: '150px', position: 'relative' }}>
+          <Image
+            src={row.images[0]}
+            fill={true}
             alt="product-img"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
