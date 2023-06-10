@@ -1,10 +1,7 @@
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
-import BasicTabs from '../Tabs';
-import SidebarBottomNavigation from '../SidbarButtonNavigation';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Typography } from '@mui/material';
 import { useRouter } from 'next/dist/client/router';
 import { ReactNode, useState } from 'react';
 

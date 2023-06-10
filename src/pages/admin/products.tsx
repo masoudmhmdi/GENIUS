@@ -12,6 +12,7 @@ import {
   handleSortingProducts,
   productSetPage,
 } from '@/Store/slice/products.slice';
+import DownDrawer from '@/Components/DownDrawer';
 
 const columns: GridColDef[] = [
   {
@@ -107,9 +108,9 @@ export default function Product() {
         }}
       >
         <Typography variant="h4">محصولات</Typography>
-        <Button size="large" variant="contained" color="success">
-          اضافه کردن محصول
-        </Button>
+        <DownDrawer>
+          <Box sx={{ height: '300px' }}></Box>
+        </DownDrawer>
       </Box>
       <Box sx={{ marginTop: '6px' }} style={{ height: '550px', width: '100%' }}>
         <DataGrid
