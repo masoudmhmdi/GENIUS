@@ -11,15 +11,11 @@ function AdminLayout({ children }: { children: ReactNode }) {
     <>
       <AdminHeader />
       <Box sx={{ display: 'flex' }}>
-        <AdminSidebar />
         <Box
           sx={{
             marginTop: '70px',
 
-            width: {
-              xs: '100%',
-              md: '75%',
-            },
+            width: '100%',
             height: '100%',
           }}
         >

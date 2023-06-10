@@ -35,6 +35,7 @@ const columns: GridColDef[] = [
   },
   {
     field: 'name',
+    flex: 1,
     headerName: 'کالا',
     width: 200,
     sortable: false,
@@ -44,6 +45,7 @@ const columns: GridColDef[] = [
 
   {
     field: 'price',
+    flex: 1,
     headerName: 'قیمت',
     width: 150,
     headerAlign: 'center',
@@ -51,6 +53,7 @@ const columns: GridColDef[] = [
   },
   {
     field: 'quantity',
+    flex: 1,
     headerName: 'موجودی',
     width: 150,
     headerAlign: 'center',
@@ -80,7 +83,7 @@ export default function Inventory() {
       >
         <Typography variant="h4">موجودی</Typography>
       </Box>
-      <Box sx={{ marginTop: '6px' }} style={{ height: '100%', width: '100%' }}>
+      <Box sx={{ marginTop: '6px' }} style={{ height: '550px', width: '100%' }}>
         <DataGrid
           sx={{
             '&.MuiDataGrid-root .MuiDataGrid-cell:focus-within': {

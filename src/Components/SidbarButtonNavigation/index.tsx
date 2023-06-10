@@ -99,6 +99,12 @@ function SidebarBottomNavigation() {
           محصولات
         </Button>
       </Link>
+      <Button fullWidth color="secondary" variant="contained">
+        داشبورد
+      </Button>
+      <Button fullWidth color="secondary" variant="contained">
+        خروج
+      </Button>
     </Box>
   );
 }

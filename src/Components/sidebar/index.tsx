@@ -6,22 +6,15 @@ import SidebarBottomNavigation from '../SidbarButtonNavigation';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Typography } from '@mui/material';
 import { useRouter } from 'next/dist/client/router';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
-export default function Sidebar() {
+export default function Sidebar({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const admin = router.pathname.split('/')[1];
 
   return (
-    <Box
-      sx={{
-        display: {
-          sx: 'flex',
-          md: 'none',
-        },
-      }}
-    >
+    <Box>
       <Box>
         <Button onClick={() => setOpen(true)}>
           <MenuIcon fontSize="large" />
@@ -34,13 +27,10 @@ export default function Sidebar() {
             gap: '15px',
             flexDirection: 'column',
             marginTop: '10px',
+            paddingX: '12px',
           }}
         >
-          <Typography variant="h5" textAlign={'center'}>
-            {admin === 'admin' ? ' پنل مدیریت فروشگاه' : 'جینیس شاپ'}
-          </Typography>
-          <BasicTabs />
-          <SidebarBottomNavigation />
+          {children}
         </Box>
       </Drawer>
     </Box>

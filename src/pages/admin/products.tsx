@@ -111,7 +111,7 @@ export default function Product() {
           اضافه کردن محصول
         </Button>
       </Box>
-      <Box sx={{ marginTop: '6px' }} style={{ height: '100%', width: '100%' }}>
+      <Box sx={{ marginTop: '6px' }} style={{ height: '550px', width: '100%' }}>
         <DataGrid
           sx={{
             '&.MuiDataGrid-root .MuiDataGrid-cell:focus-within': {

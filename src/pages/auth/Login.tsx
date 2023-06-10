@@ -57,7 +57,7 @@ function Login() {
     >
       <Box sx={{ marginTop: '50px', textAlign: 'center' }}>
         <Image
-          alt="lsdj"
+          alt="logo"
           width={522}
           height={140}
           style={{ width: '100%', maxWidth: '522px' }}

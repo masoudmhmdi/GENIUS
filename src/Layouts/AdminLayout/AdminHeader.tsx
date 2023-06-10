@@ -3,9 +3,10 @@ import Toolbar from '@mui/material/Toolbar';
 import BasicTabs from '@/Components/Tabs';
 import React from 'react';
 import Image from 'next/image';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 import Sidebar from '@/Components/sidebar';
+import SidebarBottomNavigation from '@/Components/SidbarButtonNavigation';
 
 export default function AdminHeader() {
   return (
@@ -16,6 +17,7 @@ export default function AdminHeader() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
+            paddingX: '0',
           }}
         >
           <Box
@@ -28,25 +30,26 @@ export default function AdminHeader() {
             }}
           >
             <Box>
-              <Sidebar />
-              <Box
-                sx={{
-                  display: {
-                    xs: 'none',
-                    md: 'block',
-                  },
-                }}
-              >
+              <Sidebar>
+                <Typography variant="h5" textAlign={'center'}>
+                  فروشگاه جینیس
+                </Typography>
                 <BasicTabs />
-              </Box>
+                <SidebarBottomNavigation />
+              </Sidebar>
             </Box>
             <Image
-              alt="lsdj"
+              alt="logo"
               width={179}
               height={46}
               style={{ width: '100%', maxWidth: '179px' }}
-              src={'/logo.png'}
+              src={'/new-logo.png'}
             />
+
+            <Box sx={{ display: 'flex', gap: '10px' }}>
+              <Button sx={{ borderBottom: '1px solid black' }}>خروج</Button>
+              <Button sx={{ borderBottom: '1px solid black' }}>داشبورد</Button>
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>

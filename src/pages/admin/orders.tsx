@@ -20,6 +20,7 @@ import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
 const columns: GridColDef[] = [
   {
     field: 'user',
+    flex: 1,
     headerName: ' نام کاربر',
     width: 150,
     sortable: false,
@@ -32,6 +33,7 @@ const columns: GridColDef[] = [
   },
   {
     field: 'deliveryDate',
+    flex: 1,
     headerName: 'تاریخ سفارش ',
     width: 150,
     sortable: false,
@@ -52,6 +54,7 @@ const columns: GridColDef[] = [
 
   {
     field: 'totalPrice',
+    flex: 1,
     headerName: 'مجموع قیمت',
     width: 150,
     sortable: false,
@@ -61,6 +64,7 @@ const columns: GridColDef[] = [
   {
     field: '',
     headerName: '',
+
     flex: 1,
     sortable: false,
     headerAlign: 'center',
@@ -107,7 +111,7 @@ export default function Orders() {
           <MenuItem value={20}>به اتمام رسیده</MenuItem>
         </Select>
       </Box>
-      <Box sx={{ marginTop: '6px' }} style={{ height: '100%', width: '100%' }}>
+      <Box sx={{ marginTop: '6px' }} style={{ height: '550px', width: '100%' }}>
         <DataGrid
           sx={{
             '&.MuiDataGrid-root .MuiDataGrid-cell:focus-within': {

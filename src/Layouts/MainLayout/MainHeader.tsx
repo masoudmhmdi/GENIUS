@@ -6,7 +6,7 @@ import Slide from '@mui/material/Slide';
 import BasicTabs from '@/Components/Tabs';
 import React from 'react';
 import Image from 'next/image';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from '@/Components/sidebar';
 
@@ -57,14 +57,27 @@ export default function MainHeader(props: Props) {
                 alignItems: 'center',
               }}
             >
-              <BasicTabs />
+              <Box>
+                <Sidebar>
+                  <Typography variant="h5" textAlign={'center'}>
+                    فروشگاه جینیس
+                  </Typography>
+                  <BasicTabs />
+                </Sidebar>
+              </Box>
               <Image
-                alt="lsdj"
+                alt="logo"
                 width={179}
                 height={46}
                 style={{ width: '100%', maxWidth: '179px' }}
-                src={'/logo.png'}
+                src={'/new-logo.png'}
               />
+              <Box sx={{ display: 'flex', gap: '10px' }}>
+                <Button sx={{ borderBottom: '1px solid black' }}>خروج</Button>
+                <Button sx={{ borderBottom: '1px solid black' }}>
+                  داشبورد
+                </Button>
+              </Box>
             </Box>
           </Toolbar>
         </AppBar>
