@@ -21,13 +21,13 @@ const columns: GridColDef[] = [
     headerName: 'تصویر',
     headerAlign: 'center',
     sortable: false,
-    width: 150,
+    minWidth: 150,
     renderCell: ({ row }) => {
       return (
         <Box sx={{ minWidth: '150px', height: '150px', position: 'relative' }}>
           <Image
             src={row.images[0]}
-            fill={true}
+            fill
             alt="product-img"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
@@ -104,10 +104,12 @@ export default function Product() {
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          paddingX: '12px',
         }}
       >
         <Typography variant="h4">محصولات</Typography>
+        <Button size="large" variant="contained" color="success">
+          اضافه کردن محصول
+        </Button>
       </Box>
       <Box sx={{ marginTop: '6px' }} style={{ height: '100%', width: '100%' }}>
         <DataGrid

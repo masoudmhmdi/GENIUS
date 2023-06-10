@@ -33,6 +33,14 @@ export const theme = createTheme({
     secondary: {
       main: '#F3F3F3',
     },
+    success: {
+      main: '#A4D0A4',
+      contrastText: '#617A55',
+    },
+    error: {
+      main: '#FA9884',
+      contrastText: '#EB455F',
+    },
   },
   components: {
     MuiButton: btn(),
