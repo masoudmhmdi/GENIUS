@@ -23,6 +23,7 @@ import { setCookie } from '@/utils/setCookie';
 import { useRouter } from 'next/dist/client/router';
 import { persistData } from '@/utils/persistData';
 import useGetCategory from '@/api/services/useGetCategory';
+import useGetSubcategory from '@/api/services/useGetSubcategory';
 
 const schema = yup.object({
   username: yup.string().required('این فیلد ضروری است'),
@@ -40,8 +41,9 @@ function AddProductForm() {
     resolver: yupResolver(schema),
   });
 
-  const { data } = useGetCategory();
-  const allCategory = data.data.categories;
+  const { data: categoryData } = useGetCategory();
+
+  const { refetch, data: subCategoryData } = useGetSubcategory();
 
   const submitHandler = (d: ILoginData['payload']) => {};
 
@@ -89,8 +91,9 @@ function AddProductForm() {
               id="demo-simple-select"
               label="Age"
               inputProps={{ ...register('username') }}
+              onChange={(e) => console.log(e.target.value)}
             >
-              {allCategory.map((category: Category) => {
+              {categoryData?.data.categories.map((category: Category) => {
                 return (
                   <MenuItem key={category._id} value={category.name}>
                     {category.name}
@@ -99,16 +102,28 @@ function AddProductForm() {
               })}
             </Select>
           </FormControl>
-          <TextField
-            label="رمز عبور"
-            inputProps={{ ...register('password') }}
-            error={!!errors.password}
-            helperText={errors.password?.message}
-            fullWidth
-            sx={{
-              maxWidth: '400px',
-            }}
-          />
+          <FormControl fullWidth sx={{ maxWidth: '400px' }}>
+            <InputLabel
+              sx={{ backgroundColor: 'white', paddingRight: '5px' }}
+              id="subCategory"
+            >
+              Category
+            </InputLabel>
+            <Select
+              labelId="subCategory"
+              id="demo-simple-select"
+              label="Age"
+              inputProps={{ ...register('username') }}
+            >
+              {subCategoryData?.map((category: Category) => {
+                return (
+                  <MenuItem key={category._id} value={category.name}>
+                    {category.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
         </Box>
         <Button
           variant="contained"

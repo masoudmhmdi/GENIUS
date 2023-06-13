@@ -3,12 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import getSubcategoryService from './getSubcategoryService';
 
-function useGetSubcategory(category: Category) {
-  const { name, _id } = category;
+function useGetSubcategory(category?: Category) {
   return useQuery({
-    queryKey: ['getSubcategory', name],
-    queryFn: () => getSubcategoryService(_id),
     enabled: false,
+    queryKey: ['getSubcategory', category?.name],
+    queryFn: () => getSubcategoryService(category?._id),
   });
 }
 
