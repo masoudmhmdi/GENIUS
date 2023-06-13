@@ -24,6 +24,7 @@ function DownDrawer({ children }: { children: ReactNode }) {
             flexDirection: 'column',
             marginTop: '10px',
             paddingX: '12px',
+            height: '400px',
           }}
         >
           {children}
