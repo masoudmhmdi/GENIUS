@@ -1,6 +1,7 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { CacheProvider, EmotionCache, ThemeProvider } from '@emotion/react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { theme } from '@/theme';
 import MainLayout from '@/Layouts/MainLayout/MainLayout';

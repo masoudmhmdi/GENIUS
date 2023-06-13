@@ -94,3 +94,9 @@ export type Category = {
   updatedAt: string;
   slugname: string;
 };
+
+export type IAddProduct = {
+  payload: {
+    category: string;
+  };
+};
