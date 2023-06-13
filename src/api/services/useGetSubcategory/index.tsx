@@ -7,7 +7,7 @@ function useGetSubcategory(id?: string) {
   return useQuery({
     queryKey: ['getSubcategory', id],
     queryFn: () => getSubcategoryService(id!),
-    enabled: false,
+    enabled: !!id,
   });
 }
 

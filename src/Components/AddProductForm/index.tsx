@@ -32,6 +32,7 @@ const schema = yup.object({
 
 function AddProductForm() {
   const router = useRouter();
+  const [category, setCategory] = useState('');
 
   const {
     register,
@@ -39,6 +40,7 @@ function AddProductForm() {
     getValues,
     setValue,
     setError,
+
     formState: { errors },
   } = useForm<IAddProduct['payload']>({
     resolver: yupResolver(schema),
@@ -47,11 +49,7 @@ function AddProductForm() {
   const { data: categoryData } = useGetCategory();
 
   const { refetch: fetchSubcategoryData, data: subCategoryData } =
-    useGetSubcategory(getValues('category'));
-
-  console.log(subCategoryData);
-
-  const submitHandler = (d: ILoginData['payload']) => {};
+    useGetSubcategory(category);
 
   return (
     <Box
@@ -74,7 +72,7 @@ function AddProductForm() {
           paddingY: '60px',
         }}
         component={'form'}
-        // onSubmit={handleSubmit(submitHandler)}
+        onSubmit={handleSubmit((i) => console.log(i))}
       >
         <Box
           sx={{
@@ -96,11 +94,11 @@ function AddProductForm() {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="category"
-              value={getValues('category')}
+              inputProps={{ ...register('category') }}
+              // value={getValues('category')}
               onChange={(e) => {
-                setValue('category', e.target.value);
-                fetchSubcategoryData();
-                console.log(e.target.value);
+                setValue('category', e.target.value as string);
+                setCategory(e.target.value as string);
               }}
             >
               {categoryData?.data.categories.map((category: Category) => {
@@ -112,7 +110,7 @@ function AddProductForm() {
               })}
             </Select>
           </FormControl>
-          {/* <FormControl fullWidth sx={{ maxWidth: '400px' }}>
+          <FormControl fullWidth sx={{ maxWidth: '400px' }}>
             <InputLabel
               sx={{ backgroundColor: 'white', paddingRight: '5px' }}
               id="subCategory"
@@ -120,20 +118,22 @@ function AddProductForm() {
               Category
             </InputLabel>
             <Select
+              onChange={(e) =>
+                setValue('subcategory', e.target.value as string)
+              }
               labelId="subCategory"
               id="demo-simple-select"
               label="Age"
-              inputProps={{ ...register('username') }}
             >
-              {subCategoryData?.map((category: Category) => {
+              {subCategoryData?.data.subcategories.map((category: Category) => {
                 return (
-                  <MenuItem key={category._id} value={category.name}>
+                  <MenuItem key={category._id} value={category._id}>
                     {category.name}
                   </MenuItem>
                 );
               })}
             </Select>
-          </FormControl> */}
+          </FormControl>
         </Box>
         <Button
           variant="contained"
@@ -144,8 +144,6 @@ function AddProductForm() {
         >
           ورود
         </Button>
-
-        {/* {isLoading && <CircularProgress />} */}
       </Box>
     </Box>
   );

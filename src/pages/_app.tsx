@@ -15,6 +15,7 @@ import { cacheRtl } from '@/theme/loadRtl';
 import Router from 'next/router';
 import { useState } from 'react';
 import NextNProgress from 'nextjs-progressbar';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools/build/lib/devtools';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -57,6 +58,7 @@ export default function MyApp(props: MyAppProps) {
             </CacheProvider>
           </CacheProvider>
         </ThemeProvider>
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </CacheProvider>
   );

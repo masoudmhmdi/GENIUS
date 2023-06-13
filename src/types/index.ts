@@ -98,5 +98,6 @@ export type Category = {
 export type IAddProduct = {
   payload: {
     category: string;
+    subcategory: string;
   };
 };
