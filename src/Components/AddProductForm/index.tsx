@@ -1,11 +1,20 @@
 import AuthLayout from '@/Layouts/AuthLayout/AuthLayout';
-import { Box, Button, Link, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  Link,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material';
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { ILoginData, IRegisterData } from '@/types';
+import { Category, ILoginData, IRegisterData } from '@/types';
 import { error } from 'console';
 import useLoginUser from '@/api/services/UseLoginUser';
 import { handleAuthErr } from '@/utils/handleAuthErr';
@@ -32,7 +41,7 @@ function AddProductForm() {
   });
 
   const { data } = useGetCategory();
-  console.log(data);
+  const allCategory = data.data.categories;
 
   const submitHandler = (d: ILoginData['payload']) => {};
 
@@ -59,38 +68,48 @@ function AddProductForm() {
         component={'form'}
         onSubmit={handleSubmit(submitHandler)}
       >
-        <TextField
-          label="نام کاربری"
-          inputProps={{ ...register('username') }}
-          error={!!errors.username}
-          helperText={errors.username?.message}
-          fullWidth
+        <Box
           sx={{
-            maxWidth: '400px',
+            width: '100%',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '15px',
           }}
-          InputProps={{
-            sx: {
-              borderRadius: '0px',
-              height: '50px',
-            },
-          }}
-        />
-        <TextField
-          label="رمز عبور"
-          inputProps={{ ...register('password') }}
-          error={!!errors.password}
-          helperText={errors.password?.message}
-          fullWidth
-          sx={{
-            maxWidth: '400px',
-          }}
-          InputProps={{
-            sx: {
-              borderRadius: '0px',
-              height: '50px',
-            },
-          }}
-        />
+        >
+          <FormControl fullWidth sx={{ maxWidth: '400px' }}>
+            <InputLabel
+              sx={{ backgroundColor: 'white', paddingRight: '5px' }}
+              id="demo-simple-select-label"
+            >
+              Category
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Age"
+              inputProps={{ ...register('username') }}
+            >
+              {allCategory.map((category: Category) => {
+                return (
+                  <MenuItem key={category._id} value={category.name}>
+                    {category.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <TextField
+            label="رمز عبور"
+            inputProps={{ ...register('password') }}
+            error={!!errors.password}
+            helperText={errors.password?.message}
+            fullWidth
+            sx={{
+              maxWidth: '400px',
+            }}
+          />
+        </Box>
         <Button
           variant="contained"
           sx={{ maxWidth: '400px', borderRadius: '0', marginTop: '30px' }}

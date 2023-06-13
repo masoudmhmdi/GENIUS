@@ -85,3 +85,12 @@ export type getProductQueryFnInput = {
   field: string;
   sort: GridSortDirection;
 };
+
+export type Category = {
+  _id: string;
+  name: string;
+  icon: string;
+  createdAt: string;
+  updatedAt: string;
+  slugname: string;
+};
