@@ -13,6 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { setCookie } from '@/utils/setCookie';
 import { useRouter } from 'next/dist/client/router';
 import { persistData } from '@/utils/persistData';
+import useGetCategory from '@/api/services/useGetCategory';
 
 const schema = yup.object({
   username: yup.string().required('این فیلد ضروری است'),
@@ -30,21 +31,10 @@ function AddProductForm() {
     resolver: yupResolver(schema),
   });
 
-  const { mutate, isLoading } = useLoginUser({
-    onSuccess: (res: any) => {
-      const { token } = res;
-      setCookie(token);
-      persistData(res);
-      router.push('/');
-    },
-    onError: (err) => {
-      handleAuthErr({ setError, err });
-    },
-  });
+  const { data } = useGetCategory();
+  console.log(data);
 
-  const submitHandler = (d: ILoginData['payload']) => {
-    mutate(d);
-  };
+  const submitHandler = (d: ILoginData['payload']) => {};
 
   return (
     <Box
@@ -111,7 +101,7 @@ function AddProductForm() {
           ورود
         </Button>
 
-        {isLoading && <CircularProgress />}
+        {/* {isLoading && <CircularProgress />} */}
       </Box>
     </Box>
   );

@@ -1,7 +1,7 @@
 import { serverReq } from '@/api/constants';
 
 export async function getCategoryService() {
-  const res = await serverReq('/category');
+  const res = await serverReq('/categories');
   return res.data;
 }
 
