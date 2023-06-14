@@ -151,9 +151,6 @@ function AddProductForm() {
             error={!!errors.name}
             helperText={errors.name?.message}
             fullWidth
-            sx={{
-              maxWidth: '400px',
-            }}
             InputProps={{
               ...register('name'),
             }}
@@ -163,9 +160,6 @@ function AddProductForm() {
             error={!!errors.price}
             helperText={errors.price?.message}
             fullWidth
-            sx={{
-              maxWidth: '400px',
-            }}
             InputProps={{
               ...register('price'),
             }}
@@ -175,9 +169,6 @@ function AddProductForm() {
             error={!!errors.quantity}
             helperText={errors.quantity?.message}
             fullWidth
-            sx={{
-              maxWidth: '400px',
-            }}
             InputProps={{
               ...register('quantity'),
             }}
@@ -187,9 +178,6 @@ function AddProductForm() {
             error={!!errors.brand}
             helperText={errors.brand?.message}
             fullWidth
-            sx={{
-              maxWidth: '400px',
-            }}
             InputProps={{
               ...register('brand'),
             }}
