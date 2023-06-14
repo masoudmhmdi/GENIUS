@@ -55,10 +55,12 @@ function UploadImage({
   helperText?: string;
 }) {
   const [files, setFiles] = useState<IFile[]>([]);
-  console.log(files);
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: {},
+    accept: {
+      'image/png': ['.png'],
+      'image/JPEG': ['.JPEG'],
+    },
     onDrop: (acceptedFiles: any) => {
       setFiles(
         acceptedFiles.map((file: IFile) =>
@@ -86,6 +88,7 @@ function UploadImage({
           style={img}
           // Revoke data uri after image is loaded
           onLoad={() => {
+            setImageData('images', file);
             URL.revokeObjectURL(file.preview);
           }}
         />
@@ -100,15 +103,30 @@ function UploadImage({
 
   return (
     <Box className="container">
-      <Box {...getRootProps({ className: 'dropzone' })}>
+      <Box
+        {...getRootProps({ className: 'dropzone' })}
+        sx={{
+          border: '1px dashed gray',
+          height: '100px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
+      >
         <input {...getInputProps()} />
+        <Typography
+          align="center"
+          sx={{ color: 'gray', paddingTop: '18px', cursor: 'cell' }}
+        >
+          عکس را اینجا رها کنید
+        </Typography>
         <Button fullWidth variant="contained">
           افزون عکس
         </Button>
-        <Typography color="error" fontSize={'12px'}>
-          {helperText}
-        </Typography>
       </Box>
+      <Typography color="error" fontSize={'12px'}>
+        {helperText}
+      </Typography>
       <Box sx={thumbsContainer}>{thumbs}</Box>
     </Box>
   );
