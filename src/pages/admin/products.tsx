@@ -27,9 +27,9 @@ const columns: GridColDef[] = [
     renderCell: ({ row }) => {
       return (
         <Box sx={{ minWidth: '150px', height: '150px', position: 'relative' }}>
-          <Image
+          <img
             src={row.images[0]}
-            fill
+            // fill
             alt="product-img"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
