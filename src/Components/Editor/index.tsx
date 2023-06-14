@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { Box } from '@mui/material';
 import 'react-quill/dist/quill.snow.css';
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
-function Editor() {
+function Editor({ setEditorValue }: { setEditorValue: (arg: string) => void }) {
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -39,6 +39,7 @@ function Editor() {
   const [code, setCode] = useState('hellllo');
   const handleProcedureContentChange = (content: string) => {
     setCode(content);
+    setEditorValue(content);
     //let has_attribues = delta.ops[1].attributes || "";
     //console.log(has_attribues);
     //const cursorPosition = e.quill.getSelection().index;

@@ -49,9 +49,10 @@ function AddProductForm() {
 
   const { data: categoryData } = useGetCategory();
 
-  const { refetch: fetchSubcategoryData, data: subCategoryData } =
-    useGetSubcategory(category);
-
+  const { data: subCategoryData } = useGetSubcategory(category);
+  const setEditorValue = (input: string) => {
+    setValue('description', input);
+  };
   return (
     <Box
       sx={{
@@ -135,7 +136,7 @@ function AddProductForm() {
               })}
             </Select>
           </FormControl>
-          <Editor />
+          <Editor setEditorValue={setEditorValue} />
         </Box>
         <Button
           variant="contained"
