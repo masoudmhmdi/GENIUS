@@ -44,7 +44,7 @@ function Register() {
     },
   });
 
-  const submitHandler = (d: IRegisterData['payload']) => {
+  const submitHandler = (d: any) => {
     mutate(d);
   };
   return (

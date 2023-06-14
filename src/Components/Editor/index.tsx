@@ -36,7 +36,7 @@ function Editor({ setEditorValue }: { setEditorValue: (arg: string) => void }) {
     'font',
   ];
 
-  const [code, setCode] = useState('hellllo');
+  const [code, setCode] = useState('');
   const handleProcedureContentChange = (content: string) => {
     setCode(content);
     setEditorValue(content);
@@ -48,7 +48,7 @@ function Editor({ setEditorValue }: { setEditorValue: (arg: string) => void }) {
   };
 
   return (
-    <Box sx={{ maxWidth: '600px' }}>
+    <Box>
       <ReactQuill
         theme="snow"
         modules={modules}

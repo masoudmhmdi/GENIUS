@@ -8,6 +8,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from '@mui/material';
 import Image from 'next/image';
 import React, { ReactNode, useState } from 'react';
@@ -25,15 +26,24 @@ import { persistData } from '@/utils/persistData';
 import useGetCategory from '@/api/services/useGetCategory';
 import useGetSubcategory from '@/api/services/useGetSubcategory';
 import Editor from '../Editor';
+import ImageUploader from '../ImageUploader';
+import useAddNewProduct from '@/api/services/useAddNewProduct';
 
 const schema = yup.object({
   category: yup.string().required('این فیلد ضروری است'),
   subcategory: yup.string().required('این فیلد ضروری است'),
+  description: yup.string().required('این فیلد ضروری است'),
+  images: yup.array().required('این فیلد ضروری است'),
+  name: yup.string().required('این فیلد ضروری است'),
+  price: yup.string().required('این فیلد ضروری است'),
+  quantity: yup.number().required('این فیلد ضروری است'),
+  brand: yup.string().required('این فیلد ضروری است'),
 });
 
 function AddProductForm() {
   const router = useRouter();
   const [category, setCategory] = useState('');
+  const { mutate } = useAddNewProduct();
 
   const {
     register,
@@ -54,43 +64,36 @@ function AddProductForm() {
     setValue('description', input);
   };
   return (
-    <Box
-      sx={{
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}
-    >
+    <Box component={'form'} onSubmit={handleSubmit((input) => mutate(input))}>
       <Box
         sx={{
-          textAlign: 'center',
           width: '100%',
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '15px',
-          paddingY: '60px',
+          flexDirection: {
+            xs: 'column',
+            md: 'row',
+          },
+          paddingY: '40px',
+          gap: '30px',
         }}
-        component={'form'}
-        onSubmit={handleSubmit((i) => console.log(i))}
       >
         <Box
           sx={{
-            width: '100%',
+            width: {
+              xs: '100%',
+              md: '40%',
+            },
             display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
+            flexDirection: 'column',
             gap: '15px',
           }}
         >
-          <FormControl fullWidth sx={{ maxWidth: '400px' }}>
+          <FormControl fullWidth error={!!errors.category}>
             <InputLabel
               sx={{ backgroundColor: 'white', paddingRight: '5px' }}
               id="demo-simple-select-label"
             >
-              Category
+              دسته بندی
             </InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -111,13 +114,16 @@ function AddProductForm() {
                 );
               })}
             </Select>
+            <Typography color="error" fontSize={'12px'}>
+              {errors.category?.message}
+            </Typography>
           </FormControl>
-          <FormControl fullWidth sx={{ maxWidth: '400px' }}>
+          <FormControl fullWidth error={!!errors.subcategory}>
             <InputLabel
               sx={{ backgroundColor: 'white', paddingRight: '5px' }}
               id="subCategory"
             >
-              Category
+              زیر دسته بندی
             </InputLabel>
             <Select
               onChange={(e) =>
@@ -126,6 +132,7 @@ function AddProductForm() {
               labelId="subCategory"
               id="demo-simple-select"
               label="Age"
+              inputProps={{ ...register('subcategory') }}
             >
               {subCategoryData?.data.subcategories.map((category: Category) => {
                 return (
@@ -135,19 +142,80 @@ function AddProductForm() {
                 );
               })}
             </Select>
+            <Typography color="error" fontSize={'12px'}>
+              {errors.subcategory?.message}
+            </Typography>
           </FormControl>
-          <Editor setEditorValue={setEditorValue} />
+          <TextField
+            label="نام"
+            error={!!errors.name}
+            helperText={errors.name?.message}
+            fullWidth
+            sx={{
+              maxWidth: '400px',
+            }}
+            InputProps={{
+              ...register('name'),
+            }}
+          />
+          <TextField
+            label="قیمت"
+            error={!!errors.price}
+            helperText={errors.price?.message}
+            fullWidth
+            sx={{
+              maxWidth: '400px',
+            }}
+            InputProps={{
+              ...register('price'),
+            }}
+          />
+          <TextField
+            label="تعداد"
+            error={!!errors.quantity}
+            helperText={errors.quantity?.message}
+            fullWidth
+            sx={{
+              maxWidth: '400px',
+            }}
+            InputProps={{
+              ...register('quantity'),
+            }}
+          />
+          <TextField
+            label="برند"
+            error={!!errors.brand}
+            helperText={errors.brand?.message}
+            fullWidth
+            sx={{
+              maxWidth: '400px',
+            }}
+            InputProps={{
+              ...register('brand'),
+            }}
+          />
         </Box>
-        <Button
-          variant="contained"
-          sx={{ maxWidth: '400px', borderRadius: '0', marginTop: '30px' }}
-          fullWidth
-          type="submit"
-          color="success"
+        <Box
+          sx={{
+            width: {
+              xs: '100%',
+              md: '60%',
+            },
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '15px',
+          }}
         >
-          ورود
-        </Button>
+          <Editor setEditorValue={setEditorValue} />
+          <ImageUploader
+            helperText={errors.images?.message}
+            setImageData={setValue}
+          />
+        </Box>
       </Box>
+      <Button type="submit" fullWidth variant="contained" color="success">
+        اضافه شود
+      </Button>
     </Box>
   );
 }
