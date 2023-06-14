@@ -24,6 +24,7 @@ import { useRouter } from 'next/dist/client/router';
 import { persistData } from '@/utils/persistData';
 import useGetCategory from '@/api/services/useGetCategory';
 import useGetSubcategory from '@/api/services/useGetSubcategory';
+import Editor from '../Editor';
 
 const schema = yup.object({
   category: yup.string().required('این فیلد ضروری است'),
@@ -134,6 +135,7 @@ function AddProductForm() {
               })}
             </Select>
           </FormControl>
+          <Editor />
         </Box>
         <Button
           variant="contained"
