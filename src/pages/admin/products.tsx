@@ -14,6 +14,7 @@ import {
 } from '@/Store/slice/products.slice';
 import DownDrawer from '@/Components/DownDrawer';
 import AddProductForm from '@/Components/AddProductForm';
+import MyModal from '@/Components/Modal';
 
 const columns: GridColDef[] = [
   {
@@ -68,7 +69,7 @@ const columns: GridColDef[] = [
     renderCell: () => {
       return (
         <Button size="large" variant="contained" color="success">
-          ویرایش
+          مشاهده
         </Button>
       );
     },
@@ -82,9 +83,28 @@ const columns: GridColDef[] = [
     align: 'center',
     renderCell: () => {
       return (
-        <Button size="large" variant="contained" color="error">
-          حذف
-        </Button>
+        <MyModal
+          btnText="حذف"
+          btnProps={{ color: 'error', variant: 'contained' }}
+        >
+          <Box>
+            <Typography variant="h6" align="center">
+              آیااز حذف این محصول اطمینان دارید؟
+            </Typography>
+            <Box
+              sx={{
+                marginTop: '30px',
+                display: 'flex',
+                justifyContent: 'space-around',
+              }}
+            >
+              <Button variant="contained">خیر</Button>
+              <Button color="error" variant="contained">
+                بله
+              </Button>
+            </Box>
+          </Box>
+        </MyModal>
       );
     },
   },

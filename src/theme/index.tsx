@@ -39,7 +39,7 @@ export const theme = createTheme({
     },
     error: {
       main: '#FA9884',
-      contrastText: '#EB455F',
+      contrastText: '#ff0028',
     },
   },
   components: {
