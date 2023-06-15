@@ -3,7 +3,13 @@ import dynamic from 'next/dynamic';
 import { Box } from '@mui/material';
 import 'react-quill/dist/quill.snow.css';
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
-function Editor({ setEditorValue }: { setEditorValue: (arg: string) => void }) {
+function Editor({
+  setEditorValue,
+  value,
+}: {
+  setEditorValue: (arg: string) => void;
+  value: () => string;
+}) {
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -53,7 +59,7 @@ function Editor({ setEditorValue }: { setEditorValue: (arg: string) => void }) {
         theme="snow"
         modules={modules}
         formats={formats}
-        value={code}
+        value={value()}
         onChange={handleProcedureContentChange}
       />
     </Box>

@@ -8,10 +8,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Category, IAddProduct } from '@/types';
 import { useRouter } from 'next/dist/client/router';
 import useGetCategory from '@/api/services/useGetCategory';
@@ -30,8 +30,7 @@ const schema = yup.object({
   brand: yup.string().required('این فیلد ضروری است'),
 });
 
-function AddProductForm() {
-  const router = useRouter();
+function EditProductForm({ productInfo }: { productInfo: any }) {
   const [category, setCategory] = useState('');
   const { mutate } = useAddNewProduct();
 
@@ -41,7 +40,7 @@ function AddProductForm() {
     getValues,
     setValue,
     setError,
-
+    control,
     formState: { errors },
   } = useForm<IAddProduct['payload']>({
     resolver: yupResolver(schema),
@@ -65,6 +64,21 @@ function AddProductForm() {
   const getEditorValue = () => {
     return getValues('description');
   };
+
+  useEffect(() => {
+    const { category, name, price, quantity, subcategory, description } =
+      productInfo;
+    console.log(productInfo);
+    setValue('category', category._id);
+    setValue('subcategory', subcategory._id);
+    setCategory(category._id);
+    setValue('name', name);
+    setValue('price', price);
+    setValue('quantity', quantity);
+    setEditorValue(description);
+  }, []);
+
+  console.log(getValues('category'));
 
   return (
     <Box component={'form'} onSubmit={handleSubmit((input) => mutate(input))}>
@@ -98,25 +112,31 @@ function AddProductForm() {
             >
               دسته بندی
             </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="category"
-              inputProps={{ ...register('category') }}
-              // value={getValues('category')}
-              onChange={(e) => {
-                setValue('category', e.target.value as string);
-                setCategory(e.target.value as string);
-              }}
-            >
-              {categoryData?.data.categories.map((category: Category) => {
+            <Controller
+              name="category"
+              control={control}
+              render={({ field }) => {
                 return (
-                  <MenuItem key={category._id} value={category._id}>
-                    {category.name}
-                  </MenuItem>
+                  <Select
+                    defaultValue={getValues('category')}
+                    {...field}
+                    onChange={(e) => {
+                      setValue('category', e.target.value as string);
+                      setCategory(e.target.value as string);
+                    }}
+                  >
+                    {categoryData?.data.categories.map((category: Category) => {
+                      return (
+                        <MenuItem key={category._id} value={category._id}>
+                          {category.name}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
                 );
-              })}
-            </Select>
+              }}
+            />
+
             <Typography color="error" fontSize={'12px'}>
               {errors.category?.message}
             </Typography>
@@ -128,23 +148,31 @@ function AddProductForm() {
             >
               زیر دسته بندی
             </InputLabel>
-            <Select
-              onChange={(e) =>
-                setValue('subcategory', e.target.value as string)
-              }
-              labelId="subCategory"
-              id="demo-simple-select"
-              label="Age"
-              inputProps={{ ...register('subcategory') }}
-            >
-              {subCategoryData?.data.subcategories.map((category: Category) => {
+            <Controller
+              name="subcategory"
+              control={control}
+              render={({ field }) => {
                 return (
-                  <MenuItem key={category._id} value={category._id}>
-                    {category.name}
-                  </MenuItem>
+                  <Select
+                    defaultValue={getValues('subcategory')}
+                    {...field}
+                    onChange={(e) =>
+                      setValue('subcategory', e.target.value as string)
+                    }
+                  >
+                    {subCategoryData?.data.subcategories.map(
+                      (category: Category) => {
+                        return (
+                          <MenuItem key={category._id} value={category._id}>
+                            {category.name}
+                          </MenuItem>
+                        );
+                      }
+                    )}
+                  </Select>
                 );
-              })}
-            </Select>
+              }}
+            />
             <Typography color="error" fontSize={'12px'}>
               {errors.subcategory?.message}
             </Typography>
@@ -211,4 +239,4 @@ function AddProductForm() {
   );
 }
 
-export default AddProductForm;
+export default EditProductForm;

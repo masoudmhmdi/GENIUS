@@ -1,4 +1,3 @@
-import { IFile } from '@/Components/ImageUploader';
 import { store } from '@/Store/store';
 import { GridSortDirection } from '@mui/x-data-grid';
 import { AxiosError } from 'axios';
@@ -101,10 +100,10 @@ export type IAddProduct = {
     category: string;
     subcategory: string;
     description: string;
-    images: IFile[];
+    images: unknown;
     name: string;
-    price: string;
-    quantity: string;
+    price: number;
+    quantity: number;
     brand: string;
   };
   response: {

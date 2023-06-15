@@ -14,6 +14,7 @@ import {
 import DownDrawer from '@/Components/DownDrawer';
 import AddProductForm from '@/Components/AddProductForm';
 import MyModal from '@/Components/Modal';
+import EditProductForm from '@/Components/EditProductForm';
 
 const columns: GridColDef[] = [
   {
@@ -65,11 +66,11 @@ const columns: GridColDef[] = [
     sortable: false,
     headerAlign: 'center',
     align: 'center',
-    renderCell: () => {
+    renderCell: ({ row }) => {
       return (
-        <Button size="large" variant="contained" color="success">
-          مشاهده
-        </Button>
+        <DownDrawer>
+          <EditProductForm productInfo={row} />
+        </DownDrawer>
       );
     },
   },
