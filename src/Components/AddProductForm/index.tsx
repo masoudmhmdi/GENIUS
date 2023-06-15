@@ -33,9 +33,8 @@ const schema = yup.object({
   category: yup.string().required('این فیلد ضروری است'),
   subcategory: yup.string().required('این فیلد ضروری است'),
   description: yup.string().required('این فیلد ضروری است'),
-  images: yup.array().required('این فیلد ضروری است'),
   name: yup.string().required('این فیلد ضروری است'),
-  price: yup.string().required('این فیلد ضروری است'),
+  price: yup.number().required('این فیلد ضروری است'),
   quantity: yup.number().required('این فیلد ضروری است'),
   brand: yup.string().required('این فیلد ضروری است'),
 });
@@ -173,15 +172,6 @@ function AddProductForm() {
               ...register('quantity'),
             }}
           />
-          <TextField
-            label="برند"
-            error={!!errors.brand}
-            helperText={errors.brand?.message}
-            fullWidth
-            InputProps={{
-              ...register('brand'),
-            }}
-          />
         </Box>
         <Box
           sx={{
@@ -194,6 +184,15 @@ function AddProductForm() {
             gap: '15px',
           }}
         >
+          <TextField
+            label="برند"
+            error={!!errors.brand}
+            helperText={errors.brand?.message}
+            fullWidth
+            InputProps={{
+              ...register('brand'),
+            }}
+          />
           <Editor setEditorValue={setEditorValue} />
           <ImageUploader
             helperText={errors.images?.message}

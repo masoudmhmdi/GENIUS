@@ -107,4 +107,29 @@ export type IAddProduct = {
     quantity: string;
     brand: string;
   };
+  response: {
+    status: string;
+    data: {
+      product: {
+        category: string;
+        subcategory: string;
+        name: string;
+        price: number;
+        quantity: number;
+        brand: string;
+        description: string;
+        thumbnail: string;
+        images: string[];
+        rating: {
+          rate: number;
+          count: number;
+        };
+        _id: string;
+        createdAt: string;
+        updatedAt: string;
+        slugname: string;
+        __v: number;
+      };
+    };
+  };
 };

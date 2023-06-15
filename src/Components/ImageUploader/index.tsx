@@ -55,6 +55,7 @@ function UploadImage({
   helperText?: string;
 }) {
   const [files, setFiles] = useState<IFile[]>([]);
+  console.log(files);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -88,7 +89,6 @@ function UploadImage({
           style={img}
           // Revoke data uri after image is loaded
           onLoad={() => {
-            setImageData('images', file);
             URL.revokeObjectURL(file.preview);
           }}
         />

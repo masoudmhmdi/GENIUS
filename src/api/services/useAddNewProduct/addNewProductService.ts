@@ -1,5 +1,7 @@
 import { serverReq } from '@/api/constants';
 import { IAddProduct } from '@/types';
+import { AxiosError, AxiosResponse } from 'axios';
+import { toast } from 'react-hot-toast';
 
 export async function addNewProductService(data: IAddProduct['payload']) {
   const {
@@ -24,8 +26,12 @@ export async function addNewProductService(data: IAddProduct['payload']) {
   console.log(formData);
   console.log(images);
 
-  const res = await serverReq.post('/products', formData);
-  return res.data;
+  try {
+    const res = await serverReq.post('/products', formData);
+    return res.data;
+  } catch (x: any) {
+    toast(x.response.data.message);
+  }
 }
 
 export default addNewProductService;
