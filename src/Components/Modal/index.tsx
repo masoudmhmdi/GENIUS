@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button, { ButtonPropsColorOverrides } from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import useDeleteProduct from '@/api/services/useDeleteProduct';
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
@@ -15,13 +16,9 @@ const style = {
   p: 4,
 };
 
-export default function MyModal({
-  children,
-  btnProps,
-  btnText,
-}: {
-  children: React.ReactNode;
+type IDeleteModalProps = {
   btnText: string;
+  id: string;
   btnProps: {
     color:
       | 'inherit'
@@ -34,10 +31,13 @@ export default function MyModal({
       | undefined;
     variant: 'contained' | 'outlined' | 'text';
   };
-}) {
+};
+
+export default function MyModal({ btnProps, btnText, id }: IDeleteModalProps) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { mutate } = useDeleteProduct();
 
   return (
     <div>
@@ -50,7 +50,33 @@ export default function MyModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>{children}</Box>
+        <Box sx={style}>
+          {' '}
+          <Box>
+            <Typography variant="h6" align="center">
+              آیااز حذف این محصول اطمینان دارید؟
+            </Typography>
+            <Box
+              sx={{
+                marginTop: '30px',
+                display: 'flex',
+                justifyContent: 'space-around',
+              }}
+            >
+              <Button variant="contained">خیر</Button>
+              <Button
+                onClick={() => {
+                  mutate(id);
+                  handleClose();
+                }}
+                color="error"
+                variant="contained"
+              >
+                بله
+              </Button>
+            </Box>
+          </Box>
+        </Box>
       </Modal>
     </div>
   );

@@ -1,20 +1,10 @@
+type T = any;
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-
-export type IFile = {
-  path: string;
-  preview: string;
-  lastModified: number;
-  lastModifiedDate: any;
-  name: string;
-  size: number;
-  type: string;
-  webkitRelativePath: string;
-};
 
 const thumbsContainer = {
   display: 'flex',
@@ -54,7 +44,7 @@ function UploadImage({
   setImageData: any;
   helperText?: string;
 }) {
-  const [files, setFiles] = useState<IFile[]>([]);
+  const [files, setFiles] = useState<(T & { preview: string })[]>([]);
   console.log(files);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -62,19 +52,18 @@ function UploadImage({
       'image/png': ['.png'],
       'image/JPEG': ['.JPEG'],
     },
-    onDrop: (acceptedFiles: any) => {
-      setFiles(
-        acceptedFiles.map((file: IFile) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file as any),
-          })
-        )
+    onDrop: (acceptedFiles) => {
+      const newFile = acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
       );
+      setFiles(newFile);
       setImageData(
         'images',
-        acceptedFiles.map((file: IFile) =>
+        acceptedFiles.map((file) =>
           Object.assign(file, {
-            preview: URL.createObjectURL(file as any),
+            preview: URL.createObjectURL(file),
           })
         )
       );

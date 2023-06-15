@@ -22,7 +22,8 @@ export async function addNewProductService(data: IAddProduct['payload']) {
   formData.append('price', price);
   formData.append('quantity', quantity);
   formData.append('subcategory', subcategory);
-  images.map((i) => formData.append('images', i as any));
+
+  images.map((i) => formData.append('images', i));
   console.log(formData);
   console.log(images);
 

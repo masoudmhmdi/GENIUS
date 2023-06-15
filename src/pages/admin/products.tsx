@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import AdminLayout from '@/Layouts/AdminLayout/AdminLayout';
@@ -81,30 +80,13 @@ const columns: GridColDef[] = [
     sortable: false,
     headerAlign: 'center',
     align: 'center',
-    renderCell: () => {
+    renderCell: ({ row }) => {
       return (
         <MyModal
           btnText="حذف"
           btnProps={{ color: 'error', variant: 'contained' }}
-        >
-          <Box>
-            <Typography variant="h6" align="center">
-              آیااز حذف این محصول اطمینان دارید؟
-            </Typography>
-            <Box
-              sx={{
-                marginTop: '30px',
-                display: 'flex',
-                justifyContent: 'space-around',
-              }}
-            >
-              <Button variant="contained">خیر</Button>
-              <Button color="error" variant="contained">
-                بله
-              </Button>
-            </Box>
-          </Box>
-        </MyModal>
+          id={row._id}
+        />
       );
     },
   },
