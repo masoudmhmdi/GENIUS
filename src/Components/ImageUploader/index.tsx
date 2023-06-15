@@ -1,4 +1,3 @@
-type T = any;
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { Button, Typography } from '@mui/material';
@@ -44,7 +43,7 @@ function UploadImage({
   setImageData: any;
   helperText?: string;
 }) {
-  const [files, setFiles] = useState<(T & { preview: string })[]>([]);
+  const [files, setFiles] = useState<(any & { preview: string })[]>([]);
   console.log(files);
 
   const { getRootProps, getInputProps } = useDropzone({
