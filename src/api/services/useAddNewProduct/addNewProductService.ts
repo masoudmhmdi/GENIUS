@@ -30,8 +30,10 @@ export async function addNewProductService(data: IAddProduct['payload']) {
   try {
     const res = await serverReq.post('/products', formData);
     return res.data;
-  } catch (x: any) {
-    toast(x.response.data.message);
+  } catch (error) {
+    const err = error as AxiosError<{ massage: string }>;
+    const { data, status, config } = err.response!;
+    toast(data.massage);
   }
 }
 

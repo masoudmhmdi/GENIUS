@@ -1,28 +1,19 @@
-import AuthLayout from '@/Layouts/AuthLayout/AuthLayout';
 import {
   Box,
   Button,
   FormControl,
   InputLabel,
-  Link,
   MenuItem,
   Select,
   TextField,
   Typography,
 } from '@mui/material';
-import Image from 'next/image';
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { Category, IAddProduct, ILoginData, IRegisterData } from '@/types';
-import { error } from 'console';
-import useLoginUser from '@/api/services/UseLoginUser';
-import { handleAuthErr } from '@/utils/handleAuthErr';
-import CircularProgress from '@mui/material/CircularProgress';
-import { setCookie } from '@/utils/setCookie';
+import { Category, IAddProduct } from '@/types';
 import { useRouter } from 'next/dist/client/router';
-import { persistData } from '@/utils/persistData';
 import useGetCategory from '@/api/services/useGetCategory';
 import useGetSubcategory from '@/api/services/useGetSubcategory';
 import Editor from '../Editor';
@@ -62,6 +53,7 @@ function AddProductForm() {
   const setEditorValue = (input: string) => {
     setValue('description', input);
   };
+
   return (
     <Box component={'form'} onSubmit={handleSubmit((input) => mutate(input))}>
       <Box
