@@ -25,7 +25,7 @@ async function editProductService(id: string, data: IEditProduct['payload']) {
     formData.append('subcategory', subcategory);
 
     images?.map((i: Blob) => formData.append('images', i));
-    console.log(formData);
+    console.log(images);
     const res = await serverReq.patch(`products/${id}`, formData);
     return res.data;
   } catch (error) {
