@@ -1,8 +1,9 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import editProductService from './editProductService';
 import { IEditProduct } from '@/types';
 
 function useEditSingleProduct() {
+  const client = useQueryClient();
   return useMutation({
     mutationFn: ({
       id,
@@ -12,6 +13,9 @@ function useEditSingleProduct() {
       data: IEditProduct['payload'];
     }) => {
       return editProductService(id, data);
+    },
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['GetProduct'] });
     },
   });
 }

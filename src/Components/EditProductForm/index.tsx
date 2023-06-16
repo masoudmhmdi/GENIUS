@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
   Button,
@@ -114,7 +115,7 @@ function EditProductForm({ productInfo }: { productInfo: any }) {
   return (
     <Box
       component={'form'}
-      onSubmit={handleSubmit((input: IEditProduct['payload']) =>
+      onSubmit={handleSubmit((input) =>
         mutate({ id: productInfo._id, data: input })
       )}
     >

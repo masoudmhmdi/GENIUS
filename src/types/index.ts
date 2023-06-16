@@ -100,7 +100,7 @@ export type IAddProduct = {
     category: string;
     subcategory: string;
     description: string;
-    images: unknown;
+    images: Blob[];
     name: string;
     price: number;
     quantity: number;
@@ -137,10 +137,11 @@ export type IEditProduct = {
   payload: {
     category: string;
     subcategory: string;
+    description: string;
+    images: Blob[];
     name: string;
     price: number;
     quantity: number;
     brand: string;
-    images?: any;
   };
 };
