@@ -12,13 +12,15 @@ import React, { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Controller, useForm } from 'react-hook-form';
-import { Category, IAddProduct } from '@/types';
+import { Category, IAddProduct, IEditProduct } from '@/types';
 import { useRouter } from 'next/dist/client/router';
 import useGetCategory from '@/api/services/useGetCategory';
 import useGetSubcategory from '@/api/services/useGetSubcategory';
 import Editor from '../Editor';
 import ImageUploader from '../ImageUploader';
 import useAddNewProduct from '@/api/services/useAddNewProduct';
+import useEditSingleProduct from '@/api/services/EditProductById';
+import Image from 'next/dist/client/image';
 
 const schema = yup.object({
   category: yup.string().required('این فیلد ضروری است'),
@@ -32,7 +34,12 @@ const schema = yup.object({
 
 function EditProductForm({ productInfo }: { productInfo: any }) {
   const [category, setCategory] = useState('');
-  const { mutate } = useAddNewProduct();
+
+  const [imagePreview, setImagePreview] = useState({
+    show: true,
+    imgData: [],
+  });
+  const { mutate } = useEditSingleProduct();
 
   const {
     register,
@@ -65,9 +72,20 @@ function EditProductForm({ productInfo }: { productInfo: any }) {
     return getValues('description');
   };
 
+  const getImageValue = () => {
+    return getValues('images');
+  };
   useEffect(() => {
-    const { category, name, price, quantity, subcategory, description } =
-      productInfo;
+    const {
+      category,
+      name,
+      price,
+      quantity,
+      subcategory,
+      description,
+      images,
+      brand,
+    } = productInfo;
     console.log(productInfo);
     setValue('category', category._id);
     setValue('subcategory', subcategory._id);
@@ -76,12 +94,30 @@ function EditProductForm({ productInfo }: { productInfo: any }) {
     setValue('price', price);
     setValue('quantity', quantity);
     setEditorValue(description);
+    setValue('brand', brand);
+    // setValue('images', images);
+    setImagePreview((prev) => {
+      return { ...prev, imgData: images };
+    });
   }, []);
 
   console.log(getValues('category'));
 
+  const setImageData = (data: any) => {
+    setValue('images', data);
+    setImagePreview((prev) => {
+      return { show: false, imgData: data };
+    });
+  };
+
+  console.log(getValues('images'));
   return (
-    <Box component={'form'} onSubmit={handleSubmit((input) => mutate(input))}>
+    <Box
+      component={'form'}
+      onSubmit={handleSubmit((input: IEditProduct['payload']) =>
+        mutate({ id: productInfo._id, data: input })
+      )}
+    >
       <Box
         sx={{
           width: '100%',
@@ -228,8 +264,21 @@ function EditProductForm({ productInfo }: { productInfo: any }) {
           <Editor value={getEditorValue} setEditorValue={setEditorValue} />
           <ImageUploader
             helperText={errors.images?.message}
-            setImageData={setValue}
+            setImageData={setImageData}
+            getImageValue={getImageValue}
           />
+          {imagePreview.show &&
+            imagePreview.imgData.map((img: string) => {
+              return (
+                <Image
+                  key={img}
+                  alt={'product-img'}
+                  width="100"
+                  height="100"
+                  src={img}
+                />
+              );
+            })}
         </Box>
       </Box>
       <Button type="submit" fullWidth variant="contained" color="success">

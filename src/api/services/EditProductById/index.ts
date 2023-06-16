@@ -1,10 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
 import editProductService from './editProductService';
+import { IEditProduct } from '@/types';
 
 function useEditSingleProduct() {
   return useMutation({
-    mutationFn: (id: string) => {
-      return editProductService(id);
+    mutationFn: ({
+      id,
+      data,
+    }: {
+      id: string;
+      data: IEditProduct['payload'];
+    }) => {
+      return editProductService(id, data);
     },
   });
 }

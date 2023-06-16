@@ -39,9 +39,11 @@ const img = {
 function UploadImage({
   setImageData,
   helperText,
+  getImageValue,
 }: {
   setImageData: any;
   helperText?: string;
+  getImageValue: any;
 }) {
   const [files, setFiles] = useState<(any & { preview: string })[]>([]);
   console.log(files);
@@ -58,14 +60,7 @@ function UploadImage({
         })
       );
       setFiles(newFile);
-      setImageData(
-        'images',
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
+      setImageData(newFile);
     },
   });
 

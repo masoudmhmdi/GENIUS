@@ -132,3 +132,15 @@ export type IAddProduct = {
     };
   };
 };
+
+export type IEditProduct = {
+  payload: {
+    category: string;
+    subcategory: string;
+    name: string;
+    price: number;
+    quantity: number;
+    brand: string;
+    images?: any;
+  };
+};
