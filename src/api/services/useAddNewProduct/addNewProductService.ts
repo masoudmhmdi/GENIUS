@@ -3,7 +3,10 @@ import { IAddProduct } from '@/types';
 import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-hot-toast';
 
-export async function addNewProductService(data: IAddProduct['payload']) {
+export async function addNewProductService(
+  data: IAddProduct['payload'],
+  setOpen: (arg: boolean) => void
+) {
   const {
     brand,
     category,
@@ -31,6 +34,7 @@ export async function addNewProductService(data: IAddProduct['payload']) {
     toast('محصول با موفقیت اضافه شد', {
       style: { backgroundColor: 'green' },
     });
+    setOpen(false);
     return res.data;
   } catch (error) {
     const err = error as AxiosError<{ message: string; status: string }>;

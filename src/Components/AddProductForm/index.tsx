@@ -33,11 +33,7 @@ const schema = yup.object({
 function AddProductForm({ setOpen }: { setOpen: (arg: boolean) => void }) {
   const router = useRouter();
   const [category, setCategory] = useState('');
-  const { mutate } = useAddNewProduct({
-    // onSuccess: () => {
-    //   setOpen(false);
-    // },
-  });
+  const { mutate } = useAddNewProduct({ setOpen: setOpen });
 
   const {
     register,

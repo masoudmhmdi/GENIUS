@@ -9,7 +9,7 @@ async function getProductService({
 }: getProductQueryFnInput) {
   let URL = `products?page=${
     page + 1
-  }&limit=${pageSize}&fields=-rating,-createdAt,-updatedAt,-__v&&quantity[gte]=8`;
+  }&limit=${pageSize}&fields=-rating,-createdAt,-updatedAt,-__v&&quantity[gte]=0`;
   let sortValue = '';
 
   if (field) {
