@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import AdminLayout from '@/Layouts/AdminLayout/AdminLayout';
@@ -11,10 +12,11 @@ import {
   handleSortingProducts,
   productSetPage,
 } from '@/Store/slice/products.slice';
-import DownDrawer from '@/Components/DownDrawer';
+import DownDrawer from '@/Components/AddProductDownDrawer';
 import AddProductForm from '@/Components/AddProductForm';
 import MyModal from '@/Components/Modal';
 import EditProductForm from '@/Components/EditProductForm';
+import AddProductDownDrawer from '@/Components/AddProductDownDrawer';
 
 const columns: GridColDef[] = [
   {
@@ -113,7 +115,7 @@ export default function Product() {
         }}
       >
         <Typography variant="h4">محصولات</Typography>
-        <DownDrawer />
+        <AddProductDownDrawer />
       </Box>
       <Box sx={{ marginTop: '6px' }} style={{ height: '550px', width: '100%' }}>
         <DataGrid

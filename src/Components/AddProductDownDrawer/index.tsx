@@ -5,7 +5,7 @@ import React, { ReactNode, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddProductForm from '../AddProductForm';
 
-function DownDrawer({ children }: { children?: ReactNode }) {
+function AddProductDownDrawer({ children }: { children?: ReactNode }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -39,4 +39,4 @@ function DownDrawer({ children }: { children?: ReactNode }) {
   );
 }
 
-export default DownDrawer;
+export default AddProductDownDrawer;
