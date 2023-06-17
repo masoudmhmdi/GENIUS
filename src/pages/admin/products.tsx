@@ -68,9 +68,10 @@ const columns: GridColDef[] = [
     align: 'center',
     renderCell: ({ row }) => {
       return (
-        <DownDrawer>
-          <EditProductForm productInfo={row} />
-        </DownDrawer>
+        // <DownDrawer>
+        //   <EditProductForm productInfo={row} />
+        // </DownDrawer>
+        <>hello</>
       );
     },
   },
@@ -112,9 +113,7 @@ export default function Product() {
         }}
       >
         <Typography variant="h4">محصولات</Typography>
-        <DownDrawer>
-          <AddProductForm />
-        </DownDrawer>
+        <DownDrawer />
       </Box>
       <Box sx={{ marginTop: '6px' }} style={{ height: '550px', width: '100%' }}>
         <DataGrid

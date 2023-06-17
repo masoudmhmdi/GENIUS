@@ -1,7 +1,11 @@
+import { handleDowDrawer } from '@/Store/slice/modalAndToast.slice';
+import { RootState } from '@/types';
 import { Box, Button, Drawer } from '@mui/material';
 import React, { ReactNode, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import AddProductForm from '../AddProductForm';
 
-function DownDrawer({ children }: { children: ReactNode }) {
+function DownDrawer({ children }: { children?: ReactNode }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -28,6 +32,7 @@ function DownDrawer({ children }: { children: ReactNode }) {
           }}
         >
           {children}
+          <AddProductForm setOpen={setOpen} />
         </Box>
       </Drawer>
     </Box>

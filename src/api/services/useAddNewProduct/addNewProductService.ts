@@ -19,21 +19,24 @@ export async function addNewProductService(data: IAddProduct['payload']) {
   formData.append('brand', brand);
   formData.append('category', category);
   formData.append('description', description);
-  formData.append('price', price);
-  formData.append('quantity', quantity);
+  formData.append('price', `${price}`);
+  formData.append('quantity', `${quantity}`);
   formData.append('subcategory', subcategory);
-
-  images.map((i) => formData.append('images', i));
-  console.log(formData);
   console.log(images);
+
+  images!.map((i) => formData.append('images', i));
 
   try {
     const res = await serverReq.post('/products', formData);
+    toast('محصول با موفقیت اضافه شد', {
+      style: { backgroundColor: 'green' },
+    });
     return res.data;
   } catch (error) {
-    const err = error as AxiosError<{ massage: string }>;
-    const { data, status, config } = err.response!;
-    toast(data.massage);
+    const err = error as AxiosError<{ message: string; status: string }>;
+    const { data } = err.response!;
+    console.log(data);
+    toast(data.message);
   }
 }
 

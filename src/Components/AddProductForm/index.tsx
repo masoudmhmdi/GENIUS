@@ -30,10 +30,14 @@ const schema = yup.object({
   brand: yup.string().required('این فیلد ضروری است'),
 });
 
-function AddProductForm() {
+function AddProductForm({ setOpen }: { setOpen: (arg: boolean) => void }) {
   const router = useRouter();
   const [category, setCategory] = useState('');
-  const { mutate } = useAddNewProduct();
+  const { mutate } = useAddNewProduct({
+    // onSuccess: () => {
+    //   setOpen(false);
+    // },
+  });
 
   const {
     register,
@@ -200,7 +204,7 @@ function AddProductForm() {
           <Editor value={getEditorValue} setEditorValue={setEditorValue} />
           <ImageUploader
             helperText={errors.images?.message}
-            setImageData={setValue}
+            setValue={setValue}
           />
         </Box>
       </Box>

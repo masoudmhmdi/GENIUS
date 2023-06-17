@@ -265,8 +265,7 @@ function EditProductForm({ productInfo }: { productInfo: any }) {
           <Editor value={getEditorValue} setEditorValue={setEditorValue} />
           <ImageUploader
             helperText={errors.images?.message}
-            setImageData={setImageData}
-            getImageValue={getImageValue}
+            setValue={setValue}
           />
           {imagePreview.show &&
             imagePreview.imgData.map((img: string) => {
