@@ -4,8 +4,9 @@ import { Box, Button, Drawer } from '@mui/material';
 import React, { ReactNode, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddProductForm from '../AddProductForm';
+import EditProductForm from '../EditProductForm';
 
-function AddProductDownDrawer() {
+function EditProductDownDrawer({ productInfo }: { productInfo: any }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -17,7 +18,7 @@ function AddProductDownDrawer() {
           variant="contained"
           color="success"
         >
-          اضافه کردن محصول
+          ویرایش محصول
         </Button>
       </Box>
       <Drawer anchor="bottom" open={open} onClose={() => setOpen(false)}>
@@ -31,11 +32,11 @@ function AddProductDownDrawer() {
             maxHeight: '400px',
           }}
         >
-          <AddProductForm setOpen={setOpen} />
+          <EditProductForm productInfo={productInfo} setOpen={setOpen} />
         </Box>
       </Drawer>
     </Box>
   );
 }
 
-export default AddProductDownDrawer;
+export default EditProductDownDrawer;

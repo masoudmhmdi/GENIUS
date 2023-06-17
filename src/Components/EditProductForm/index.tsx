@@ -33,14 +33,20 @@ const schema = yup.object({
   brand: yup.string().required('این فیلد ضروری است'),
 });
 
-function EditProductForm({ productInfo }: { productInfo: any }) {
+function EditProductForm({
+  productInfo,
+  setOpen,
+}: {
+  productInfo: any;
+  setOpen: (arg: boolean) => void;
+}) {
   const [category, setCategory] = useState('');
 
   const [imagePreview, setImagePreview] = useState({
     show: true,
     imgData: [],
   });
-  const { mutate } = useEditSingleProduct();
+  const { mutate } = useEditSingleProduct({ setOpen });
 
   const {
     register,
@@ -73,9 +79,6 @@ function EditProductForm({ productInfo }: { productInfo: any }) {
     return getValues('description');
   };
 
-  const getImageValue = () => {
-    return getValues('images');
-  };
   useEffect(() => {
     const {
       category,
@@ -266,6 +269,7 @@ function EditProductForm({ productInfo }: { productInfo: any }) {
           <ImageUploader
             helperText={errors.images?.message}
             setValue={setValue}
+            setImagePreview={setImagePreview}
           />
           {imagePreview.show &&
             imagePreview.imgData.map((img: string) => {

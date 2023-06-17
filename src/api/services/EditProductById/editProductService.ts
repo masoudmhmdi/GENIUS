@@ -3,7 +3,11 @@ import { IEditProduct } from '@/types';
 import { AxiosError } from 'axios';
 import { toast } from 'react-hot-toast';
 
-async function editProductService(id: string, data: IEditProduct['payload']) {
+async function editProductService(
+  id: string,
+  data: IEditProduct['payload'],
+  setOpen: (arg: boolean) => void
+) {
   try {
     const {
       brand,
@@ -27,6 +31,10 @@ async function editProductService(id: string, data: IEditProduct['payload']) {
     images?.map((i: Blob) => formData.append('images', i));
     console.log(images);
     const res = await serverReq.patch(`products/${id}`, formData);
+    toast('محصول با موفقیت اضافه شد', {
+      style: { backgroundColor: '#A4D0A4' },
+    });
+    setOpen(false);
     return res.data;
   } catch (error) {
     const err = error as AxiosError<{ massage: string }>;

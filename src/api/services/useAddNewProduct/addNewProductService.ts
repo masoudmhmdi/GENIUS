@@ -32,7 +32,7 @@ export async function addNewProductService(
   try {
     const res = await serverReq.post('/products', formData);
     toast('محصول با موفقیت اضافه شد', {
-      style: { backgroundColor: 'green' },
+      style: { backgroundColor: '#A4D0A4' },
     });
     setOpen(false);
     return res.data;

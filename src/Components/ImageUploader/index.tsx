@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 const thumbsContainer = {
@@ -39,9 +39,16 @@ const img = {
 function UploadImage({
   setValue,
   helperText,
+  setImagePreview,
 }: {
   setValue: any;
   helperText?: string;
+  setImagePreview?: React.Dispatch<
+    React.SetStateAction<{
+      show: boolean;
+      imgData: never[];
+    }>
+  >;
 }) {
   const [files, setFiles] = useState<(any & { preview: string })[]>([]);
   console.log(files);
@@ -59,6 +66,13 @@ function UploadImage({
       );
       setFiles(newFile);
       setValue('images', newFile);
+      setImagePreview &&
+        setImagePreview((prev) => {
+          return {
+            ...prev,
+            show: false,
+          };
+        });
     },
   });
 

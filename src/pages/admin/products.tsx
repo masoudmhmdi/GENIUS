@@ -17,6 +17,7 @@ import AddProductForm from '@/Components/AddProductForm';
 import MyModal from '@/Components/Modal';
 import EditProductForm from '@/Components/EditProductForm';
 import AddProductDownDrawer from '@/Components/AddProductDownDrawer';
+import EditProductDownDrawer from '@/Components/EditProductDownDrawer';
 
 const columns: GridColDef[] = [
   {
@@ -69,12 +70,7 @@ const columns: GridColDef[] = [
     headerAlign: 'center',
     align: 'center',
     renderCell: ({ row }) => {
-      return (
-        // <DownDrawer>
-        //   <EditProductForm productInfo={row} />
-        // </DownDrawer>
-        <>hello</>
-      );
+      return <EditProductDownDrawer productInfo={row} />;
     },
   },
   {
