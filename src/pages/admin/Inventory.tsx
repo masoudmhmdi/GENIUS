@@ -4,13 +4,14 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import AdminLayout from '@/Layouts/AdminLayout/AdminLayout';
 import { Box, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/types';
+import { IProductFromBack, RootState } from '@/types';
 import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
 import useGetProducts from '@/api/services/useGetProducts';
 import {
   handleSortingProducts,
   productSetPage,
 } from '@/Store/slice/products.slice';
+import useParallelEditProduct from '@/api/services/useParallelEditProduct';
 
 const columns: GridColDef[] = [
   {
@@ -45,32 +46,39 @@ const columns: GridColDef[] = [
 
   {
     field: 'price',
+    editable: true,
     flex: 1,
     headerName: 'قیمت',
     width: 150,
     headerAlign: 'center',
     align: 'center',
+    type: 'number',
   },
   {
     field: 'quantity',
+    editable: true,
     flex: 1,
     headerName: 'موجودی',
     width: 150,
     headerAlign: 'center',
+    type: 'number',
     align: 'center',
   },
 ];
 
 export default function Inventory() {
   const orderPaginate = useSelector((state: RootState) => state.productsSlice);
+  const [editedProduct, setEditedProduct] = React.useState<
+    [] | IProductFromBack[]
+  >([]);
   const { field, sort } = orderPaginate;
   const dispatch = useDispatch();
   const { data, isLoading } = useGetProducts();
+  const { mutate } = useParallelEditProduct();
 
   if (isLoading) return <PanelAdminSkeleton />;
-  console.log(data);
+
   const products = data.data.products;
-  console.log(orderPaginate);
 
   return (
     <Box sx={{ marginTop: '40px', paddingX: '12px' }}>
@@ -82,6 +90,13 @@ export default function Inventory() {
         }}
       >
         <Typography variant="h4">موجودی</Typography>
+        <Button
+          onClick={() => {
+            mutate(editedProduct);
+          }}
+        >
+          ذخیره
+        </Button>
       </Box>
       <Box sx={{ marginTop: '6px' }} style={{ height: '550px', width: '100%' }}>
         <DataGrid
@@ -103,6 +118,9 @@ export default function Inventory() {
           pageSizeOptions={[5, 10, 20]}
           onPaginationModelChange={(w) => dispatch(productSetPage(w))}
           paginationModel={orderPaginate}
+          processRowUpdate={(updatedRow) =>
+            setEditedProduct((prev) => [...prev, updatedRow])
+          }
         />
       </Box>
     </Box>

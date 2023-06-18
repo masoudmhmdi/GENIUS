@@ -64,7 +64,7 @@ function EditProductForm({
       brand: '',
       description: '',
       name: '',
-      price: 0,
+      price: productInfo.price,
       quantity: 0,
     },
   });
@@ -95,7 +95,7 @@ function EditProductForm({
     setValue('subcategory', subcategory._id);
     setCategory(category._id);
     setValue('name', name);
-    setValue('price', price);
+    // setValue('price', price);
     setValue('quantity', quantity);
     setEditorValue(description);
     setValue('brand', brand);
