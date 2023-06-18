@@ -40,13 +40,25 @@ function EditProductForm({
   productInfo: any;
   setOpen: (arg: boolean) => void;
 }) {
-  const [category, setCategory] = useState('');
+  const {
+    category: initialCategory,
+    name,
+    price,
+    quantity,
+    subcategory,
+    description,
+    images,
+    brand,
+  } = productInfo;
+  const [category, setCategory] = useState(initialCategory._id);
 
   const [imagePreview, setImagePreview] = useState({
     show: true,
-    imgData: [],
+    imgData: images,
   });
   const { mutate } = useEditSingleProduct({ setOpen });
+
+  console.log(initialCategory);
 
   const {
     register,
@@ -59,13 +71,13 @@ function EditProductForm({
   } = useForm<IAddProduct['payload']>({
     resolver: yupResolver(schema),
     defaultValues: {
-      category: '',
-      subcategory: '',
-      brand: '',
-      description: '',
-      name: '',
-      price: productInfo.price,
-      quantity: 0,
+      category: initialCategory._id,
+      subcategory: subcategory._id,
+      brand: brand,
+      description: description,
+      name: name,
+      price: price,
+      quantity: quantity,
     },
   });
 
@@ -78,32 +90,6 @@ function EditProductForm({
   const getEditorValue = () => {
     return getValues('description');
   };
-
-  useEffect(() => {
-    const {
-      category,
-      name,
-      price,
-      quantity,
-      subcategory,
-      description,
-      images,
-      brand,
-    } = productInfo;
-    console.log(productInfo);
-    setValue('category', category._id);
-    setValue('subcategory', subcategory._id);
-    setCategory(category._id);
-    setValue('name', name);
-    // setValue('price', price);
-    setValue('quantity', quantity);
-    setEditorValue(description);
-    setValue('brand', brand);
-    // setValue('images', images);
-    setImagePreview((prev) => {
-      return { ...prev, imgData: images };
-    });
-  }, []);
 
   console.log(getValues('category'));
 
