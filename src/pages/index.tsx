@@ -6,6 +6,7 @@ const inter = Inter({ subsets: ['latin'] });
 import { useRouter } from 'next/router';
 import Cookie from 'js-cookie';
 import ProductCard from '@/Components/card';
+import Slider from '@/Components/slider';
 
 export default function Home() {
   return (
@@ -24,18 +25,7 @@ export default function Home() {
           flexWrap: 'wrap',
         }}
       >
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        <Slider />
       </Box>
     </>
   );
