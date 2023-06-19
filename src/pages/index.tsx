@@ -14,6 +14,7 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import StoreIcon from '@mui/icons-material/Store';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export default function Home() {
   const { data: allCategory } = useGetCategory();
@@ -29,7 +30,7 @@ export default function Home() {
       <Box sx={{ width: '100%' }}>
         <Slider />
         <Typography sx={{ marginY: '20px' }} align="left" variant="h4">
-          دسته بندی ها
+          برند ها
         </Typography>
         <Box
           sx={{
@@ -170,6 +171,202 @@ export default function Home() {
             <Typography sx={{ opacity: '0.7', fontSize: '14px' }}>
               Lorem ipsum dolor sit amet consectetur
             </Typography>
+          </Box>
+        </Box>
+        <Typography sx={{ marginY: '20px' }} align="left" variant="h4">
+          دسته بندی ها
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: '20px',
+            backdropFilter: 'unset',
+          }}
+        >
+          <Box
+            sx={{
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              paddingBottom: '20px',
+            }}
+          >
+            <Image
+              style={{ objectFit: 'cover' }}
+              alt="mobile"
+              src={'/mobile.png'}
+              fill
+            />
+
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+                backgroundColor: 'black',
+                opacity: '0.3',
+                top: '0',
+                left: '0',
+              }}
+            ></Box>
+            <Button
+              sx={{
+                position: 'absolute',
+                zIndex: '2',
+                width: '150px',
+                borderRadius: '8px',
+                top: '70%',
+              }}
+              variant="contained"
+              color="secondary"
+            >
+              <ArrowForwardIcon />
+              موبایل
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              paddingBottom: '20px',
+            }}
+          >
+            <Image
+              style={{ objectFit: 'cover' }}
+              alt="mobile"
+              src={'/mobile.png'}
+              fill
+            />
+
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+                backgroundColor: 'black',
+                opacity: '0.3',
+                top: '0',
+                left: '0',
+              }}
+            ></Box>
+            <Button
+              sx={{
+                position: 'absolute',
+                zIndex: '2',
+                width: '150px',
+                borderRadius: '8px',
+                top: '70%',
+              }}
+              variant="contained"
+              color="secondary"
+            >
+              <ArrowForwardIcon />
+              موبایل
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              paddingBottom: '20px',
+            }}
+          >
+            <Image
+              style={{ objectFit: 'cover' }}
+              alt="mobile"
+              src={'/mobile.png'}
+              fill
+            />
+
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+                backgroundColor: 'black',
+                opacity: '0.3',
+                top: '0',
+                left: '0',
+              }}
+            ></Box>
+            <Button
+              sx={{
+                position: 'absolute',
+                zIndex: '2',
+                width: '150px',
+                borderRadius: '8px',
+                top: '70%',
+              }}
+              variant="contained"
+              color="secondary"
+            >
+              <ArrowForwardIcon />
+              موبایل
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              paddingBottom: '20px',
+            }}
+          >
+            <Image
+              style={{ objectFit: 'cover' }}
+              alt="mobile"
+              src={'/mobile.png'}
+              fill
+            />
+
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+                backgroundColor: 'black',
+                opacity: '0.3',
+                top: '0',
+                left: '0',
+              }}
+            ></Box>
+            <Button
+              sx={{
+                position: 'absolute',
+                zIndex: '2',
+                width: '150px',
+                borderRadius: '8px',
+                top: '70%',
+              }}
+              variant="contained"
+              color="secondary"
+            >
+              <ArrowForwardIcon />
+              موبایل
+            </Button>
           </Box>
         </Box>
       </Box>
