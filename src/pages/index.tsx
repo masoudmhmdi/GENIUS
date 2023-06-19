@@ -86,7 +86,7 @@ export default function Home() {
               sx={{ width: '50px', height: '50px' }}
               disabled
             >
-              <LocalShippingIcon />
+              <LocalShippingIcon sx={{ color: 'black' }} />
             </Button>
             <Typography sx={{ fontWeight: 'bold' }}>
               امکان تحویل اکسپرس
@@ -100,7 +100,7 @@ export default function Home() {
               sx={{ width: '50px', height: '50px' }}
               disabled
             >
-              <LocalMallIcon />
+              <LocalMallIcon sx={{ color: 'black' }} />
             </Button>
             <Typography sx={{ fontWeight: 'bold' }}>
               ضمانت اصالت کالا
@@ -114,7 +114,7 @@ export default function Home() {
               sx={{ width: '50px', height: '50px' }}
               disabled
             >
-              <PaymentsIcon />
+              <PaymentsIcon sx={{ color: 'black' }} />
             </Button>
             <Typography sx={{ fontWeight: 'bold' }}>
               امکان پرداخت درب منزل
@@ -128,7 +128,7 @@ export default function Home() {
               sx={{ width: '50px', height: '50px' }}
               disabled
             >
-              <StoreIcon />
+              <StoreIcon sx={{ color: 'black' }} />
             </Button>
             <Typography sx={{ fontWeight: 'bold' }}>
               هفت روز ضمانت بازگشت کالا
