@@ -239,14 +239,16 @@ export default function Home() {
               overflow: 'hidden',
               display: 'flex',
               justifyContent: 'center',
-              paddingBottom: '20px',
+
+              alignItems: 'center',
             }}
           >
             <Image
-              style={{ objectFit: 'cover' }}
+              // style={{ objectFit: 'cover' }}
               alt="mobile"
-              src={'/mobile.png'}
-              fill
+              src={'/laptop1.png'}
+              width={200}
+              height={117}
             />
 
             <Box
@@ -273,7 +275,54 @@ export default function Home() {
               color="secondary"
             >
               <ArrowForwardIcon />
-              موبایل
+              لپتاپ
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Image
+              // style={{ objectFit: 'cover' }}
+              alt="mobile"
+              src={'/tablet.png'}
+              width={119}
+              height={170}
+            />
+
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+                backgroundColor: 'black',
+                opacity: '0.3',
+                top: '0',
+                left: '0',
+              }}
+            ></Box>
+            <Button
+              sx={{
+                position: 'absolute',
+                zIndex: '2',
+                width: '150px',
+                borderRadius: '8px',
+                top: '70%',
+              }}
+              variant="contained"
+              color="secondary"
+            >
+              <ArrowForwardIcon />
+              تبلت
             </Button>
           </Box>
           <Box
@@ -291,7 +340,7 @@ export default function Home() {
             <Image
               style={{ objectFit: 'cover' }}
               alt="mobile"
-              src={'/mobile.png'}
+              src={'/watch.jpg'}
               fill
             />
 
@@ -319,7 +368,7 @@ export default function Home() {
               color="secondary"
             >
               <ArrowForwardIcon />
-              موبایل
+              ساعت
             </Button>
           </Box>
           <Box
@@ -334,12 +383,7 @@ export default function Home() {
               paddingBottom: '20px',
             }}
           >
-            <Image
-              style={{ objectFit: 'cover' }}
-              alt="mobile"
-              src={'/mobile.png'}
-              fill
-            />
+            <Image alt="mobile" src={'/headphone.png'} fill />
 
             <Box
               sx={{
@@ -365,7 +409,7 @@ export default function Home() {
               color="secondary"
             >
               <ArrowForwardIcon />
-              موبایل
+              هدفون
             </Button>
           </Box>
         </Box>
