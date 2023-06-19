@@ -79,7 +79,14 @@ export default function Home() {
         <Box
           sx={{ display: 'flex', justifyContent: 'space-around', gap: '10px' }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+              width: '20%',
+            }}
+          >
             <Button
               color="secondary"
               variant="contained"
@@ -91,9 +98,18 @@ export default function Home() {
             <Typography sx={{ fontWeight: 'bold' }}>
               امکان تحویل اکسپرس
             </Typography>
-            <Typography>Lorem ipsum dolor sit amet consectetur</Typography>
+            <Typography sx={{ opacity: '0.7', fontSize: '14px' }}>
+              Lorem ipsum dolor sit amet consectetur
+            </Typography>
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+              width: '20%',
+            }}
+          >
             <Button
               color="secondary"
               variant="contained"
@@ -105,9 +121,18 @@ export default function Home() {
             <Typography sx={{ fontWeight: 'bold' }}>
               ضمانت اصالت کالا
             </Typography>
-            <Typography>Lorem ipsum dolor sit amet consectetur</Typography>
+            <Typography sx={{ opacity: '0.7', fontSize: '14px' }}>
+              Lorem ipsum dolor sit amet consectetur
+            </Typography>
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+              width: '20%',
+            }}
+          >
             <Button
               color="secondary"
               variant="contained"
@@ -119,9 +144,18 @@ export default function Home() {
             <Typography sx={{ fontWeight: 'bold' }}>
               امکان پرداخت درب منزل
             </Typography>
-            <Typography>Lorem ipsum dolor sit amet consectetur</Typography>
+            <Typography sx={{ opacity: '0.7', fontSize: '14px' }}>
+              Lorem ipsum dolor sit amet consectetur
+            </Typography>
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+              width: '20%',
+            }}
+          >
             <Button
               color="secondary"
               variant="contained"
@@ -133,7 +167,9 @@ export default function Home() {
             <Typography sx={{ fontWeight: 'bold' }}>
               هفت روز ضمانت بازگشت کالا
             </Typography>
-            <Typography>Lorem ipsum dolor sit amet consectetur</Typography>
+            <Typography sx={{ opacity: '0.7', fontSize: '14px' }}>
+              Lorem ipsum dolor sit amet consectetur
+            </Typography>
           </Box>
         </Box>
       </Box>
