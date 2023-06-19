@@ -10,6 +10,10 @@ import Slider from '@/Components/slider';
 import useGetCategory from '@/api/services/useGetCategory';
 import Image from 'next/image';
 import { Category } from '@/types';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import StoreIcon from '@mui/icons-material/Store';
 
 export default function Home() {
   const { data: allCategory } = useGetCategory();
@@ -24,7 +28,7 @@ export default function Home() {
       </Head>
       <Box sx={{ width: '100%' }}>
         <Slider />
-        <Typography align="left" variant="h4">
+        <Typography sx={{ marginY: '20px' }} align="left" variant="h4">
           دسته بندی ها
         </Typography>
         <Box
@@ -39,6 +43,7 @@ export default function Home() {
               <Button
                 key={category._id}
                 color="secondary"
+                variant="contained"
                 sx={{ width: '100px', height: '100px', borderRadius: '100%' }}
               >
                 <Image
@@ -50,6 +55,86 @@ export default function Home() {
               </Button>
             );
           })}
+        </Box>
+        <Box sx={{ display: 'flex', marginY: '50px' }}>
+          <Box sx={{ flexGrow: '1' }}>
+            <Typography variant="h4" sx={{ width: '300px' }}>
+              بهترین خریدرا با ما تجربه کنید
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              borderLeft: '2px solid black',
+              paddingY: '2px',
+              display: 'flex',
+              alignItems: 'center',
+              paddingX: '20px',
+            }}
+          >
+            <Typography sx={{ opacity: '0.7' }}>
+              ما اطمینان میدهیم مشتری های ما بهترین تجربه خرید را داشته باشند
+            </Typography>
+          </Box>
+        </Box>
+        <Box
+          sx={{ display: 'flex', justifyContent: 'space-around', gap: '10px' }}
+        >
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '50px', height: '50px' }}
+              disabled
+            >
+              <LocalShippingIcon />
+            </Button>
+            <Typography sx={{ fontWeight: 'bold' }}>
+              امکان تحویل اکسپرس
+            </Typography>
+            <Typography>Lorem ipsum dolor sit amet consectetur</Typography>
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '50px', height: '50px' }}
+              disabled
+            >
+              <LocalMallIcon />
+            </Button>
+            <Typography sx={{ fontWeight: 'bold' }}>
+              ضمانت اصالت کالا
+            </Typography>
+            <Typography>Lorem ipsum dolor sit amet consectetur</Typography>
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '50px', height: '50px' }}
+              disabled
+            >
+              <PaymentsIcon />
+            </Button>
+            <Typography sx={{ fontWeight: 'bold' }}>
+              امکان پرداخت درب منزل
+            </Typography>
+            <Typography>Lorem ipsum dolor sit amet consectetur</Typography>
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '50px', height: '50px' }}
+              disabled
+            >
+              <StoreIcon />
+            </Button>
+            <Typography sx={{ fontWeight: 'bold' }}>
+              هفت روز ضمانت بازگشت کالا
+            </Typography>
+            <Typography>Lorem ipsum dolor sit amet consectetur</Typography>
+          </Box>
         </Box>
       </Box>
     </>
