@@ -1,14 +1,19 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { useEffect } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 import { useRouter } from 'next/router';
 import Cookie from 'js-cookie';
 import ProductCard from '@/Components/card';
 import Slider from '@/Components/slider';
+import useGetCategory from '@/api/services/useGetCategory';
+import Image from 'next/image';
+import { Category } from '@/types';
 
 export default function Home() {
+  const { data: allCategory } = useGetCategory();
+  console.log(allCategory);
   return (
     <>
       <Head>
@@ -17,15 +22,35 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          gap: '20px',
-          flexWrap: 'wrap',
-        }}
-      >
+      <Box sx={{ width: '100%' }}>
         <Slider />
+        <Typography align="left" variant="h4">
+          دسته بندی ها
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}
+        >
+          {allCategory?.data.categories.map((category: Category) => {
+            return (
+              <Button
+                key={category._id}
+                color="secondary"
+                sx={{ width: '100px', height: '100px', borderRadius: '100%' }}
+              >
+                <Image
+                  src={`http://localhost:8000/images/categories/icons/${category.icon}`}
+                  alt=""
+                  width={50}
+                  height={50}
+                />
+              </Button>
+            );
+          })}
+        </Box>
       </Box>
     </>
   );
