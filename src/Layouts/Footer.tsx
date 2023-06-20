@@ -23,6 +23,7 @@ export default function Footer() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        paddingX: '12px',
       }}
       component={'footer'}
     >
@@ -125,7 +126,7 @@ export default function Footer() {
           </Box>
         </Box>
       </Toolbar>
-      <Typography sx={{ fontSize: '14px', opacity: '0.7' }}>
+      <Typography sx={{ fontSize: '14px', opacity: '0.7', paddingY: '6px' }}>
         برای استفاده از مطالب جینیس شاپ داشتن «هدف غیرتجاری» و ذکر «منبع» کافیست
       </Typography>
     </AppBar>
