@@ -23,7 +23,6 @@ export default function Footer() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingX: '12px',
       }}
       component={'footer'}
     >
@@ -32,7 +31,9 @@ export default function Footer() {
           display: 'flex',
           justifyContent: 'space-around',
           borderBottom: '1px solid #484848',
-          paddingBottom: '12px',
+
+          alignItems: 'start',
+          paddingY: '24px',
         }}
       >
         <Box>
@@ -126,7 +127,7 @@ export default function Footer() {
           </Box>
         </Box>
       </Toolbar>
-      <Typography sx={{ fontSize: '14px', opacity: '0.7', paddingY: '6px' }}>
+      <Typography sx={{ fontSize: '14px', opacity: '0.7', paddingY: '12px' }}>
         برای استفاده از مطالب جینیس شاپ داشتن «هدف غیرتجاری» و ذکر «منبع» کافیست
       </Typography>
     </AppBar>
