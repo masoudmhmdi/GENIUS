@@ -9,19 +9,23 @@ import ProductCard from '@/Components/card';
 import Slider from '@/Components/slider';
 import useGetCategory from '@/api/services/useGetCategory';
 import Image from 'next/image';
-import { Category } from '@/types';
+import { Category, IProductFromBack } from '@/types';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import StoreIcon from '@mui/icons-material/Store';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import useGetProductByCategory from '@/api/services/getProductByCategory';
+import { GetServerSideProps } from 'next';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
+import getProductByCategoryService from '@/api/services/getProductByCategory/getProductByCategoryService';
 
-export default function Home() {
+export default function Home({ data }: any) {
   const { data: allCategory } = useGetCategory();
+  const mobileData: IProductFromBack[] =
+    data.queries[0].state.data.data.products;
+  console.log(mobileData);
 
-  // const { data } = useGetProductByCategory('647f0ffd8dcfc191205f4bb3');
-  // console.log(data);
   return (
     <>
       <Head>
@@ -416,8 +420,73 @@ export default function Home() {
             </Button>
           </Box>
         </Box>
-        <ProductCard />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginY: '20px',
+            alignItems: 'center',
+          }}
+        >
+          <Typography align="left" variant="h4">
+            موبایل ها
+          </Typography>
+          <Button sx={{ opacity: '0.7', textDecoration: 'inline' }}>همه</Button>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            paddingY: '12px',
+          }}
+        >
+          {mobileData.map((p) => {
+            return <ProductCard productData={p} key={p._id} />;
+          })}
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginY: '20px',
+            alignItems: 'center',
+          }}
+        >
+          <Typography align="left" variant="h4">
+            لپتاپ ها
+          </Typography>
+          <Button sx={{ opacity: '0.7', textDecoration: 'inline' }}>همه</Button>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            paddingY: '12px',
+          }}
+        >
+          {mobileData.map((p) => {
+            return <ProductCard productData={p} key={p._id} />;
+          })}
+        </Box>
       </Box>
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['mobileCategory'], () =>
+    getProductByCategoryService('647f0ffd8dcfc191205f4bb3')
+  );
+  await queryClient.prefetchQuery(['laptopCategory'], () =>
+    getProductByCategoryService('647f0ffd8dcfc191205f4bb3')
+  );
+
+  return {
+    props: {
+      data: dehydrate(queryClient),
+    },
+  };
+};

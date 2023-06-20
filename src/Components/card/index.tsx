@@ -5,14 +5,19 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Box, Button, CardActionArea, CardActions } from '@mui/material';
 import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
+import { IProductFromBack } from '@/types';
 
-export default function ProductCard() {
+export default function ProductCard({
+  productData,
+}: {
+  productData: IProductFromBack;
+}) {
   return (
-    <Card variant="outlined" sx={{ maxWidth: 200, maxHeight: 300 }}>
+    <Card variant="outlined" sx={{ maxWidth: 250, height: 350 }}>
       <CardMedia
-        sx={{ borderRadius: '12px', padding: '20px' }}
+        sx={{ borderRadius: '12px', padding: '20px', maxWidth: '100%' }}
         component="img"
-        image="./headphone.png"
+        image={productData.images[0]}
       />
       <CardContent
         sx={{
@@ -36,8 +41,10 @@ export default function ProductCard() {
           </Button>
         </Box>
         <Box>
-          <Typography>name</Typography>
-          <Typography>price</Typography>
+          <Typography align="right">{productData.name}</Typography>
+          <Typography align="right" fontWeight={'bold'}>
+            {productData.price}
+          </Typography>
         </Box>
       </CardContent>
     </Card>
