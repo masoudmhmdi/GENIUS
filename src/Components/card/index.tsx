@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import { Box, Button, CardActionArea, CardActions } from '@mui/material';
 import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
 import { IProductFromBack } from '@/types';
+import { theme } from '@/theme';
+import Link from 'next/link';
 
 export default function ProductCard({
   productData,
@@ -13,40 +15,49 @@ export default function ProductCard({
   productData: IProductFromBack;
 }) {
   return (
-    <Card variant="outlined" sx={{ maxWidth: 250, height: 350 }}>
-      <CardMedia
-        sx={{ borderRadius: '12px', padding: '20px', maxWidth: '100%' }}
-        component="img"
-        image={productData.images[0]}
-      />
-      <CardContent
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Box>
-          <Button
-            variant="contained"
+    <Card variant="outlined" sx={{ maxWidth: 200, height: 300 }}>
+      <CardActionArea sx={{ width: '100%', height: '100%' }}>
+        <Link
+          style={{ textDecoration: 'none', color: theme.palette.primary.main }}
+          href={`/product/${productData._id}`}
+        >
+          <CardMedia
+            sx={{ borderRadius: '12px', padding: '20px', maxWidth: '100%' }}
+            component="img"
+            image={productData.images[0]}
+          />
+          <CardContent
             sx={{
-              maxWidth: '40px',
-              maxHeight: '40px',
-              minWidth: '40px',
-              minHeight: '40px',
-              borderRadius: '5px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}
           >
-            <ShoppingCartTwoToneIcon />
-          </Button>
-        </Box>
-        <Box>
-          <Typography align="right">{productData.name}</Typography>
-          <Typography align="right" fontWeight={'bold'}>
-            {productData.price}
-          </Typography>
-        </Box>
-      </CardContent>
+            <Box>
+              <Box
+                sx={{
+                  width: '40px',
+                  height: '40px',
+                  display: 'flex',
+                  color: 'white',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: '5px',
+                  backgroundColor: theme.palette.primary.main,
+                }}
+              >
+                {productData.rating.rate}
+              </Box>
+            </Box>
+            <Box>
+              <Typography align="right">{productData.name}</Typography>
+              <Typography align="right" fontWeight={'bold'}>
+                {productData.price}
+              </Typography>
+            </Box>
+          </CardContent>
+        </Link>
+      </CardActionArea>
     </Card>
   );
 }

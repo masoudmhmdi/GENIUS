@@ -147,6 +147,10 @@ export type IEditProduct = {
 };
 
 export type IProductFromBack = {
+  rating: {
+    rate: number;
+    count: number;
+  };
   _id: string;
   category: {
     _id: string;

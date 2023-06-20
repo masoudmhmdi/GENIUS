@@ -1,7 +1,7 @@
 import { serverReq } from '@/api/constants';
 
-async function getProductByCategoryService(id: string) {
-  const res = await serverReq(`products?page=1&limit=4&category=${id}`);
+async function getProductByCategoryService(id: string, limit: number = 4) {
+  const res = await serverReq(`products?page=1&limit=${limit}&category=${id}`);
   return await res.data;
 }
 
