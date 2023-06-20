@@ -413,6 +413,7 @@ export default function Home() {
             </Button>
           </Box>
         </Box>
+        <ProductCard />
       </Box>
     </>
   );

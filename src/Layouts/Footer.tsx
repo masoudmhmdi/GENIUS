@@ -31,7 +31,6 @@ export default function Footer() {
           display: 'flex',
           justifyContent: 'space-around',
           borderBottom: '1px solid #484848',
-
           alignItems: 'start',
           paddingY: '24px',
         }}
