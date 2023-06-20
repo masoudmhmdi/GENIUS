@@ -239,7 +239,6 @@ export default function Home() {
               overflow: 'hidden',
               display: 'flex',
               justifyContent: 'center',
-
               alignItems: 'center',
             }}
           >
@@ -287,7 +286,8 @@ export default function Home() {
               overflow: 'hidden',
               display: 'flex',
               justifyContent: 'center',
-              alignItems: 'center',
+              alignItems: 'end',
+              paddingBottom: '10px',
             }}
           >
             <Image
