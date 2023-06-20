@@ -15,10 +15,13 @@ import LocalMallIcon from '@mui/icons-material/LocalMall';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import StoreIcon from '@mui/icons-material/Store';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import useGetProductByCategory from '@/api/services/getProductByCategory';
 
 export default function Home() {
   const { data: allCategory } = useGetCategory();
-  console.log(allCategory);
+
+  // const { data } = useGetProductByCategory('647f0ffd8dcfc191205f4bb3');
+  // console.log(data);
   return (
     <>
       <Head>

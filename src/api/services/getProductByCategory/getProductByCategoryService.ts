@@ -3,7 +3,8 @@ import { serverReq } from '@/api/constants';
 async function getProductByCategoryService(id: string) {
   const url = new URL('/products');
   url.searchParams.append('category', id);
-  const res = await serverReq(url.toString());
+  console.log(url);
+  const res = await serverReq('/products');
   return res.data;
 }
 
