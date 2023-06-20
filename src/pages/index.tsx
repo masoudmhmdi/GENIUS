@@ -21,10 +21,12 @@ import { QueryClient, dehydrate } from '@tanstack/react-query';
 import getProductByCategoryService from '@/api/services/getProductByCategory/getProductByCategoryService';
 
 export default function Home({ data }: any) {
+  console.log(data);
   const { data: allCategory } = useGetCategory();
   const mobileData: IProductFromBack[] =
     data.queries[0].state.data.data.products;
-  console.log(mobileData);
+  const laptopData: IProductFromBack[] =
+    data.queries[1].state.data.data.products;
 
   return (
     <>
@@ -464,7 +466,7 @@ export default function Home({ data }: any) {
             paddingY: '12px',
           }}
         >
-          {mobileData.map((p) => {
+          {laptopData.map((p) => {
             return <ProductCard productData={p} key={p._id} />;
           })}
         </Box>
@@ -481,7 +483,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     getProductByCategoryService('647f0ffd8dcfc191205f4bb3')
   );
   await queryClient.prefetchQuery(['laptopCategory'], () =>
-    getProductByCategoryService('647f0ffd8dcfc191205f4bb3')
+    getProductByCategoryService('647f103a8dcfc191205f4bbf')
   );
 
   return {
