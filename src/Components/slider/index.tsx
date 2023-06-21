@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { useRef, useCallback, MutableRefObject } from 'react';
 import { useSwiper } from 'swiper/react';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -26,6 +28,8 @@ function Slider() {
         // install Swiper modules
         style={{
           borderRadius: '12px',
+          height: '400px',
+          position: 'relative',
         }}
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         loop={true}
@@ -67,21 +71,40 @@ function Slider() {
             />
           </Box>
         </SwiperSlide>
+        <Box
+          sx={{
+            position: 'absolute',
+            borderRadius: '4px',
+            overflow: 'hidden',
+            top: '20px',
+            left: '20px',
+            zIndex: '2',
+          }}
+        >
+          <Button
+            size="small"
+            color="secondary"
+            variant="contained"
+            sx={{ borderRadius: '0', minWidth: '40px', maxWidth: '40px' }}
+            onClick={() => {
+              handleNext(sliderRef);
+            }}
+          >
+            <NavigateNextIcon />
+          </Button>
+          <Button
+            size="small"
+            color="secondary"
+            variant="contained"
+            sx={{ borderRadius: '0', minWidth: '40px', maxWidth: '40px' }}
+            onClick={() => {
+              handlePrev(sliderRef);
+            }}
+          >
+            <NavigateBeforeIcon />
+          </Button>
+        </Box>
       </Swiper>
-      <Button
-        onClick={() => {
-          handleNext(sliderRef);
-        }}
-      >
-        next
-      </Button>
-      <Button
-        onClick={() => {
-          handlePrev(sliderRef);
-        }}
-      >
-        prev
-      </Button>
     </>
   );
 }
