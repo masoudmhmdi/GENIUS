@@ -29,7 +29,7 @@ function EditProductDownDrawer({ productInfo }: { productInfo: any }) {
             flexDirection: 'column',
             marginTop: '10px',
             paddingX: '12px',
-            maxHeight: '400px',
+            maxHeight: '750px',
           }}
         >
           <EditProductForm productInfo={productInfo} setOpen={setOpen} />

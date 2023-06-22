@@ -14,6 +14,9 @@ import ExpressDelivery from '@/Components/icons/expressDelivery';
 import CashNoDelivery from '@/Components/icons/cashNoDelivery';
 import SevenDay from '@/Components/icons/sevenDay';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
+import { Remove } from '@mui/icons-material';
 
 function SingleProductPage({
   data,
@@ -22,13 +25,15 @@ function SingleProductPage({
 }) {
   const productData = data.data.product;
   return (
-    <Box sx={{ display: 'flex', marginY: '60px' }}>
-      <Box sx={{ width: '50%' }}>
+    <Box
+      sx={{ display: 'flex', marginY: '60px', justifyContent: 'space-between' }}
+    >
+      <Box sx={{ width: '40%' }}>
         <SingleProductSlider images={productData.images} />
       </Box>
       <Box
         sx={{
-          width: '50%',
+          width: '60%',
           display: 'flex',
           gap: '20px',
           flexDirection: 'column',
@@ -40,9 +45,39 @@ function SingleProductPage({
         <Typography variant="h2">{productData.name}</Typography>
         <Rating name="simple-controlled" value={4} readOnly />
         <Box>{parse(productData.description)}</Box>
-        <Typography variant="h5" fontWeight={'bold'}>
-          {productData.price}$
-        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            marginTop: 'auto',
+          }}
+        >
+          <Typography variant="h5" fontWeight={'bold'}>
+            {productData.price}$
+          </Typography>
+          <Box
+            sx={{
+              width: '120px',
+              borderRadius: '16px',
+              height: '40px',
+              overflow: 'hidden',
+              border: '1px solid #8080803d ',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Button sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}>
+              <AddRoundedIcon />
+            </Button>
+            <Typography fontWeight={'500'} sx={{ marginY: 'auto' }}>
+              0
+            </Typography>
+            <Button sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}>
+              <RemoveRoundedIcon />
+            </Button>
+          </Box>
+        </Box>
         <Button
           size="large"
           sx={{ marginTop: 'auto', borderRadius: '6px' }}

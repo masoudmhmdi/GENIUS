@@ -28,7 +28,7 @@ function AddProductDownDrawer() {
             flexDirection: 'column',
             marginTop: '10px',
             paddingX: '12px',
-            maxHeight: '400px',
+            maxHeight: '750px',
           }}
         >
           <AddProductForm setOpen={setOpen} />
