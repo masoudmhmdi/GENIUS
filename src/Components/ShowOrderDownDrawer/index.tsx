@@ -2,8 +2,9 @@ import { Box, Button, Drawer } from '@mui/material';
 import React, { useState } from 'react';
 import AddProductForm from '../AddProductForm';
 
-function AddProductDownDrawer() {
+function ShowOrderDownDrawer({ orderInfo }: any) {
   const [open, setOpen] = useState(false);
+  console.log(orderInfo);
 
   return (
     <Box>
@@ -14,7 +15,7 @@ function AddProductDownDrawer() {
           variant="contained"
           color="success"
         >
-          اضافه کردن محصول
+          جزئیات
         </Button>
       </Box>
       <Drawer anchor="bottom" open={open} onClose={() => setOpen(false)}>
@@ -28,11 +29,11 @@ function AddProductDownDrawer() {
             maxHeight: '750px',
           }}
         >
-          <AddProductForm setOpen={setOpen} />
+          hello
         </Box>
       </Drawer>
     </Box>
   );
 }
 
-export default AddProductDownDrawer;
+export default ShowOrderDownDrawer;

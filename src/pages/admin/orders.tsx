@@ -16,6 +16,7 @@ import next from 'next/types';
 import { changeStatus, setPage } from '@/Store/slice/orderPaginate.slice';
 import { RootState } from '@/types';
 import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
+import ShowOrderDownDrawer from '@/Components/ShowOrderDownDrawer';
 
 const columns: GridColDef[] = [
   {
@@ -69,12 +70,8 @@ const columns: GridColDef[] = [
     sortable: false,
     headerAlign: 'center',
     align: 'center',
-    renderCell: () => {
-      return (
-        <Button size="large" variant="contained" color="success">
-          برسی سفارش
-        </Button>
-      );
+    renderCell: ({ row }) => {
+      return <ShowOrderDownDrawer orderInfo={row} />;
     },
   },
 ];
