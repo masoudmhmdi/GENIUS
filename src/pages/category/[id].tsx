@@ -22,7 +22,7 @@ function SingleCategoryPage({ data }: any) {
       <Typography sx={{ marginBottom: '50px' }}>
         جینیس شاپ/{products[0].category.name}
       </Typography>
-      <Box sx={{ display: 'flex', gap: '6px' }}>
+      <Box sx={{ display: 'flex', gap: '50px' }}>
         <Box
           sx={{
             width: '30%',
