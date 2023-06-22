@@ -85,6 +85,7 @@ export default function FilterBar({ setter }: IFilterProps) {
             name="row-radio-buttons-group"
             onChange={(e) => handleRadioBrandChange(e.target.value)}
           >
+            <FormControlLabel value="" control={<Radio />} label="همه" />
             <FormControlLabel value="apple" control={<Radio />} label="اپل" />
             <FormControlLabel
               value="sumsung"
@@ -107,21 +108,6 @@ export default function FilterBar({ setter }: IFilterProps) {
               label="هووای"
             />
           </RadioGroup>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
-          <Typography>Disabled Accordion</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
         </AccordionDetails>
       </Accordion>
     </Box>
