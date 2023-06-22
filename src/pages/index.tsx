@@ -19,6 +19,8 @@ import useGetProductByCategory from '@/api/services/getProductByCategory';
 import { GetServerSideProps } from 'next';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import getProductByCategoryService from '@/api/services/getProductByCategory/getProductByCategoryService';
+import Link from 'next/link';
+import { theme } from '@/theme';
 
 export default function Home({ data }: any) {
   console.log(data);
@@ -235,8 +237,18 @@ export default function Home({ data }: any) {
               variant="contained"
               color="secondary"
             >
-              <ArrowForwardIcon />
-              موبایل
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: theme.palette.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                href={'/category/647f0ffd8dcfc191205f4bb3'}
+              >
+                <ArrowForwardIcon />
+                موبایل
+              </Link>
             </Button>
           </Box>
           <Box
@@ -282,8 +294,18 @@ export default function Home({ data }: any) {
               variant="contained"
               color="secondary"
             >
-              <ArrowForwardIcon />
-              لپتاپ
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: theme.palette.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                href={'/category/647f103a8dcfc191205f4bbf'}
+              >
+                <ArrowForwardIcon />
+                لپتاپ
+              </Link>
             </Button>
           </Box>
           <Box
@@ -330,8 +352,18 @@ export default function Home({ data }: any) {
               variant="contained"
               color="secondary"
             >
-              <ArrowForwardIcon />
-              تبلت
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: theme.palette.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                href={'/category/647f10148dcfc191205f4bb7'}
+              >
+                <ArrowForwardIcon />
+                تبلت
+              </Link>
             </Button>
           </Box>
           <Box
@@ -376,8 +408,18 @@ export default function Home({ data }: any) {
               variant="contained"
               color="secondary"
             >
-              <ArrowForwardIcon />
-              ساعت
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: theme.palette.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                href={'/category/647f10268dcfc191205f4bbb'}
+              >
+                <ArrowForwardIcon />
+                ساعت
+              </Link>
             </Button>
           </Box>
           <Box
@@ -417,8 +459,18 @@ export default function Home({ data }: any) {
               variant="contained"
               color="secondary"
             >
-              <ArrowForwardIcon />
-              هدفون
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: theme.palette.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                href={'/category/647f10e38dcfc191205f4bc3'}
+              >
+                <ArrowForwardIcon />
+                هدفون
+              </Link>
             </Button>
           </Box>
         </Box>

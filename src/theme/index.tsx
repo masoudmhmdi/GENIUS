@@ -1,3 +1,4 @@
+import { Theme } from '@emotion/react';
 import { Components, createTheme } from '@mui/material';
 
 const btn = (): Components['MuiButton'] => ({
@@ -24,6 +25,14 @@ const MuiTextFieldStyle = (): Components['MuiTextField'] => ({
     },
   },
 });
+const MuiLink = (): Components['MuiLink'] => ({
+  styleOverrides: {
+    root: {
+      textDecoration: 'none',
+      color: '#212529',
+    },
+  },
+});
 
 export const theme = createTheme({
   palette: {
@@ -46,6 +55,7 @@ export const theme = createTheme({
     MuiButton: btn(),
     MuiToolbar: MuiToolbarStyle(),
     MuiTextField: MuiTextFieldStyle(),
+    MuiLink: MuiLink(),
   },
   direction: 'rtl',
   typography: {
