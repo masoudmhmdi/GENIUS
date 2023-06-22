@@ -179,3 +179,29 @@ export type IProductFromBack = {
   images: string[];
   slugname: string;
 };
+
+export type IOrder = {
+  _id: string;
+  user: {
+    _id: string;
+    firstname: string;
+    lastname: string;
+    username: string;
+    phoneNumber: string;
+    address: string;
+    role: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+  };
+  products: {
+    product: string;
+    count: number;
+    _id: string;
+  }[];
+  totalPrice: number;
+  deliveryDate: string;
+  deliveryStatus: boolean;
+  createdAt: string;
+  updatedAt: string;
+};

@@ -1,6 +1,7 @@
 import { Box, Button, Drawer } from '@mui/material';
 import React, { useState } from 'react';
 import AddProductForm from '../AddProductForm';
+import ShowOrderDetailForm from '../ShowOrderDetailForm';
 
 function ShowOrderDownDrawer({ orderInfo }: any) {
   const [open, setOpen] = useState(false);
@@ -29,7 +30,7 @@ function ShowOrderDownDrawer({ orderInfo }: any) {
             maxHeight: '750px',
           }}
         >
-          hello
+          <ShowOrderDetailForm orderInfo={orderInfo} />
         </Box>
       </Drawer>
     </Box>
