@@ -31,7 +31,7 @@ async function editProductService(
     images?.map((i: Blob) => formData.append('images', i));
     console.log(images);
     const res = await serverReq.patch(`products/${id}`, formData);
-    toast('محصول با موفقیت اضافه شد', {
+    toast('محصول با موفقیت ویرایش شد', {
       style: { backgroundColor: '#A4D0A4' },
     });
     setOpen(false);

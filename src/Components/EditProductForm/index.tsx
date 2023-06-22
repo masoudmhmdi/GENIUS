@@ -251,24 +251,31 @@ function EditProductForm({
               ...register('brand'),
             }}
           />
-          <Editor value={getEditorValue} setEditorValue={setEditorValue} />
+          <Editor
+            errMassage={errors.description?.message}
+            value={getEditorValue}
+            setEditorValue={setEditorValue}
+          />
           <ImageUploader
             helperText={errors.images?.message}
             setValue={setValue}
             setImagePreview={setImagePreview}
           />
-          {imagePreview.show &&
-            imagePreview.imgData.map((img: string) => {
-              return (
-                <Image
-                  key={img}
-                  alt={'product-img'}
-                  width="100"
-                  height="100"
-                  src={img}
-                />
-              );
-            })}
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+            {' '}
+            {imagePreview.show &&
+              imagePreview.imgData.map((img: string) => {
+                return (
+                  <Image
+                    key={img}
+                    alt={'product-img'}
+                    width="100"
+                    height="100"
+                    src={img}
+                  />
+                );
+              })}
+          </Box>
         </Box>
       </Box>
       <Button type="submit" fullWidth variant="contained" color="success">

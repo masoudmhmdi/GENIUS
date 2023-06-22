@@ -28,6 +28,7 @@ const schema = yup.object({
   price: yup.number().required('این فیلد ضروری است'),
   quantity: yup.number().required('این فیلد ضروری است'),
   brand: yup.string().required('این فیلد ضروری است'),
+  images: yup.array().required('این فیلد ضروری است'),
 });
 
 function AddProductForm({ setOpen }: { setOpen: (arg: boolean) => void }) {
@@ -197,7 +198,12 @@ function AddProductForm({ setOpen }: { setOpen: (arg: boolean) => void }) {
               ...register('brand'),
             }}
           />
-          <Editor value={getEditorValue} setEditorValue={setEditorValue} />
+          <Editor
+            errMassage={errors.description?.message}
+            value={getEditorValue}
+            setEditorValue={setEditorValue}
+          />
+
           <ImageUploader
             helperText={errors.images?.message}
             setValue={setValue}

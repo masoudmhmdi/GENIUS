@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import 'react-quill/dist/quill.snow.css';
+import { theme } from '@/theme';
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 function Editor({
   setEditorValue,
   value,
+  errMassage,
 }: {
   setEditorValue: (arg: string) => void;
   value: () => string;
+  errMassage: string | undefined;
 }) {
   const modules = {
     toolbar: [
@@ -62,6 +65,9 @@ function Editor({
         value={value()}
         onChange={handleProcedureContentChange}
       />
+      <Typography fontSize={14} color={theme.palette.error.main}>
+        {errMassage}
+      </Typography>
     </Box>
   );
 }

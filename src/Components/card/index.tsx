@@ -8,6 +8,7 @@ import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
 import { IProductFromBack } from '@/types';
 import { theme } from '@/theme';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ProductCard({
   productData,
@@ -15,45 +16,37 @@ export default function ProductCard({
   productData: IProductFromBack;
 }) {
   return (
-    <Card variant="outlined" sx={{ maxWidth: 200, height: 300 }}>
+    <Card variant="outlined" sx={{ maxWidth: 235 }}>
       <CardActionArea sx={{ width: '100%', height: '100%' }}>
         <Link
           style={{ textDecoration: 'none', color: theme.palette.primary.main }}
           href={`/product/${productData._id}`}
         >
           <CardMedia
-            sx={{ borderRadius: '12px', padding: '20px', maxWidth: '100%' }}
+            sx={{ borderRadius: '12px', padding: '10px', maxWidth: '100%' }}
             component="img"
             image={productData.images[0]}
           />
           <CardContent
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
+            sx={{ display: 'flex', gap: '6px', flexDirection: 'column' }}
           >
             <Box>
-              <Box
-                sx={{
-                  width: '40px',
-                  height: '40px',
-                  display: 'flex',
-                  color: 'white',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: '5px',
-                  backgroundColor: theme.palette.primary.main,
-                }}
-              >
-                {productData.rating.rate}
-              </Box>
-            </Box>
-            <Box>
-              <Typography align="right">{productData.name}</Typography>
-              <Typography align="right" fontWeight={'bold'}>
+              <Typography align="left">{productData.name}</Typography>
+              <Typography align="left" fontWeight={'bold'}>
                 {productData.price}
+                تومان
               </Typography>
+            </Box>
+            <Box
+              sx={{
+                width: '100%',
+                backgroundColor: theme.palette.primary.main,
+                color: theme.palette.secondary.main,
+                padding: '6px',
+                borderRadius: '6px',
+              }}
+            >
+              <Typography align="center"> جزئیات</Typography>
             </Box>
           </CardContent>
         </Link>
