@@ -28,7 +28,6 @@ const columns: GridColDef[] = [
     headerAlign: 'center',
     align: 'center',
     renderCell: ({ row }) => {
-      console.log(row);
       return <div>{row.user.username}</div>;
     },
   },
@@ -64,8 +63,7 @@ const columns: GridColDef[] = [
   },
   {
     field: '',
-    headerName: '',
-
+    // headerName: 'مشاهده جزئیات',
     flex: 1,
     sortable: false,
     headerAlign: 'center',

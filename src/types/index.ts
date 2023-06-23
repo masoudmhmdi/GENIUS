@@ -195,7 +195,26 @@ export type IOrder = {
     __v: number;
   };
   products: {
-    product: string;
+    product: {
+      rating: {
+        rate: number;
+        count: number;
+      };
+      _id: string;
+      category: string;
+      subcategory: string;
+      name: string;
+      price: 40;
+      quantity: 23;
+      brand: string;
+      description: string;
+      thumbnail: string;
+      images: string[];
+      createdAt: '2023-06-06T14:01:55.538Z';
+      updatedAt: '2023-06-22T22:40:57.632Z';
+      slugname: 'iphone-13-pro-max';
+      __v: 1;
+    };
     count: number;
     _id: string;
   }[];
