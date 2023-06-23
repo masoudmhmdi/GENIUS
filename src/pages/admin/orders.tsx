@@ -16,6 +16,7 @@ import next from 'next/types';
 import { changeStatus, setPage } from '@/Store/slice/orderPaginate.slice';
 import { RootState } from '@/types';
 import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
+import ShowOrderDownDrawer from '@/Components/ShowOrderDownDrawer';
 
 const columns: GridColDef[] = [
   {
@@ -27,7 +28,6 @@ const columns: GridColDef[] = [
     headerAlign: 'center',
     align: 'center',
     renderCell: ({ row }) => {
-      console.log(row);
       return <div>{row.user.username}</div>;
     },
   },
@@ -63,18 +63,13 @@ const columns: GridColDef[] = [
   },
   {
     field: '',
-    headerName: '',
-
+    // headerName: 'مشاهده جزئیات',
     flex: 1,
     sortable: false,
     headerAlign: 'center',
     align: 'center',
-    renderCell: () => {
-      return (
-        <Button size="large" variant="contained" color="success">
-          برسی سفارش
-        </Button>
-      );
+    renderCell: ({ row }) => {
+      return <ShowOrderDownDrawer orderInfo={row} />;
     },
   },
 ];

@@ -61,7 +61,7 @@ function Login() {
           width={522}
           height={140}
           style={{ width: '100%', maxWidth: '522px' }}
-          src={'/logo.png'}
+          src={'/Logo.webp'}
         />
       </Box>
       <Box

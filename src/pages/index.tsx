@@ -1,13 +1,35 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { useEffect } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 import { useRouter } from 'next/router';
 import Cookie from 'js-cookie';
 import ProductCard from '@/Components/card';
+import Slider from '@/Components/slider';
+import useGetCategory from '@/api/services/useGetCategory';
+import Image from 'next/image';
+import { Category, IProductFromBack } from '@/types';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import StoreIcon from '@mui/icons-material/Store';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import useGetProductByCategory from '@/api/services/getProductByCategory';
+import { GetServerSideProps } from 'next';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
+import getProductByCategoryService from '@/api/services/getProductByCategory/getProductByCategoryService';
+import Link from 'next/link';
+import { theme } from '@/theme';
 
-export default function Home() {
+export default function Home({ data }: any) {
+  console.log(data);
+  const { data: allCategory } = useGetCategory();
+  const mobileData: IProductFromBack[] =
+    data.queries[0].state.data.data.products;
+  const laptopData: IProductFromBack[] =
+    data.queries[1].state.data.data.products;
+
   return (
     <>
       <Head>
@@ -16,27 +38,509 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          gap: '20px',
-          flexWrap: 'wrap',
-        }}
-      >
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+      <Box sx={{ width: '100%' }}>
+        <Slider />
+        <Typography sx={{ marginY: '20px' }} align="left" variant="h4">
+          برند ها
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}
+        >
+          {allCategory?.data.categories.map((category: Category) => {
+            return (
+              <Button
+                key={category._id}
+                color="secondary"
+                variant="contained"
+                sx={{ width: '100px', height: '100px', borderRadius: '100%' }}
+              >
+                <Image
+                  src={`http://localhost:8000/images/categories/icons/${category.icon}`}
+                  alt=""
+                  width={50}
+                  height={50}
+                />
+              </Button>
+            );
+          })}
+        </Box>
+        <Box sx={{ display: 'flex', marginY: '50px' }}>
+          <Box sx={{ flexGrow: '1' }}>
+            <Typography variant="h4" sx={{ width: '300px' }}>
+              بهترین خریدرا با ما تجربه کنید
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              borderLeft: '2px solid black',
+              paddingY: '2px',
+              display: 'flex',
+              alignItems: 'center',
+              paddingX: '20px',
+            }}
+          >
+            <Typography sx={{ opacity: '0.7' }}>
+              ما اطمینان میدهیم مشتری های ما بهترین تجربه خرید را داشته باشند
+            </Typography>
+          </Box>
+        </Box>
+        <Box
+          sx={{ display: 'flex', justifyContent: 'space-around', gap: '10px' }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+              width: '20%',
+            }}
+          >
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '50px', height: '50px' }}
+              disabled
+            >
+              <LocalShippingIcon sx={{ color: 'black' }} />
+            </Button>
+            <Typography sx={{ fontWeight: 'bold' }}>
+              امکان تحویل اکسپرس
+            </Typography>
+            <Typography sx={{ opacity: '0.7', fontSize: '14px' }}>
+              Lorem ipsum dolor sit amet consectetur
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+              width: '20%',
+            }}
+          >
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '50px', height: '50px' }}
+              disabled
+            >
+              <LocalMallIcon sx={{ color: 'black' }} />
+            </Button>
+            <Typography sx={{ fontWeight: 'bold' }}>
+              ضمانت اصالت کالا
+            </Typography>
+            <Typography sx={{ opacity: '0.7', fontSize: '14px' }}>
+              Lorem ipsum dolor sit amet consectetur
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+              width: '20%',
+            }}
+          >
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '50px', height: '50px' }}
+              disabled
+            >
+              <PaymentsIcon sx={{ color: 'black' }} />
+            </Button>
+            <Typography sx={{ fontWeight: 'bold' }}>
+              امکان پرداخت درب منزل
+            </Typography>
+            <Typography sx={{ opacity: '0.7', fontSize: '14px' }}>
+              Lorem ipsum dolor sit amet consectetur
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+              width: '20%',
+            }}
+          >
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '50px', height: '50px' }}
+              disabled
+            >
+              <StoreIcon sx={{ color: 'black' }} />
+            </Button>
+            <Typography sx={{ fontWeight: 'bold' }}>
+              هفت روز ضمانت بازگشت کالا
+            </Typography>
+            <Typography sx={{ opacity: '0.7', fontSize: '14px' }}>
+              Lorem ipsum dolor sit amet consectetur
+            </Typography>
+          </Box>
+        </Box>
+        <Typography sx={{ marginY: '20px' }} align="left" variant="h4">
+          دسته بندی ها
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: '20px',
+            backdropFilter: 'unset',
+          }}
+        >
+          <Box
+            sx={{
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              paddingBottom: '20px',
+            }}
+          >
+            <Image
+              style={{ objectFit: 'cover' }}
+              alt="mobile"
+              src={'/mobile.png'}
+              fill
+            />
+
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+                backgroundColor: 'black',
+                opacity: '0.3',
+                top: '0',
+                left: '0',
+              }}
+            ></Box>
+            <Button
+              sx={{
+                position: 'absolute',
+                zIndex: '2',
+                width: '150px',
+                borderRadius: '8px',
+                top: '70%',
+              }}
+              variant="contained"
+              color="secondary"
+            >
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: theme.palette.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                href={'/category/647f0ffd8dcfc191205f4bb3'}
+              >
+                <ArrowForwardIcon />
+                موبایل
+              </Link>
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Image
+              // style={{ objectFit: 'cover' }}
+              alt="mobile"
+              src={'/laptop1.png'}
+              width={200}
+              height={117}
+            />
+
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+                backgroundColor: 'black',
+                opacity: '0.3',
+                top: '0',
+                left: '0',
+              }}
+            ></Box>
+            <Button
+              sx={{
+                position: 'absolute',
+                zIndex: '2',
+                width: '150px',
+                borderRadius: '8px',
+                top: '70%',
+              }}
+              variant="contained"
+              color="secondary"
+            >
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: theme.palette.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                href={'/category/647f103a8dcfc191205f4bbf'}
+              >
+                <ArrowForwardIcon />
+                لپتاپ
+              </Link>
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'end',
+              paddingBottom: '10px',
+            }}
+          >
+            <Image
+              // style={{ objectFit: 'cover' }}
+              alt="mobile"
+              src={'/tablet.png'}
+              width={119}
+              height={170}
+            />
+
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+                backgroundColor: 'black',
+                opacity: '0.3',
+                top: '0',
+                left: '0',
+              }}
+            ></Box>
+            <Button
+              sx={{
+                position: 'absolute',
+                zIndex: '2',
+                width: '150px',
+                borderRadius: '8px',
+                top: '70%',
+              }}
+              variant="contained"
+              color="secondary"
+            >
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: theme.palette.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                href={'/category/647f10148dcfc191205f4bb7'}
+              >
+                <ArrowForwardIcon />
+                تبلت
+              </Link>
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              paddingBottom: '20px',
+            }}
+          >
+            <Image
+              style={{ objectFit: 'cover' }}
+              alt="mobile"
+              src={'/watch.jpg'}
+              fill
+            />
+
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+                backgroundColor: 'black',
+                opacity: '0.3',
+                top: '0',
+                left: '0',
+              }}
+            ></Box>
+            <Button
+              sx={{
+                position: 'absolute',
+                zIndex: '2',
+                width: '150px',
+                borderRadius: '8px',
+                top: '70%',
+              }}
+              variant="contained"
+              color="secondary"
+            >
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: theme.palette.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                href={'/category/647f10268dcfc191205f4bbb'}
+              >
+                <ArrowForwardIcon />
+                ساعت
+              </Link>
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              paddingBottom: '20px',
+            }}
+          >
+            <Image alt="mobile" src={'/headphone.png'} fill />
+
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+                backgroundColor: 'black',
+                opacity: '0.3',
+                top: '0',
+                left: '0',
+              }}
+            ></Box>
+            <Button
+              sx={{
+                position: 'absolute',
+                zIndex: '2',
+                width: '150px',
+                borderRadius: '8px',
+                top: '70%',
+              }}
+              variant="contained"
+              color="secondary"
+            >
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: theme.palette.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                href={'/category/647f10e38dcfc191205f4bc3'}
+              >
+                <ArrowForwardIcon />
+                هدفون
+              </Link>
+            </Button>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginY: '20px',
+            alignItems: 'center',
+          }}
+        >
+          <Typography align="left" variant="h4">
+            موبایل ها
+          </Typography>
+          <Button sx={{ opacity: '0.7', textDecoration: 'inline' }}>همه</Button>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            paddingY: '12px',
+          }}
+        >
+          {mobileData.map((p) => {
+            return <ProductCard productData={p} key={p._id} />;
+          })}
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginY: '20px',
+            alignItems: 'center',
+          }}
+        >
+          <Typography align="left" variant="h4">
+            لپتاپ ها
+          </Typography>
+          <Button sx={{ opacity: '0.7', textDecoration: 'inline' }}>همه</Button>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            paddingY: '12px',
+          }}
+        >
+          {laptopData.map((p) => {
+            return <ProductCard productData={p} key={p._id} />;
+          })}
+        </Box>
       </Box>
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['mobileCategory'], () =>
+    getProductByCategoryService('647f0ffd8dcfc191205f4bb3')
+  );
+  await queryClient.prefetchQuery(['laptopCategory'], () =>
+    getProductByCategoryService('647f103a8dcfc191205f4bbf')
+  );
+
+  return {
+    props: {
+      data: dehydrate(queryClient),
+    },
+  };
+};

@@ -12,6 +12,12 @@ import {
   handleSortingProducts,
   productSetPage,
 } from '@/Store/slice/products.slice';
+import DownDrawer from '@/Components/AddProductDownDrawer';
+import AddProductForm from '@/Components/AddProductForm';
+import MyModal from '@/Components/Modal';
+import EditProductForm from '@/Components/EditProductForm';
+import AddProductDownDrawer from '@/Components/AddProductDownDrawer';
+import EditProductDownDrawer from '@/Components/EditProductDownDrawer';
 
 const columns: GridColDef[] = [
   {
@@ -25,9 +31,9 @@ const columns: GridColDef[] = [
     renderCell: ({ row }) => {
       return (
         <Box sx={{ minWidth: '150px', height: '150px', position: 'relative' }}>
-          <Image
+          <img
             src={row.images[0]}
-            fill
+            // fill
             alt="product-img"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
@@ -63,12 +69,8 @@ const columns: GridColDef[] = [
     sortable: false,
     headerAlign: 'center',
     align: 'center',
-    renderCell: () => {
-      return (
-        <Button size="large" variant="contained" color="success">
-          ویرایش
-        </Button>
-      );
+    renderCell: ({ row }) => {
+      return <EditProductDownDrawer productInfo={row} />;
     },
   },
   {
@@ -78,11 +80,13 @@ const columns: GridColDef[] = [
     sortable: false,
     headerAlign: 'center',
     align: 'center',
-    renderCell: () => {
+    renderCell: ({ row }) => {
       return (
-        <Button size="large" variant="contained" color="error">
-          حذف
-        </Button>
+        <MyModal
+          btnText="حذف"
+          btnProps={{ color: 'error', variant: 'contained' }}
+          id={row._id}
+        />
       );
     },
   },
@@ -107,9 +111,7 @@ export default function Product() {
         }}
       >
         <Typography variant="h4">محصولات</Typography>
-        <Button size="large" variant="contained" color="success">
-          اضافه کردن محصول
-        </Button>
+        <AddProductDownDrawer />
       </Box>
       <Box sx={{ marginTop: '6px' }} style={{ height: '550px', width: '100%' }}>
         <DataGrid
