@@ -166,6 +166,7 @@ function AddProductForm({ setOpen }: { setOpen: (arg: boolean) => void }) {
             fullWidth
             InputProps={{
               ...register('price'),
+              type: 'number',
             }}
           />
           <TextField
@@ -175,6 +176,7 @@ function AddProductForm({ setOpen }: { setOpen: (arg: boolean) => void }) {
             fullWidth
             InputProps={{
               ...register('quantity'),
+              type: 'number',
             }}
           />
         </Box>

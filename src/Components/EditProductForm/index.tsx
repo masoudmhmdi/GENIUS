@@ -219,6 +219,7 @@ function EditProductForm({
             fullWidth
             InputProps={{
               ...register('price'),
+              type: 'number',
             }}
           />
           <TextField
@@ -228,6 +229,7 @@ function EditProductForm({
             fullWidth
             InputProps={{
               ...register('quantity'),
+              type: 'number',
             }}
           />
         </Box>
