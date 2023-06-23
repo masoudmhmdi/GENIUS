@@ -1,3 +1,4 @@
+import useEndDelivery from '@/api/services/editOrderDeliveryStatusById';
 import { IOrder } from '@/types';
 import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
@@ -42,6 +43,7 @@ const columns: GridColDef[] = [
 ];
 
 function ShowOrderDetailForm({ orderInfo }: { orderInfo: IOrder }) {
+  const { mutate } = useEndDelivery();
   return (
     <Box sx={{ height: '450px' }}>
       <Typography sx={{ paddingY: '12px' }} fontWeight={'bold'} variant="h5">
@@ -82,8 +84,14 @@ function ShowOrderDetailForm({ orderInfo }: { orderInfo: IOrder }) {
         getRowId={(row) => row._id}
         rows={orderInfo.products}
       />
-      <Button fullWidth variant="contained">
-        تحویل شد
+      <Button
+        fullWidth
+        variant="contained"
+        disabled={!orderInfo.deliveryStatus && true}
+        color={!orderInfo.deliveryStatus ? 'success' : 'primary'}
+        onClick={() => mutate(orderInfo._id)}
+      >
+        تحویل داده شد
       </Button>
     </Box>
   );

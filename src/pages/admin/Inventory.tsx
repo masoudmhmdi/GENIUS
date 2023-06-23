@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import AdminLayout from '@/Layouts/AdminLayout/AdminLayout';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { IProductFromBack, RootState } from '@/types';
 import PanelAdminSkeleton from '@/Components/panelAdminSkeleton';
@@ -74,8 +74,7 @@ export default function Inventory() {
   const { field, sort } = orderPaginate;
   const dispatch = useDispatch();
   const { data, isLoading } = useGetProducts();
-  const { mutate } = useParallelEditProduct();
-
+  const { mutate, isLoading: mutateLoading } = useParallelEditProduct();
   if (isLoading) return <PanelAdminSkeleton />;
 
   const products = data.data.products;
@@ -90,13 +89,17 @@ export default function Inventory() {
         }}
       >
         <Typography variant="h4">موجودی</Typography>
-        <Button
-          onClick={() => {
-            mutate(editedProduct);
-          }}
-        >
-          ذخیره
-        </Button>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              mutate(editedProduct);
+            }}
+          >
+            ذخیره
+          </Button>
+          {mutateLoading && <CircularProgress />}
+        </Box>
       </Box>
       <Box sx={{ marginTop: '6px' }} style={{ height: '550px', width: '100%' }}>
         <DataGrid

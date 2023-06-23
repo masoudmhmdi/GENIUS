@@ -3,26 +3,32 @@ import RowRadioButtonsGroup from '@/Components/FilterBar';
 import useGetProductByCategory from '@/api/services/getProductByCategory';
 import getProductByCategoryService from '@/api/services/getProductByCategory/getProductByCategoryService';
 import { theme } from '@/theme';
-import { IProductFromBack } from '@/types';
-import { Box, Typography } from '@mui/material';
+import { Category, IProductFromBack, RootState } from '@/types';
+import { Box, Button, Typography } from '@mui/material';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import React, { useState } from 'react';
 import FilterBar from '@/Components/FilterBar';
+import { serverReq } from '@/api/constants';
+import { useSelector } from 'react-redux';
 
 function SingleCategoryPage({ data }: any) {
   let products: IProductFromBack[] = data.queries[0].state.data.data.products;
-  const [filterParams, setFilterParams] = useState<
-    {} | { sort: string; brand: string }
-  >({});
-  console.log(filterParams);
+  let category: Category = data.queries[1].state.data.data.category;
+
+  const {
+    data: productData,
+    refetch,
+    isLoading,
+  } = useGetProductByCategory(category._id, 8);
+
   return (
-    <Box>
+    <Box sx={{ minHeight: '100vh' }}>
       <Typography sx={{ marginBottom: '50px' }}>
-        جینیس شاپ/{products[0].category.name}
+        جینیس شاپ/{category.name}
       </Typography>
-      <Box sx={{ display: 'flex', gap: '50px' }}>
+      <Box sx={{ display: 'flex', gap: '50px', height: '100%' }}>
         <Box
           sx={{
             width: '30%',
@@ -33,7 +39,8 @@ function SingleCategoryPage({ data }: any) {
             borderRadius: '6px',
           }}
         >
-          <FilterBar setter={setFilterParams} />
+          <FilterBar />
+          <Button onClick={() => refetch()}>اعمال</Button>
         </Box>
         <Box
           sx={{
@@ -66,8 +73,16 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['category', id], () =>
+  const getCategoryByIdService = async (id: string) => {
+    const res = await serverReq(`/categories/${id}`);
+    return res.data;
+  };
+
+  await queryClient.prefetchQuery(['getProductByCategory', id], () =>
     getProductByCategoryService(id, 8)
+  );
+  await queryClient.prefetchQuery(['categoryInfo', id], () =>
+    getCategoryByIdService(id)
   );
 
   return {

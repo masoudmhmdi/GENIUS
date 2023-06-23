@@ -10,6 +10,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { brandSetter, priceSetter } from '@/Store/slice/singleCategory.slice';
 
 type IFilterProps = {
   setter: React.Dispatch<
@@ -23,16 +25,14 @@ type IFilterProps = {
   >;
 };
 
-export default function FilterBar({ setter }: IFilterProps) {
+export default function FilterBar() {
+  const dispatch = useDispatch();
+
   const handleRadioPriceChange = (value: string) => {
-    setter((prev) => {
-      return { ...prev, sort: value };
-    });
+    dispatch(priceSetter(value));
   };
   const handleRadioBrandChange = (value: string) => {
-    setter((prev) => {
-      return { ...prev, brand: value };
-    });
+    dispatch(brandSetter(value));
   };
   return (
     <Box>
