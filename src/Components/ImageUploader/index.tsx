@@ -57,6 +57,7 @@ function UploadImage({
     accept: {
       'image/png': ['.png'],
       'image/JPEG': ['.JPEG'],
+      'image/webp': ['.webp'],
     },
     onDrop: (acceptedFiles) => {
       const newFile = acceptedFiles.map((file) =>

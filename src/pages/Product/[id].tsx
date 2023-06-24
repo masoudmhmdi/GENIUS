@@ -26,14 +26,19 @@ function SingleProductPage({
   const productData = data.data.product;
   return (
     <Box
-      sx={{ display: 'flex', marginY: '60px', justifyContent: 'space-between' }}
+      sx={{
+        display: 'flex',
+        marginY: '60px',
+        justifyContent: 'space-between',
+        gap: '100px',
+      }}
     >
-      <Box sx={{ width: '40%' }}>
+      <Box sx={{ width: '50%' }}>
         <SingleProductSlider images={productData.images} />
       </Box>
       <Box
         sx={{
-          width: '60%',
+          width: '50%',
           display: 'flex',
           gap: '20px',
           flexDirection: 'column',
@@ -42,7 +47,7 @@ function SingleProductPage({
         <Typography variant="h6" sx={{ borderBottom: '1px solid gray' }}>
           {productData.category.name}/{productData.subcategory.name}
         </Typography>
-        <Typography variant="h2">{productData.name}</Typography>
+        <Typography variant="h4">{productData.name}</Typography>
         <Rating name="simple-controlled" value={4} readOnly />
         <Box>{parse(productData.description)}</Box>
         <Box
