@@ -77,7 +77,9 @@ function CartCard({ cartProductDate }: { cartProductDate: Cart }) {
               <RemoveRoundedIcon />
             </Button>
           </Box>
-          <Typography> تومان{cartProductDate.product.price}</Typography>
+          <Typography>
+            تومان{cartProductDate.product.price * cartProductDate.count}
+          </Typography>
         </Box>
       </Box>
       <CardActionArea sx={{ width: '15%' }}>
