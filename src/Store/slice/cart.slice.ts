@@ -17,9 +17,31 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       return [...state, action.payload];
     },
+    plusCount: (state, action) => {
+      const newState = state.map((item) => {
+        if (item.product._id === action.payload) {
+          item.count < item.product.quantity && item.count + 1;
+          return item;
+        }
+        return item;
+      });
+
+      return [...newState];
+    },
+    minusCount: (state, action) => {
+      const newState = state.map((item) => {
+        if (item.product._id === action.payload) {
+          item.count > 1 && item.count - 1;
+          return item;
+        }
+        return item;
+      });
+
+      return [...newState];
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, plusCount, minusCount } = cartSlice.actions;
 const reducers = combineReducers({ cartSlice: cartSlice.reducer });
 export const persistedReducer = persistReducer(persistConfig as any, reducers);
