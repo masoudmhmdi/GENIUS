@@ -225,8 +225,8 @@ export type IOrder = {
   updatedAt: string;
 };
 
-type Cart = {
-  id: string;
+export type Cart = {
+  product: IProductFromBack;
   count: number;
 };
 

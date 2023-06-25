@@ -31,7 +31,7 @@ function SingleProductPage({
   console.log(cartState);
   const dispatch = useDispatch();
   const [productState, setProductState] = useState({
-    product: productData._id,
+    product: productData,
     count: 1,
   });
 
