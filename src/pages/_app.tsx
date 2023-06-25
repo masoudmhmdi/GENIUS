@@ -21,6 +21,10 @@ import { ComponentType, ReactNode, useState } from 'react';
 import NextNProgress from 'nextjs-progressbar';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools/build/lib/devtools';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+
+let persistor = persistStore(store);
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -50,21 +54,23 @@ export default function MyApp(props: MyAppProps) {
             <CacheProvider value={emotionCache}>
               <CacheProvider value={cacheRtl}>
                 <Provider store={store}>
-                  <CssBaseline />
-                  <NextNProgress color="#212529" />
-                  {Component.getLayout ? (
-                    Component.getLayout(<Component {...pageProps} />)
-                  ) : (
-                    <MainLayout>
-                      <Component {...pageProps} />
-                    </MainLayout>
-                  )}
-                  <Toaster
-                    toastOptions={{
-                      style: { backgroundColor: '#212529', color: 'white' },
-                      position: 'top-left',
-                    }}
-                  />
+                  <PersistGate persistor={persistor}>
+                    <CssBaseline />
+                    <NextNProgress color="#212529" />
+                    {Component.getLayout ? (
+                      Component.getLayout(<Component {...pageProps} />)
+                    ) : (
+                      <MainLayout>
+                        <Component {...pageProps} />
+                      </MainLayout>
+                    )}
+                    <Toaster
+                      toastOptions={{
+                        style: { backgroundColor: '#212529', color: 'white' },
+                        position: 'top-left',
+                      }}
+                    />
+                  </PersistGate>
                 </Provider>
               </CacheProvider>
             </CacheProvider>

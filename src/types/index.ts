@@ -224,3 +224,10 @@ export type IOrder = {
   createdAt: string;
   updatedAt: string;
 };
+
+type Cart = {
+  id: string;
+  count: number;
+};
+
+export type ICart = Cart[];

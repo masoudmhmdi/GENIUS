@@ -3,9 +3,9 @@ import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import getProductByIdService from '@/api/services/useGetProductById/getProductByIdService';
-import { IProductFromBack } from '@/types';
+import { IProductFromBack, RootState } from '@/types';
 import { AxiosResponse } from 'axios';
-import { Box, Button, Rating, Typography } from '@mui/material';
+import { Box, Button, Link, Rating, Typography } from '@mui/material';
 import SingleProductSlider from '@/Components/singleProductSlider';
 import parse from 'html-react-parser';
 import Image from 'next/image';
@@ -17,6 +17,9 @@ import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { Remove } from '@mui/icons-material';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '@/Store/slice/cart.slice';
+import { theme } from '@/theme';
 
 function SingleProductPage({
   data,
@@ -24,6 +27,9 @@ function SingleProductPage({
   data: AxiosResponse<{ product: IProductFromBack }>;
 }) {
   const productData = data.data.product;
+  const cartState = useSelector((state: RootState) => state.persistedReducer);
+  console.log(cartState);
+  const dispatch = useDispatch();
   const [productState, setProductState] = useState({
     product: productData._id,
     count: 1,
@@ -111,15 +117,24 @@ function SingleProductPage({
             </Button>
           </Box>
         </Box>
-        <Button
-          size="large"
-          sx={{ marginTop: 'auto', borderRadius: '6px' }}
-          fullWidth
-          variant="contained"
+        <Link
+          href="/cart"
+          style={{
+            textDecoration: 'none',
+            color: theme.palette.primary.main,
+          }}
         >
-          <ShoppingCartRoundedIcon sx={{ marginX: '10px' }} />
-          افزون به سبد خرید
-        </Button>
+          <Button
+            size="large"
+            sx={{ marginTop: 'auto', borderRadius: '6px' }}
+            fullWidth
+            variant="contained"
+            onClick={() => dispatch(addToCart(productState))}
+          >
+            <ShoppingCartRoundedIcon sx={{ marginX: '10px' }} />
+            افزون به سبد خرید
+          </Button>
+        </Link>
         <Box
           sx={{
             marginTop: 'auto',
