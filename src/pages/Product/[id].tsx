@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
@@ -24,6 +24,28 @@ function SingleProductPage({
   data: AxiosResponse<{ product: IProductFromBack }>;
 }) {
   const productData = data.data.product;
+  const [productState, setProductState] = useState({
+    product: productData._id,
+    count: 1,
+  });
+
+  const addCount = () => {
+    setProductState((prev) => {
+      return {
+        ...prev,
+        count: prev.count < productData.quantity ? prev.count + 1 : prev.count,
+      };
+    });
+  };
+  const minusCount = () => {
+    setProductState((prev) => {
+      return {
+        ...prev,
+        count: prev.count > 1 ? prev.count + -1 : prev.count,
+      };
+    });
+  };
+
   return (
     <Box
       sx={{
@@ -72,13 +94,19 @@ function SingleProductPage({
               justifyContent: 'space-between',
             }}
           >
-            <Button sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}>
+            <Button
+              sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}
+              onClick={addCount}
+            >
               <AddRoundedIcon />
             </Button>
             <Typography fontWeight={'500'} sx={{ marginY: 'auto' }}>
-              0
+              {productState.count}
             </Typography>
-            <Button sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}>
+            <Button
+              sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}
+              onClick={minusCount}
+            >
               <RemoveRoundedIcon />
             </Button>
           </Box>

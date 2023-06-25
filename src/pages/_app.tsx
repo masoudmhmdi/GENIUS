@@ -69,7 +69,7 @@ export default function MyApp(props: MyAppProps) {
               </CacheProvider>
             </CacheProvider>
           </ThemeProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </Hydrate>
       </QueryClientProvider>
     </CacheProvider>
