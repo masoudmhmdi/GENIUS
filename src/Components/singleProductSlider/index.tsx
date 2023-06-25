@@ -28,9 +28,9 @@ export default function SingleProductSlider({ images }: { images: string[] }) {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {images.map((img) => {
+        {images.map((img, i) => {
           return (
-            <SwiperSlide key={img}>
+            <SwiperSlide key={i}>
               <img src={img} />
             </SwiperSlide>
           );
@@ -46,9 +46,9 @@ export default function SingleProductSlider({ images }: { images: string[] }) {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        {images.map((img) => {
+        {images.map((img, i) => {
           return (
-            <SwiperSlide key={img}>
+            <SwiperSlide key={i}>
               <img src={img} />
             </SwiperSlide>
           );

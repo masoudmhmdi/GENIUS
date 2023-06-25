@@ -4,7 +4,7 @@ import { Components, createTheme } from '@mui/material';
 const btn = (): Components['MuiButton'] => ({
   styleOverrides: {
     root: {
-      borderRadius: '2px',
+      borderRadius: '6px',
     },
   },
 });
