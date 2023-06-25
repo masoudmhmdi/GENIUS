@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
+import { toast } from 'react-hot-toast';
 
 const persistConfig = {
   key: 'cartSlice',
@@ -20,8 +21,18 @@ const cartSlice = createSlice({
     plusCount: (state, action) => {
       const newState = state.map((item) => {
         if (item.product._id === action.payload) {
-          item.count < item.product.quantity && item.count + 1;
-          return item;
+          const newItem = {
+            ...item,
+            count:
+              item.count < item.product.quantity ? item.count + 1 : item.count,
+          };
+          if (item.count === item.product.quantity) {
+            toast(
+              'شما حداکتر موجودی این محصول را  به سبد خرید خود اضافه کرده اید'
+            );
+          }
+          console.log(newItem.count);
+          return newItem;
         }
         return item;
       });
@@ -31,8 +42,12 @@ const cartSlice = createSlice({
     minusCount: (state, action) => {
       const newState = state.map((item) => {
         if (item.product._id === action.payload) {
-          item.count > 1 && item.count - 1;
-          return item;
+          const newItem = {
+            ...item,
+            count: item.count > 1 ? item.count - 1 : item.count,
+          };
+
+          return newItem;
         }
         return item;
       });

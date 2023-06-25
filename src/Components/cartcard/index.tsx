@@ -10,7 +10,10 @@ import {
 import React from 'react';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
+import { useDispatch } from 'react-redux';
+import { minusCount, plusCount } from '@/Store/slice/cart.slice';
 function CartCard({ cartProductDate }: { cartProductDate: Cart }) {
+  const dispatch = useDispatch();
   return (
     <Card
       sx={{
@@ -60,16 +63,16 @@ function CartCard({ cartProductDate }: { cartProductDate: Cart }) {
           >
             <Button
               sx={{ height: '100%', minWidth: '40px', maxWidth: '40px' }}
-              //   onClick={addCount}
+              onClick={() => dispatch(plusCount(cartProductDate.product._id))}
             >
               <AddRoundedIcon />
             </Button>
             <Typography fontWeight={'500'} sx={{ marginY: 'auto' }}>
-              {/* {productState.count} */}0
+              {cartProductDate.count}
             </Typography>
             <Button
               sx={{ height: '100%', minWidth: '40px', maxWidth: '40px' }}
-              //   onClick={minusCount}
+              onClick={() => dispatch(minusCount(cartProductDate.product._id))}
             >
               <RemoveRoundedIcon />
             </Button>
