@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -31,7 +32,7 @@ export default function SingleProductSlider({ images }: { images: string[] }) {
         {images.map((img, i) => {
           return (
             <SwiperSlide key={i}>
-              <img src={img} />
+              <img src={img} alt="slider-product-img" />
             </SwiperSlide>
           );
         })}
@@ -49,7 +50,7 @@ export default function SingleProductSlider({ images }: { images: string[] }) {
         {images.map((img, i) => {
           return (
             <SwiperSlide key={i}>
-              <img src={img} />
+              <img src={img} alt="slider-product-img" />
             </SwiperSlide>
           );
         })}
