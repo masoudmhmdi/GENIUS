@@ -10,10 +10,15 @@ function CartPage() {
   const { cartSlice } = useSelector(
     (state: RootState) => state.persistedReducer
   );
+
   return (
     <Box
       sx={{
         display: 'flex',
+        flexDirection: {
+          xs: 'column-reverse',
+          md: 'row',
+        },
         marginTop: '60px',
         minHeight: '100vh',
         gap: '50px',
@@ -21,12 +26,17 @@ function CartPage() {
     >
       <Box
         sx={{
-          width: '30%',
+          width: {
+            xs: '100%',
+            md: '30%',
+          },
           borderRadius: '20px',
           boxShadow: '0px 1px 1px 1px #e0e0e0',
-
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
           height: '300px',
-          padding: '8px',
+          padding: '16px',
         }}
       >
         <Box
@@ -39,8 +49,16 @@ function CartPage() {
           <Image alt="logo" src={'/Logo.webp'} width={200} height={50} />
         </Box>
         <Box>
-          <Typography sx={{ marginY: '12px' }}>کد تخفیف:</Typography>
-          <Box sx={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+          <Typography>کد تخفیف:</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '6px',
+              alignItems: 'center',
+              marginTop: '8px',
+              marginX: 'auto',
+            }}
+          >
             <Button
               variant="contained"
               sx={{
@@ -54,7 +72,10 @@ function CartPage() {
               +
             </Button>
             <TextField
-              inputProps={{ style: { maxHeight: '5px', minHeight: '5px' } }}
+              fullWidth
+              inputProps={{
+                style: { maxHeight: '5px', minHeight: '5px' },
+              }}
             />
           </Box>
         </Box>
@@ -64,25 +85,29 @@ function CartPage() {
             gap: '6px',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginY: '12px',
           }}
         >
           <Typography sx={{ marginY: '12px' }}>مجموع قیمت</Typography>
-          <Typography sx={{ marginY: '12px' }}>0تومان</Typography>
+          <Typography sx={{ marginY: '12px' }}>
+            {cartSlice.totalPrice}تومان
+          </Typography>
         </Box>
-        <Button fullWidth variant="contained" sx={{ marginTop: '20px' }}>
+        <Button fullWidth variant="contained">
           تکمیل خرید
         </Button>
       </Box>
       <Box
         sx={{
-          width: '70%',
+          width: {
+            xs: '100%',
+            md: '70%',
+          },
           display: 'flex',
           flexDirection: 'column',
           gap: '20px',
         }}
       >
-        {cartSlice.map((product) => {
+        {cartSlice.allCart?.map((product) => {
           return (
             <CartCard cartProductDate={product} key={product.product._id} />
           );

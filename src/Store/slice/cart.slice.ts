@@ -11,15 +11,26 @@ const persistConfig = {
   storage,
 };
 
+type IState = {
+  allCart: ICart;
+  totalPrice: number;
+};
+
 const cartSlice = createSlice({
   name: 'cartSlice',
-  initialState: [] as ICart,
+  initialState: {
+    allCart: [],
+    totalPrice: 0,
+  } as IState,
   reducers: {
     addToCart: (state, action) => {
-      return [...state, action.payload];
+      return {
+        ...state,
+        allCart: [...state.allCart, action.payload],
+      };
     },
     plusCount: (state, action) => {
-      const newState = state.map((item) => {
+      const newState = state.allCart.map((item) => {
         if (item.product._id === action.payload) {
           const newItem = {
             ...item,
@@ -36,11 +47,18 @@ const cartSlice = createSlice({
         }
         return item;
       });
-
-      return [...newState];
+      const total = newState.reduce((acc, item) => {
+        const singleTotalPrice = +item.count * +item.product.price;
+        return +acc + singleTotalPrice;
+      }, 0);
+      return {
+        ...state,
+        allCart: [...newState],
+        totalPrice: total,
+      };
     },
     minusCount: (state, action) => {
-      const newState = state.map((item) => {
+      const newState = state.allCart.map((item) => {
         if (item.product._id === action.payload) {
           const newItem = {
             ...item,
@@ -51,8 +69,24 @@ const cartSlice = createSlice({
         }
         return item;
       });
-
-      return [...newState];
+      const total = newState.reduce((acc, item) => {
+        const singleTotalPrice = +item.count * +item.product.price;
+        return +acc + singleTotalPrice;
+      }, 0);
+      return {
+        ...state,
+        allCart: [...newState],
+        totalPrice: total,
+      };
+    },
+    totalPriceGenerator: (state, action) => {
+      const total = state.allCart.reduce((acc, item) => {
+        const singleTotalPrice = +item.count * +item.product.price;
+        return +acc + singleTotalPrice;
+      }, 0);
+      const promoPresent = action.payload / 100;
+      const result = total - total * promoPresent;
+      return { ...state, totalPrice: result };
     },
   },
 });
