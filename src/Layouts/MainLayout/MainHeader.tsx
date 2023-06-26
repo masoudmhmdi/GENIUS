@@ -7,8 +7,8 @@ import BasicTabs from '@/Components/Tabs';
 import React from 'react';
 import Image from 'next/image';
 import { Button, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from '@/Components/sidebar';
+import CartPopover from '@/Components/CartPopover';
 
 interface Props {
   /**
@@ -73,10 +73,7 @@ export default function MainHeader(props: Props) {
                 src={'/new-logo.png'}
               />
               <Box sx={{ display: 'flex', gap: '10px' }}>
-                <Button sx={{ borderBottom: '1px solid black' }}>خروج</Button>
-                <Button sx={{ borderBottom: '1px solid black' }}>
-                  داشبورد
-                </Button>
+                <CartPopover />
               </Box>
             </Box>
           </Toolbar>
