@@ -18,7 +18,12 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { Remove } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '@/Store/slice/cart.slice';
+import {
+  addToCart,
+  deleteProduct,
+  minusCount,
+  plusCount,
+} from '@/Store/slice/cart.slice';
 import { theme } from '@/theme';
 
 function SingleProductPage({
@@ -46,14 +51,16 @@ function SingleProductPage({
         count: prev.count < productData.quantity ? prev.count + 1 : prev.count,
       };
     });
+    dispatch(plusCount(productData._id));
   };
-  const minusCount = () => {
+  const minusLocalStateCount = () => {
     setProductState((prev) => {
       return {
         ...prev,
         count: prev.count > 1 ? prev.count + -1 : prev.count,
       };
     });
+    dispatch(minusCount(productData._id));
   };
   console.log(isExistInCart);
   return (
@@ -93,47 +100,47 @@ function SingleProductPage({
           <Typography variant="h5" fontWeight={'bold'}>
             {productData.price}$
           </Typography>
-          <Box
-            sx={{
-              width: '120px',
-              borderRadius: '16px',
-              height: '40px',
-              overflow: 'hidden',
-              border: '1px solid #8080803d ',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Button
-              sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}
-              onClick={addCount}
+          {isExistInCart && (
+            <Box
+              sx={{
+                width: '120px',
+                borderRadius: '16px',
+                height: '40px',
+                overflow: 'hidden',
+                border: '1px solid #8080803d ',
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
             >
-              <AddRoundedIcon />
-            </Button>
-            <Typography fontWeight={'500'} sx={{ marginY: 'auto' }}>
-              {productState.count}
-            </Typography>
-            <Button
-              sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}
-              onClick={minusCount}
-            >
-              <RemoveRoundedIcon />
-            </Button>
-          </Box>
+              <Button
+                sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}
+                onClick={addCount}
+              >
+                <AddRoundedIcon />
+              </Button>
+              <Typography fontWeight={'500'} sx={{ marginY: 'auto' }}>
+                {productState.count}
+              </Typography>
+              <Button
+                sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}
+                onClick={minusLocalStateCount}
+              >
+                <RemoveRoundedIcon />
+              </Button>
+            </Box>
+          )}
         </Box>
-
         {isExistInCart ? (
-          <Typography
-            sx={{
-              backgroundColor: theme.palette.primary.main,
-              padding: '8px',
-              color: 'white',
-              textAlign: 'center',
-              borderRadius: '12px',
-            }}
+          <Button
+            color="error"
+            variant="contained"
+            sx={{ marginTop: 'auto', borderRadius: '6px' }}
+            onClick={() => dispatch(deleteProduct(productData._id))}
+            fullWidth
+            size="large"
           >
-            این محصول در سبد خرید وجود دارد
-          </Typography>
+            حذف از سبد خرید
+          </Button>
         ) : (
           <Button
             size="large"

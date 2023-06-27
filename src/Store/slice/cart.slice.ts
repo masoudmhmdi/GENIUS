@@ -89,12 +89,18 @@ const cartSlice = createSlice({
       return { ...state, totalPrice: result };
     },
     deleteProduct: (state, action) => {
-      const deletedProducts = state.allCart.filter(
-        (product) => product.product._id !== action.payload
-      );
+      const deletedProducts = state.allCart.filter((product) => {
+        console.log(product.product._id, '===', action.payload);
+        return product.product._id !== action.payload;
+      });
+      const total = deletedProducts.reduce((acc, item) => {
+        const singleTotalPrice = +item.count * +item.product.price;
+        return +acc + singleTotalPrice;
+      }, 0);
       return {
         ...state,
         allCart: deletedProducts,
+        totalPrice: total,
       };
     },
   },

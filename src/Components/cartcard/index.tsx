@@ -11,8 +11,9 @@ import React from 'react';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { useDispatch } from 'react-redux';
-import { minusCount, plusCount } from '@/Store/slice/cart.slice';
-function CartCard({ cartProductDate }: { cartProductDate: Cart }) {
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import { deleteProduct, minusCount, plusCount } from '@/Store/slice/cart.slice';
+function CartCard({ cartProductData }: { cartProductData: Cart }) {
   const dispatch = useDispatch();
   return (
     <Card
@@ -41,8 +42,14 @@ function CartCard({ cartProductDate }: { cartProductDate: Cart }) {
             gap: '30px',
           }}
         >
-          <Button>delete</Button>
-          <Typography>{cartProductDate.product.name}</Typography>
+          <Button
+            onClick={() =>
+              dispatch(deleteProduct(cartProductData?.product._id))
+            }
+          >
+            <DeleteRoundedIcon />
+          </Button>
+          <Typography>{cartProductData.product.name}</Typography>
         </Box>
         <Box
           sx={{
@@ -64,22 +71,22 @@ function CartCard({ cartProductDate }: { cartProductDate: Cart }) {
           >
             <Button
               sx={{ height: '100%', minWidth: '40px', maxWidth: '40px' }}
-              onClick={() => dispatch(plusCount(cartProductDate.product._id))}
+              onClick={() => dispatch(plusCount(cartProductData.product._id))}
             >
               <AddRoundedIcon />
             </Button>
             <Typography fontWeight={'500'} sx={{ marginY: 'auto' }}>
-              {cartProductDate.count}
+              {cartProductData.count}
             </Typography>
             <Button
               sx={{ height: '100%', minWidth: '40px', maxWidth: '40px' }}
-              onClick={() => dispatch(minusCount(cartProductDate.product._id))}
+              onClick={() => dispatch(minusCount(cartProductData.product._id))}
             >
               <RemoveRoundedIcon />
             </Button>
           </Box>
           <Typography>
-            تومان{cartProductDate.product.price * cartProductDate.count}
+            تومان{cartProductData.product.price * cartProductData.count}
           </Typography>
         </Box>
       </Box>
@@ -93,7 +100,7 @@ function CartCard({ cartProductDate }: { cartProductDate: Cart }) {
             objectFit: 'contain',
           }}
           component="img"
-          image={cartProductDate.product.images[0]}
+          image={cartProductData.product.images[0]}
         />
       </CardActionArea>
     </Card>

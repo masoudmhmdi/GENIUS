@@ -10,6 +10,7 @@ function CartPage() {
   const { cartSlice } = useSelector(
     (state: RootState) => state.persistedReducer
   );
+  console.log(cartSlice);
 
   return (
     <Box
@@ -109,7 +110,7 @@ function CartPage() {
       >
         {cartSlice.allCart?.map((product) => {
           return (
-            <CartCard cartProductDate={product} key={product.product._id} />
+            <CartCard cartProductData={product} key={product.product._id} />
           );
         })}
       </Box>
