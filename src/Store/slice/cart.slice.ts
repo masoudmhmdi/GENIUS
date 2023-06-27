@@ -79,7 +79,7 @@ const cartSlice = createSlice({
         totalPrice: total,
       };
     },
-    totalPriceGenerator: (state, action) => {
+    setPromoCode: (state, action) => {
       const total = state.allCart.reduce((acc, item) => {
         const singleTotalPrice = +item.count * +item.product.price;
         return +acc + singleTotalPrice;
@@ -88,9 +88,19 @@ const cartSlice = createSlice({
       const result = total - total * promoPresent;
       return { ...state, totalPrice: result };
     },
+    deleteProduct: (state, action) => {
+      const deletedProducts = state.allCart.filter(
+        (product) => product.product._id !== action.payload
+      );
+      return {
+        ...state,
+        allCart: deletedProducts,
+      };
+    },
   },
 });
 
-export const { addToCart, plusCount, minusCount } = cartSlice.actions;
+export const { addToCart, plusCount, minusCount, deleteProduct } =
+  cartSlice.actions;
 const reducers = combineReducers({ cartSlice: cartSlice.reducer });
 export const persistedReducer = persistReducer(persistConfig as any, reducers);
