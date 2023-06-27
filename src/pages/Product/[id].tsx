@@ -27,13 +27,17 @@ function SingleProductPage({
   data: AxiosResponse<{ product: IProductFromBack }>;
 }) {
   const productData = data.data.product;
-  const cartState = useSelector((state: RootState) => state.persistedReducer);
-  console.log(cartState);
+  const { cartSlice } = useSelector(
+    (state: RootState) => state.persistedReducer
+  );
   const dispatch = useDispatch();
   const [productState, setProductState] = useState({
     product: productData,
     count: 1,
   });
+  const isExistInCart = cartSlice.allCart.find(
+    (product) => product.product._id === productData._id
+  );
 
   const addCount = () => {
     setProductState((prev) => {
@@ -51,7 +55,7 @@ function SingleProductPage({
       };
     });
   };
-
+  console.log(isExistInCart);
   return (
     <Box
       sx={{
@@ -117,13 +121,20 @@ function SingleProductPage({
             </Button>
           </Box>
         </Box>
-        <Link
-          href="/cart"
-          style={{
-            textDecoration: 'none',
-            color: theme.palette.primary.main,
-          }}
-        >
+
+        {isExistInCart ? (
+          <Typography
+            sx={{
+              backgroundColor: theme.palette.primary.main,
+              padding: '8px',
+              color: 'white',
+              textAlign: 'center',
+              borderRadius: '12px',
+            }}
+          >
+            این محصول در سبد خرید وجود دارد
+          </Typography>
+        ) : (
           <Button
             size="large"
             sx={{ marginTop: 'auto', borderRadius: '6px' }}
@@ -134,7 +145,8 @@ function SingleProductPage({
             <ShoppingCartRoundedIcon sx={{ marginX: '10px' }} />
             افزون به سبد خرید
           </Button>
-        </Link>
+        )}
+
         <Box
           sx={{
             marginTop: 'auto',

@@ -38,6 +38,7 @@ function CartCard({ cartProductDate }: { cartProductDate: Cart }) {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            gap: '30px',
           }}
         >
           <Button>delete</Button>
