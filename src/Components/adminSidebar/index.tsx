@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/dist/client/router';
 import { ReactNode, useState } from 'react';
 
-export default function Sidebar({ children }: { children: ReactNode }) {
+export default function AdminSidebar({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const admin = router.pathname.split('/')[1];
@@ -13,14 +13,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
   return (
     <Box>
       <Box>
-        <Button
-          sx={{
-            display: {
-              md: 'none',
-            },
-          }}
-          onClick={() => setOpen(true)}
-        >
+        <Button onClick={() => setOpen(true)}>
           <MenuIcon fontSize="large" />
         </Button>
       </Box>

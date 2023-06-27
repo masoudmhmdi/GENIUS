@@ -7,6 +7,8 @@ import { Box, Button, Typography } from '@mui/material';
 
 import Sidebar from '@/Components/sidebar';
 import SidebarBottomNavigation from '@/Components/SidbarButtonNavigation';
+import CartPopover from '@/Components/CartPopover';
+import AdminSidebar from '@/Components/adminSidebar';
 
 export default function AdminHeader() {
   return (
@@ -24,31 +26,35 @@ export default function AdminHeader() {
             sx={{
               backgroundColor: 'white',
               width: '100%',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
             }}
           >
             <Box>
-              <Sidebar>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'cetner',
+                }}
+              >
+                <Box
+                  sx={{
+                    display: {
+                      xs: 'none',
+                      md: 'block',
+                    },
+                  }}
+                >
+                  <BasicTabs />
+                </Box>
+                <CartPopover />
+              </Box>
+              <AdminSidebar>
                 <Typography variant="h5" textAlign={'center'}>
                   فروشگاه جینیس
                 </Typography>
                 <BasicTabs />
                 <SidebarBottomNavigation />
-              </Sidebar>
-            </Box>
-            <Image
-              alt="logo"
-              width={179}
-              height={46}
-              style={{ width: '100%', maxWidth: '179px' }}
-              src={'/new-logo.png'}
-            />
-
-            <Box sx={{ display: 'flex', gap: '10px' }}>
-              <Button sx={{ borderBottom: '1px solid black' }}>خروج</Button>
-              <Button sx={{ borderBottom: '1px solid black' }}>داشبورد</Button>
+              </AdminSidebar>
             </Box>
           </Box>
         </Toolbar>

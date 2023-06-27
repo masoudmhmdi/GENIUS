@@ -1,21 +1,21 @@
-import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
-import { Box } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import CartCard from '../cartcard';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/types';
 import SmallCartCard from '../smallCartCard';
+import { useRouter } from 'next/router';
+import { useRef, useState } from 'react';
 
 export default function CartPopover() {
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const { cartSlice } = useSelector(
     (state: RootState) => state.persistedReducer
   );
+  const router = useRouter();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -27,14 +27,17 @@ export default function CartPopover() {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-
+  console.log(router.pathname);
   return (
-    <div>
-      <Button
-        aria-describedby={id}
-        variant="contained"
-        onMouseEnter={handleClick}
-      >
+    <Box
+      sx={{
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
+      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
         <ShoppingCartRoundedIcon />
       </Button>
       <Popover
@@ -53,6 +56,7 @@ export default function CartPopover() {
             display: 'flex',
             flexDirection: 'column',
             gap: '20px',
+            padding: '10px',
           }}
         >
           {cartSlice.allCart?.map((product) => {
@@ -63,8 +67,15 @@ export default function CartPopover() {
               />
             );
           })}
+          {router.pathname !== '/cart' && (
+            <Link href="/cart">
+              <Button fullWidth variant="contained">
+                <ShoppingCartRoundedIcon />
+              </Button>
+            </Link>
+          )}
         </Box>
       </Popover>
-    </div>
+    </Box>
   );
 }

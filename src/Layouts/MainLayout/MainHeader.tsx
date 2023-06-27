@@ -40,7 +40,7 @@ export default function MainHeader(props: Props) {
   return (
     <React.Fragment>
       <HideOnScroll {...props}>
-        <AppBar sx={{ backgroundColor: 'white' }}>
+        <AppBar sx={{ backgroundColor: 'white', zIndex: '50' }}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -58,6 +58,16 @@ export default function MainHeader(props: Props) {
               }}
             >
               <Box>
+                <Box
+                  sx={{
+                    display: {
+                      xs: 'none',
+                      md: 'block',
+                    },
+                  }}
+                >
+                  <BasicTabs />
+                </Box>
                 <Sidebar>
                   <Typography variant="h5" textAlign={'center'}>
                     فروشگاه جینیس
