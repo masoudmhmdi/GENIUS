@@ -119,7 +119,7 @@ function SingleProductPage({
                 <AddRoundedIcon />
               </Button>
               <Typography fontWeight={'500'} sx={{ marginY: 'auto' }}>
-                {productState.count}
+                {isExistInCart ? isExistInCart.count : productState.count}
               </Typography>
               <Button
                 sx={{ height: '100%', minWidth: '50px', maxWidth: '50px' }}

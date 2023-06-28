@@ -11,7 +11,8 @@ import React from 'react';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { useDispatch } from 'react-redux';
-import { minusCount, plusCount } from '@/Store/slice/cart.slice';
+import { deleteProduct, minusCount, plusCount } from '@/Store/slice/cart.slice';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 function SmallCartCard({ cartProductDate }: { cartProductDate: Cart }) {
   const dispatch = useDispatch();
   return (
@@ -71,12 +72,25 @@ function SmallCartCard({ cartProductDate }: { cartProductDate: Cart }) {
             <Typography fontWeight={'500'} sx={{ marginY: 'auto' }}>
               {cartProductDate.count}
             </Typography>
-            <Button
-              sx={{ height: '100%', minWidth: '30px', maxWidth: '30px' }}
-              onClick={() => dispatch(minusCount(cartProductDate.product._id))}
-            >
-              <RemoveRoundedIcon />
-            </Button>
+            {cartProductDate.count === 1 ? (
+              <Button
+                sx={{ height: '100%', minWidth: '40px', maxWidth: '40px' }}
+                onClick={() =>
+                  dispatch(deleteProduct(cartProductDate.product._id))
+                }
+              >
+                <DeleteRoundedIcon />
+              </Button>
+            ) : (
+              <Button
+                sx={{ height: '100%', minWidth: '40px', maxWidth: '40px' }}
+                onClick={() =>
+                  dispatch(minusCount(cartProductDate.product._id))
+                }
+              >
+                <RemoveRoundedIcon />
+              </Button>
+            )}
           </Box>
           <Typography>
             تومان{cartProductDate.product.price * cartProductDate.count}

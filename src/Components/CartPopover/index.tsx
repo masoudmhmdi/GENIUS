@@ -67,6 +67,11 @@ export default function CartPopover() {
               />
             );
           })}
+          {!!!cartSlice.allCart.length && (
+            <Typography align="center">
+              هیچ محصولی در سبد خرید شما وجود ندارد
+            </Typography>
+          )}
           {router.pathname !== '/cart' && (
             <Link href="/cart">
               <Button fullWidth variant="contained">
