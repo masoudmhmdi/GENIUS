@@ -14,6 +14,7 @@ const persistConfig = {
 type IState = {
   allCart: ICart;
   totalPrice: number;
+  deliveryDate: string;
 };
 
 const cartSlice = createSlice({
@@ -21,6 +22,7 @@ const cartSlice = createSlice({
   initialState: {
     allCart: [],
     totalPrice: 0,
+    deliveryDate: '',
   } as IState,
   reducers: {
     addToCart: (state, action) => {
@@ -103,10 +105,22 @@ const cartSlice = createSlice({
         totalPrice: total,
       };
     },
+    setDeliveryDate: (state, action) => {
+      return {
+        ...state,
+        deliveryDate: action.payload,
+      };
+    },
   },
 });
 
-export const { addToCart, plusCount, minusCount, deleteProduct } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  plusCount,
+  minusCount,
+  deleteProduct,
+  setDeliveryDate,
+  setPromoCode,
+} = cartSlice.actions;
 const reducers = combineReducers({ cartSlice: cartSlice.reducer });
 export const persistedReducer = persistReducer(persistConfig as any, reducers);

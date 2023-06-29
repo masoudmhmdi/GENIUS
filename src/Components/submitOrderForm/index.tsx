@@ -5,9 +5,12 @@ import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import { theme } from '@/theme';
 import 'react-multi-date-picker/styles/colors/analog_time_pocker_coustom.css';
+import { useDispatch } from 'react-redux';
+import { setDeliveryDate } from '@/Store/slice/cart.slice';
 
 function SubmitOrderForm() {
   const { user } = window && JSON.parse(localStorage.getItem('data')!);
+  const dispatch = useDispatch();
   console.log(user);
   return (
     <Box
@@ -29,6 +32,10 @@ function SubmitOrderForm() {
           <TextField disabled value={user.firstname} label={'نام'} fullWidth />
           <DatePicker
             calendar={persian}
+            onChange={(e) => {
+              console.log(e?.valueOf());
+              dispatch(setDeliveryDate(e?.valueOf()));
+            }}
             locale={persian_fa}
             calendarPosition="bottom-right"
             className="coustom"
@@ -45,7 +52,6 @@ function SubmitOrderForm() {
             value={user.address}
             multiline
             rows={2}
-            maxRows={4}
             label={'ادرس'}
             fullWidth
           />
@@ -73,7 +79,12 @@ function SubmitOrderForm() {
         </Box>
       </Box>
       <Button fullWidth variant="contained">
-        ثبت نهایی
+        <a
+          style={{ textDecoration: 'none', color: 'white' }}
+          href="http://127.0.0.1:5500/index.html"
+        >
+          ثبت نهایی
+        </a>
       </Button>
     </Box>
   );
