@@ -7,23 +7,55 @@ import { idID } from '@mui/material/locale';
 import { count } from 'console';
 import Link from 'next/link';
 import { theme } from '@/theme';
+import useCreateNewOrder from '@/api/services/useAddNewOrder';
+import { IOrder, RootState } from '@/types';
+import { useSelector } from 'react-redux';
 
 function Checkout() {
   const router = useRouter();
   const deliveryStatus = router.query.delivery;
   const [counter, setCounter] = useState(10);
-  console.log(counter);
+  const { mutate } = useCreateNewOrder();
+  let arrOfProducts: IOrder['payload']['products'] = [];
+
+  const { cartSlice } = useSelector(
+    (state: RootState) => state.persistedReducer
+  );
 
   useEffect(() => {
     const id = setInterval(() => {
-      counter && setCounter((prev) => prev - 1);
+      if (counter > 0) setCounter((prev) => prev - 1);
       if (counter === 0) {
-        router.push('/');
+        // router.push('/');
       }
     }, 1000);
-
     return () => clearInterval(id);
   }, [counter]);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('data')!);
+    console.log(userData);
+
+    cartSlice.allCart.forEach((cart) => {
+      const tempObj = {
+        product: cart.product._id,
+        count: cart.count,
+      };
+      arrOfProducts.push(tempObj);
+    });
+
+    const serviceInput: IOrder['payload'] = {
+      user: userData.user._id,
+      products: arrOfProducts,
+      deliveryDate: cartSlice.deliveryDate,
+      deliveryStatus: true,
+    };
+    const d = router.query.delivery;
+    console.log(d);
+    if (d === 'true') {
+      mutate(serviceInput);
+    }
+  }, [router]);
 
   return (
     <Box
