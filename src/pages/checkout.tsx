@@ -1,15 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
-import { idID } from '@mui/material/locale';
-import { count } from 'console';
 import Link from 'next/link';
 import { theme } from '@/theme';
 import useCreateNewOrder from '@/api/services/useAddNewOrder';
-import { IOrder, RootState } from '@/types';
-import { useSelector } from 'react-redux';
 
 function Checkout() {
   const router = useRouter();
@@ -33,6 +28,7 @@ function Checkout() {
     if (d === 'true') {
       mutate();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   return (
