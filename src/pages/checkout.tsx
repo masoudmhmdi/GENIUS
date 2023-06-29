@@ -16,11 +16,6 @@ function Checkout() {
   const deliveryStatus = router.query.delivery;
   const [counter, setCounter] = useState(10);
   const { mutate } = useCreateNewOrder();
-  let arrOfProducts: IOrder['payload']['products'] = [];
-
-  const { cartSlice } = useSelector(
-    (state: RootState) => state.persistedReducer
-  );
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -33,27 +28,10 @@ function Checkout() {
   }, [counter]);
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('data')!);
-    console.log(userData);
-
-    cartSlice.allCart.forEach((cart) => {
-      const tempObj = {
-        product: cart.product._id,
-        count: cart.count,
-      };
-      arrOfProducts.push(tempObj);
-    });
-
-    const serviceInput: IOrder['payload'] = {
-      user: userData.user._id,
-      products: arrOfProducts,
-      deliveryDate: cartSlice.deliveryDate,
-      deliveryStatus: true,
-    };
     const d = router.query.delivery;
     console.log(d);
     if (d === 'true') {
-      mutate(serviceInput);
+      mutate();
     }
   }, [router]);
 

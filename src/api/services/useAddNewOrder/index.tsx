@@ -6,9 +6,31 @@ import { IOrder, RootState } from '@/types';
 import { log } from 'console';
 
 function useCreateNewOrder() {
+  let arrOfProducts: IOrder['payload']['products'] = [];
+
+  const { cartSlice } = useSelector(
+    (state: RootState) => state.persistedReducer
+  );
+
+  const userData = JSON.parse(localStorage.getItem('data')!);
+  console.log(userData);
+
+  cartSlice.allCart.forEach((cart) => {
+    const tempObj = {
+      product: cart.product._id,
+      count: cart.count,
+    };
+    arrOfProducts.push(tempObj);
+  });
+
+  const serviceInput: IOrder['payload'] = {
+    user: userData.user._id,
+    products: arrOfProducts,
+    deliveryDate: cartSlice.deliveryDate,
+    deliveryStatus: true,
+  };
   return useMutation({
-    mutationFn: (serviceInput: IOrder['payload']) =>
-      addNewOrderService(serviceInput),
+    mutationFn: () => addNewOrderService(serviceInput),
   });
 }
 
