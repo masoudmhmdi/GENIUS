@@ -13,7 +13,6 @@ function useCreateNewOrder() {
   );
 
   const userData = JSON.parse(localStorage.getItem('data')!);
-  console.log(userData);
 
   cartSlice.allCart.forEach((cart) => {
     const tempObj = {

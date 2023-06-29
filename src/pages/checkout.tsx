@@ -16,7 +16,7 @@ function Checkout() {
     const id = setInterval(() => {
       if (counter > 0) setCounter((prev) => prev - 1);
       if (counter === 0) {
-        // router.push('/');
+        router.push('/');
       }
     }, 1000);
     return () => clearInterval(id);
@@ -96,7 +96,12 @@ function Checkout() {
               color: theme.palette.primary.main,
             }}
           >
-            <Button sx={{ height: '40px' }} fullWidth variant="contained">
+            <Button
+              sx={{ height: '40px' }}
+              fullWidth
+              onClick={() => router.push('/')}
+              variant="contained"
+            >
               بازگشت به صفحه اصلی
             </Button>
           </Link>
