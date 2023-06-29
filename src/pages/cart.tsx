@@ -5,6 +5,7 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import React from 'react';
 import CartCard from '@/Components/cartcard';
 import Image from 'next/image';
+import SubmitOrderModal from '@/Components/SubmitOrderModal';
 
 function CartPage() {
   const { cartSlice } = useSelector(
@@ -93,9 +94,7 @@ function CartPage() {
             {cartSlice.totalPrice}تومان
           </Typography>
         </Box>
-        <Button fullWidth variant="contained">
-          تکمیل خرید
-        </Button>
+        <SubmitOrderModal />
       </Box>
       <Box
         sx={{
