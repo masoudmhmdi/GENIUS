@@ -10,11 +10,15 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: {
+    xs: '100%',
+    md: '60%',
+  },
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  borderRadius: '6px',
+  outline: 'none',
 };
 
 export default function SubmitOrderModal() {
@@ -24,7 +28,9 @@ export default function SubmitOrderModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button fullWidth variant="contained" onClick={handleOpen}>
+        تکمیل خرید
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
