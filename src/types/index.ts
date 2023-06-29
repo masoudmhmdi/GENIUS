@@ -223,6 +223,15 @@ export type IOrder = {
   deliveryStatus: boolean;
   createdAt: string;
   updatedAt: string;
+  payload: {
+    user: string;
+    products: {
+      product: string;
+      count: number;
+    }[];
+    deliveryStatus: boolean;
+    deliveryDate: number;
+  };
 };
 
 export type Cart = {
