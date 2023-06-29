@@ -36,6 +36,7 @@
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.44.1",
     "react-hot-toast": "^2.4.1",
+    "react-multi-date-picker": "^4.1.2",
     "react-quill": "^2.0.0",
     "react-redux": "^8.0.5",
     "redux-persist": "^6.0.0",

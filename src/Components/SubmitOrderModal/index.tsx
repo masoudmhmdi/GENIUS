@@ -16,7 +16,7 @@ const style = {
   },
   bgcolor: 'background.paper',
   boxShadow: 24,
-  p: 4,
+  padding: '20px 24px 24px 24px',
   borderRadius: '6px',
   outline: 'none',
 };

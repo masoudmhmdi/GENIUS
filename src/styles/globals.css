@@ -76,3 +76,21 @@ body {
   height: 100%;
   object-fit: cover;
 }
+
+.rmdp-day.rmdp-selected span:not(.highlight) {
+  background-color: #212529 !important;
+}
+
+.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+  background-color: #7e7e7e !important;
+  color: #fff !important;
+}
+
+.rmdp-week-day {
+  color: #212529 !important;
+}
+
+.rmdp-day.rmdp-today span {
+  background-color: #7e7e7e !important;
+  color: #fff;
+}
