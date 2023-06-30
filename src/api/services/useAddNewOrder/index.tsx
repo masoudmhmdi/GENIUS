@@ -1,12 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import React from 'react';
 import addNewOrderService from './addNewOrderService';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IOrder, RootState } from '@/types';
 import { log } from 'console';
+import { clearState } from '@/Store/slice/cart.slice';
 
 function useCreateNewOrder() {
   let arrOfProducts: IOrder['payload']['products'] = [];
+  const dispatch = useDispatch();
 
   const { cartSlice } = useSelector(
     (state: RootState) => state.persistedReducer
@@ -30,6 +32,9 @@ function useCreateNewOrder() {
   };
   return useMutation({
     mutationFn: () => addNewOrderService(serviceInput),
+    onSuccess: () => {
+      dispatch(clearState());
+    },
   });
 }
 

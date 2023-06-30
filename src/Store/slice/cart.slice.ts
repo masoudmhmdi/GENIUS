@@ -111,6 +111,9 @@ const cartSlice = createSlice({
         deliveryDate: action.payload,
       };
     },
+    clearState: () => {
+      return { allCart: [], totalPrice: 0, deliveryDate: 0 };
+    },
   },
 });
 
@@ -121,6 +124,7 @@ export const {
   deleteProduct,
   setDeliveryDate,
   setPromoCode,
+  clearState,
 } = cartSlice.actions;
 const reducers = combineReducers({ cartSlice: cartSlice.reducer });
 export const persistedReducer = persistReducer(persistConfig as any, reducers);

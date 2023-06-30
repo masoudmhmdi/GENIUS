@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { theme } from '@/theme';
 import { GetServerSideProps } from 'next/types';
 import useCreateNewOrder from '@/api/services/useAddNewOrder';
+import { useDispatch } from 'react-redux';
 
 function Checkout({ deliveryStatus }: any) {
   const [counter, setCounter] = useState(10);
@@ -15,7 +16,6 @@ function Checkout({ deliveryStatus }: any) {
   let tempCounter = 10;
 
   useEffect(() => {
-    // router.prefetch('/');
     const id = setInterval(() => {
       console.log(tempCounter);
       if (tempCounter > 0) {
@@ -35,8 +35,7 @@ function Checkout({ deliveryStatus }: any) {
   useEffect(() => {
     console.log(deliveryStatus);
     if (deliveryStatus === 'true') {
-      // mutate();
-      console.log('send req');
+      mutate();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
