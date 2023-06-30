@@ -2,20 +2,27 @@ import { serverReq } from '@/api/constants';
 
 async function getProductByCategoryService(
   id: string,
-  limit: number = 4,
+  limit: string = '4',
   params?: any
 ) {
-  let url = `products?page=1&limit=${limit}&category=${id}`;
+  // let url = `products?page=1&limit=${limit}&category=${id}`;
+  const queryParams = {
+    page: '1',
+    limit,
+    category: id,
+  };
 
-  for (let x in params) {
-    console.log(params[x]);
+  const url = new URLSearchParams(queryParams);
 
-    if (params[x as any]) {
-      url += `&${x}=${params[x]}`;
-    }
-  }
+  // for (let x in params) {
+  //   console.log(params[x]);
 
-  const res = await serverReq(url);
+  //   if (params[x as any]) {
+  //     url += `&${x}=${params[x]}`;
+  //   }
+  // }
+
+  const res = await serverReq(`/products?${url.toString()}`);
   return await res.data;
 }
 

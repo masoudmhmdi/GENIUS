@@ -4,32 +4,41 @@ import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { theme } from '@/theme';
+import { GetServerSideProps } from 'next/types';
 import useCreateNewOrder from '@/api/services/useAddNewOrder';
 
-function Checkout() {
-  const router = useRouter();
-  const deliveryStatus = router.query.delivery;
+function Checkout({ deliveryStatus }: any) {
   const [counter, setCounter] = useState(10);
   const { mutate } = useCreateNewOrder();
+  const router = useRouter();
+  let tempCouter = 10;
 
   useEffect(() => {
+    // router.prefetch('/');
     const id = setInterval(() => {
-      if (counter > 0) setCounter((prev) => prev - 1);
-      if (counter === 0) {
+      console.log(tempCouter);
+      if (tempCouter > 0) {
+        setCounter((prev) => prev - 1);
+        tempCouter -= 1;
+      }
+      if (tempCouter === 0) {
         router.push('/');
       }
     }, 1000);
-    return () => clearInterval(id);
-  }, [counter]);
+    console.log(id);
 
+    return () => clearInterval(id);
+  }, []);
+
+  // use effect for set request
   useEffect(() => {
-    const d = router.query.delivery;
-    console.log(d);
-    if (d === 'true') {
-      mutate();
+    console.log(deliveryStatus);
+    if (deliveryStatus === 'true') {
+      // mutate();
+      console.log('send req');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, []);
 
   return (
     <Box
@@ -94,14 +103,10 @@ function Checkout() {
             style={{
               textDecoration: 'none',
               color: theme.palette.primary.main,
+              width: '100%',
             }}
           >
-            <Button
-              sx={{ height: '40px' }}
-              fullWidth
-              onClick={() => router.push('/')}
-              variant="contained"
-            >
+            <Button sx={{ height: '40px' }} fullWidth variant="contained">
               بازگشت به صفحه اصلی
             </Button>
           </Link>
@@ -112,6 +117,16 @@ function Checkout() {
 }
 
 export default Checkout;
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const { deliveryStatus } = query;
+  console.log(query);
+  return {
+    props: {
+      deliveryStatus: query.delivery,
+    },
+  };
+};
 
 Checkout.getLayout = function pageLayout(page: ReactNode) {
   return page;
