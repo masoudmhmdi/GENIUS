@@ -4,10 +4,10 @@ import getProductByCategoryService from './getProductByCategoryService';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/types';
 
-function useGetProductByCategory(id: string, limit: number) {
+function useGetProductByCategory(id: string, limit: string) {
   const params = useSelector((state: RootState) => state.singleCategory);
   return useQuery({
-    queryKey: ['getProductByCategory', id],
+    queryKey: ['getProductByCategory', id, params.brand, params.sort],
     queryFn: () => getProductByCategoryService(id, limit, params),
   });
 }

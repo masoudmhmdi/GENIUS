@@ -5,28 +5,41 @@ import getProductByCategoryService from '@/api/services/getProductByCategory/get
 import { theme } from '@/theme';
 import { Category, IProductFromBack, RootState } from '@/types';
 import { Box, Button, Typography } from '@mui/material';
-import { QueryClient, dehydrate } from '@tanstack/react-query';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import React, { useState } from 'react';
 import FilterBar from '@/Components/FilterBar';
 import { serverReq } from '@/api/constants';
 import { useSelector } from 'react-redux';
+import useGetCategory from '@/api/services/useGetCategory';
 
-function SingleCategoryPage({ data }: any) {
-  let products: IProductFromBack[] = data.queries[0].state.data.data.products;
-  let category: Category = data.queries[1].state.data.data.category;
+function SingleCategoryPage({ id }: { id: string }) {
+  console.log(id);
+
+  // const { data: category } = useQuery({
+  //   queryKey: ['categoryInfo', id],
+  //   queryFn: async (id: string) => {
+  //     const res = await serverReq(`/categories/${id}`);
+  //     return res.data;
+  //   },
+  // });
+  // console.log(category);
+
+  // return false;
 
   const {
     data: productData,
     refetch,
     isLoading,
-  } = useGetProductByCategory(category._id, 8);
+  } = useGetProductByCategory(id, '8');
+
+  console.log(productData);
 
   return (
     <Box sx={{ minHeight: '100vh' }}>
       <Typography sx={{ marginBottom: '50px' }}>
-        جینیس شاپ/{category.name}
+        {/* جینیس شاپ/{category.name} */}
       </Typography>
       <Box sx={{ display: 'flex', gap: '50px', height: '100%' }}>
         <Box
@@ -52,7 +65,7 @@ function SingleCategoryPage({ data }: any) {
             marginLeft: 'auto',
           }}
         >
-          {products.map((product) => {
+          {productData?.data.products.map((product: IProductFromBack) => {
             return <ProductCard key={product._id} productData={product} />;
           })}
         </Box>
@@ -79,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 
   await queryClient.prefetchQuery(['getProductByCategory', id], () =>
-    getProductByCategoryService(id, 8)
+    getProductByCategoryService(id, '8')
   );
   await queryClient.prefetchQuery(['categoryInfo', id], () =>
     getCategoryByIdService(id)
@@ -88,6 +101,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   return {
     props: {
       data: dehydrate(queryClient),
+      id,
     },
   };
 };
