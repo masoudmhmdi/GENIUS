@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Button, Typography } from '@mui/material';
@@ -11,17 +12,17 @@ function Checkout({ deliveryStatus }: any) {
   const [counter, setCounter] = useState(10);
   const { mutate } = useCreateNewOrder();
   const router = useRouter();
-  let tempCouter = 10;
+  let tempCounter = 10;
 
   useEffect(() => {
     // router.prefetch('/');
     const id = setInterval(() => {
-      console.log(tempCouter);
-      if (tempCouter > 0) {
+      console.log(tempCounter);
+      if (tempCounter > 0) {
         setCounter((prev) => prev - 1);
-        tempCouter -= 1;
+        tempCounter -= 1;
       }
-      if (tempCouter === 0) {
+      if (tempCounter === 0) {
         router.push('/');
       }
     }, 1000);
