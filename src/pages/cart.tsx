@@ -6,6 +6,7 @@ import React from 'react';
 import CartCard from '@/Components/cartcard';
 import Image from 'next/image';
 import SubmitOrderModal from '@/Components/SubmitOrderModal';
+import DeleteProductFromCartModal from '@/Components/deleteProductFromCartModal';
 
 function CartPage() {
   const { cartSlice } = useSelector(
