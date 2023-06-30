@@ -45,7 +45,7 @@ function CartCard({ cartProductData }: { cartProductData: Cart }) {
           }}
         >
           <Button onClick={() => dispatch(handleDeleteModal(true))}>
-            <DeleteRoundedIcon />
+            <DeleteRoundedIcon color="error" />
           </Button>
           <Typography>{cartProductData.product.name}</Typography>
         </Box>

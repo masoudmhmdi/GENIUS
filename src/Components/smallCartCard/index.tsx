@@ -13,6 +13,9 @@ import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { useDispatch } from 'react-redux';
 import { deleteProduct, minusCount, plusCount } from '@/Store/slice/cart.slice';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import DeleteProductFromCartModal from '../deleteProductFromCartModal';
+import { handleDeleteModal } from '@/Store/slice/modalAndToast.slice';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 function SmallCartCard({ cartProductDate }: { cartProductDate: Cart }) {
   const dispatch = useDispatch();
   return (
@@ -42,8 +45,9 @@ function SmallCartCard({ cartProductDate }: { cartProductDate: Cart }) {
             gap: '30px',
           }}
         >
-          <Button>delete</Button>
-          <Typography fontSize={14}>{cartProductDate.product.name}</Typography>
+          <Typography align="center" fontSize={14}>
+            {cartProductDate.product.name}
+          </Typography>
         </Box>
         <Box
           sx={{
@@ -74,16 +78,14 @@ function SmallCartCard({ cartProductDate }: { cartProductDate: Cart }) {
             </Typography>
             {cartProductDate.count === 1 ? (
               <Button
-                sx={{ height: '100%', minWidth: '40px', maxWidth: '40px' }}
-                onClick={() =>
-                  dispatch(deleteProduct(cartProductDate.product._id))
-                }
+                sx={{ height: '100%', minWidth: '30px', maxWidth: '30px' }}
+                onClick={() => dispatch(handleDeleteModal(true))}
               >
-                <DeleteRoundedIcon />
+                <DeleteOutlinedIcon sx={{ fontSize: '22px' }} color="error" />
               </Button>
             ) : (
               <Button
-                sx={{ height: '100%', minWidth: '40px', maxWidth: '40px' }}
+                sx={{ height: '100%', minWidth: '30px', maxWidth: '30px' }}
                 onClick={() =>
                   dispatch(minusCount(cartProductDate.product._id))
                 }
@@ -110,6 +112,7 @@ function SmallCartCard({ cartProductDate }: { cartProductDate: Cart }) {
           image={cartProductDate.product.images[0]}
         />
       </CardActionArea>
+      <DeleteProductFromCartModal id={cartProductDate?.product._id} />
     </Card>
   );
 }

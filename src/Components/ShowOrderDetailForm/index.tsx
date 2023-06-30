@@ -65,7 +65,7 @@ function ShowOrderDetailForm({ orderInfo }: { orderInfo: IOrder }) {
         <Typography> نام کاربری:{orderInfo.user.username}</Typography>
         <Typography>
           تاریخ ثبت سفارش:
-          {new Date(orderInfo.user.createdAt).toLocaleString('fa-IR', {
+          {new Date(orderInfo.createdAt).toLocaleString('fa-IR', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',

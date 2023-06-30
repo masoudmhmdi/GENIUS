@@ -43,12 +43,16 @@ export default function DeleteProductFromCartModal({ id }: any) {
       >
         <Box sx={style}>
           <Box>
-            <Typography variant="h5" align="center">
+            <Typography
+              sx={{ paddingBottom: '24px' }}
+              variant="h5"
+              align="center"
+            >
               آیا از حذف این محصول مطمئنید
             </Typography>
             <Box
               sx={{
-                marginY: '16px',
+                marginY: '6px',
                 display: 'flex',
                 justifyContent: 'space-around',
               }}
