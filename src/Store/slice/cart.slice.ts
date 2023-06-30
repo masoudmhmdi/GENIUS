@@ -26,9 +26,16 @@ const cartSlice = createSlice({
   } as IState,
   reducers: {
     addToCart: (state, action) => {
+      const newAll = [...state.allCart, action.payload];
+      const total = newAll.reduce((acc, item) => {
+        const singleTotalPrice = +item.count * +item.product.price;
+        return +acc + singleTotalPrice;
+      }, 0);
+
       return {
         ...state,
-        allCart: [...state.allCart, action.payload],
+        allCart: newAll,
+        totalPrice: total,
       };
     },
     plusCount: (state, action) => {

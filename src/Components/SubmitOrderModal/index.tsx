@@ -4,6 +4,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import SubmitOrderForm from '../submitOrderForm';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/types';
+import { toast } from 'react-hot-toast';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -22,13 +25,27 @@ const style = {
 };
 
 export default function SubmitOrderModal() {
+  const { cartSlice } = useSelector(
+    (state: RootState) => state.persistedReducer
+  );
+  const numberOfProduct = cartSlice.allCart.length;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <Button fullWidth variant="contained" onClick={handleOpen}>
+      <Button
+        fullWidth
+        variant="contained"
+        onClick={() => {
+          if (!numberOfProduct) {
+            toast('هیچ محصولی در سبد خرید نیست');
+          } else {
+            handleOpen();
+          }
+        }}
+      >
         تکمیل خرید
       </Button>
       <Modal

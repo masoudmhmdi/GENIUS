@@ -2,7 +2,7 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
-import { Box, Link } from '@mui/material';
+import { Badge, Box, Link } from '@mui/material';
 import CartCard from '../cartcard';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/types';
@@ -15,6 +15,8 @@ export default function CartPopover() {
   const { cartSlice } = useSelector(
     (state: RootState) => state.persistedReducer
   );
+
+  const numberOfProductInCart = cartSlice.allCart.length;
   const router = useRouter();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -38,7 +40,9 @@ export default function CartPopover() {
       }}
     >
       <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-        <ShoppingCartRoundedIcon />
+        <Badge badgeContent={numberOfProductInCart} color="primary">
+          <ShoppingCartRoundedIcon />
+        </Badge>
       </Button>
       <Popover
         id={id}
