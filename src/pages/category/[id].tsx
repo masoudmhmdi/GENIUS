@@ -1,18 +1,15 @@
 import ProductCard from '@/Components/card';
-import RowRadioButtonsGroup from '@/Components/FilterBar';
 import useGetProductByCategory from '@/api/services/getProductByCategory';
 import getProductByCategoryService from '@/api/services/getProductByCategory/getProductByCategoryService';
 import { theme } from '@/theme';
-import { Category, IProductFromBack, RootState } from '@/types';
+import { IProductFromBack } from '@/types';
 import { Box, Button, Typography } from '@mui/material';
-import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import React, { useState } from 'react';
+import React from 'react';
 import FilterBar from '@/Components/FilterBar';
 import { serverReq } from '@/api/constants';
-import { useSelector } from 'react-redux';
-import useGetCategory from '@/api/services/useGetCategory';
 
 function SingleCategoryPage({ id }: { id: string }) {
   console.log(id);

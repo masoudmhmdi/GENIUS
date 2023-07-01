@@ -9,7 +9,7 @@ const singleCategory = createSlice({
       return { ...state, sort: action.payload };
     },
     brandSetter: (state, action) => {
-      return { ...state, sort: action.payload };
+      return { ...state, brand: action.payload };
     },
   },
 });
