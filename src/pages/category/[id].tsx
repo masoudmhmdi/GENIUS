@@ -28,6 +28,7 @@ function SingleCategoryPage({ id, query }: { id: string; query: any }) {
     console.log(query);
     dispatch(priceSetter(query.sort));
     dispatch(brandSetter(query.brand));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
