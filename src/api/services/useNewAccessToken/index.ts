@@ -5,7 +5,7 @@ import { newAccessTokenService } from './newAccessTokenService';
 function useNewAccessTokenService(
   options: UseMutationOptions<string, AxiosError, unknown>
 ) {
-  return useMutation({ ...options, mutationFn: newAccessTokenService });
+  return useMutation({ ...options, mutationFn: newAccessTokenService as any });
 }
 
 export default useNewAccessTokenService;

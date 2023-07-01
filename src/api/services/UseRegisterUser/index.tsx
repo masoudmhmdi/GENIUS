@@ -11,7 +11,7 @@ function useRegisterUser(
     IRegisterData['response']
   >
 ) {
-  return useMutation({ ...options, mutationFn: registerService });
+  return useMutation({ ...options, mutationFn: registerService as any });
 }
 
 export default useRegisterUser;
