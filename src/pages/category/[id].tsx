@@ -11,6 +11,7 @@ import React from 'react';
 import FilterBar from '@/Components/FilterBar';
 import { serverReq } from '@/api/constants';
 import { useGetCategoryById } from '@/api/services/useGetCategoryById';
+import FilteringDownDrawer from '@/Components/filteringDownDrawer';
 
 function SingleCategoryPage({ id }: { id: string }) {
   const { data: category } = useGetCategoryById(id);
@@ -34,23 +35,36 @@ function SingleCategoryPage({ id }: { id: string }) {
             borderStyle: 'solid',
             borderColor: theme.palette.secondary.main,
             borderRadius: '6px',
+            display: {
+              xs: 'none',
+              md: 'block',
+            },
           }}
         >
           <FilterBar />
         </Box>
         <Box
           sx={{
-            width: '70%',
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '30px',
-            justifyContent: 'space-between',
-            marginLeft: 'auto',
+            width: {
+              xs: '100%',
+              md: '70%',
+            },
           }}
         >
-          {productData?.data.products.map((product: IProductFromBack) => {
-            return <ProductCard key={product._id} productData={product} />;
-          })}
+          <FilteringDownDrawer />
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '30px',
+              justifyContent: 'space-around',
+              marginLeft: 'auto',
+            }}
+          >
+            {productData?.data.products.map((product: IProductFromBack) => {
+              return <ProductCard key={product._id} productData={product} />;
+            })}
+          </Box>
         </Box>
       </Box>
     </Box>
