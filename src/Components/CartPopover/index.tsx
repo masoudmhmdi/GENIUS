@@ -39,7 +39,12 @@ export default function CartPopover() {
         justifyContent: 'center',
       }}
     >
-      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+      <Button
+        aria-describedby={id}
+        variant="contained"
+        color="secondary"
+        onClick={handleClick}
+      >
         <Badge badgeContent={numberOfProductInCart} color="primary">
           <ShoppingCartRoundedIcon />
         </Badge>

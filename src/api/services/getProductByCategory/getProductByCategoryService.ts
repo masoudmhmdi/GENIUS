@@ -5,7 +5,6 @@ async function getProductByCategoryService(
   limit: string = '4',
   params?: { sort: string; brand: string }
 ) {
-  // let url = `products?page=1&limit=${limit}&category=${id}`;
   const queryParams: any = {
     page: '1',
     limit: limit,
@@ -17,12 +16,6 @@ async function getProductByCategoryService(
 
   console.log(queryParams);
   const url = new URLSearchParams({ ...queryParams });
-
-  // for (let x in queryParams) {
-  //   if (params[x as any]) {
-  //     url.append(x, queryParams[x]);
-  //   }
-  // }
 
   console.log(url.toString());
 
