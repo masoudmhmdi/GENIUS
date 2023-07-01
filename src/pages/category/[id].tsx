@@ -10,39 +10,26 @@ import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
 import FilterBar from '@/Components/FilterBar';
 import { serverReq } from '@/api/constants';
+import { useGetCategoryById } from '@/api/services/useGetCategoryById';
 
 function SingleCategoryPage({ id }: { id: string }) {
-  console.log(id);
+  const { data: category } = useGetCategoryById(id);
+  console.log(category);
 
-  // const { data: category } = useQuery({
-  //   queryKey: ['categoryInfo', id],
-  //   queryFn: async (id: string) => {
-  //     const res = await serverReq(`/categories/${id}`);
-  //     return res.data;
-  //   },
-  // });
-  // console.log(category);
-
-  // return false;
-
-  const {
-    data: productData,
-    refetch,
-    isLoading,
-  } = useGetProductByCategory(id, '8');
-
-  console.log(productData);
+  const { data: productData, isLoading } = useGetProductByCategory(id, '8');
 
   return (
     <Box sx={{ minHeight: '100vh' }}>
       <Typography sx={{ marginBottom: '50px' }}>
-        {/* جینیس شاپ/{category.name} */}
+        جینیس شاپ/{category?.data.category.name}
       </Typography>
       <Box sx={{ display: 'flex', gap: '50px', height: '100%' }}>
         <Box
           sx={{
             width: '30%',
-            // position: 'fixed',
+            position: 'sticky',
+            top: '10px',
+            height: '150px',
             borderWidth: '1px',
             borderStyle: 'solid',
             borderColor: theme.palette.secondary.main,
@@ -50,7 +37,6 @@ function SingleCategoryPage({ id }: { id: string }) {
           }}
         >
           <FilterBar />
-          <Button onClick={() => refetch()}>اعمال</Button>
         </Box>
         <Box
           sx={{
