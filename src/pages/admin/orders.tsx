@@ -96,13 +96,14 @@ export default function Orders() {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Age"
-          onChange={() => {
-            dispatch(changeStatus());
+          onChange={(e) => {
+            dispatch(changeStatus(e.target.value));
           }}
-          defaultValue={10}
+          value={orderPaginate.deliveryStatus}
         >
-          <MenuItem value={10}>درحال انجام</MenuItem>
-          <MenuItem value={20}>به اتمام رسیده</MenuItem>
+          <MenuItem value={'all'}> همه</MenuItem>
+          <MenuItem value={false as any}>درحال انجام</MenuItem>
+          <MenuItem value={true as any}>به اتمام رسیده</MenuItem>
         </Select>
       </Box>
       <Box sx={{ marginTop: '6px' }} style={{ height: '550px', width: '100%' }}>

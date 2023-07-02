@@ -28,7 +28,7 @@ function useCreateNewOrder() {
     user: userData.user._id,
     products: arrOfProducts,
     deliveryDate: cartSlice.deliveryDate,
-    deliveryStatus: true,
+    deliveryStatus: false,
   };
   return useMutation({
     mutationFn: () => addNewOrderService(serviceInput),

@@ -1,15 +1,16 @@
 import { serverReq } from '@/api/constants';
 type FnInput = {
   page: number;
-  deliveryStatus: boolean;
+  deliveryStatus: boolean | string;
   pageSize: number;
 };
 async function getOrdersService({ page, deliveryStatus, pageSize }: FnInput) {
-  const { data } = await serverReq.get(
-    `/orders?page=${
-      page + 1
-    }&limit=${pageSize}&deliveryStatus=${deliveryStatus}`
-  );
+  const url = new URLSearchParams();
+  page && url.append('page', `${page + 1}`);
+  deliveryStatus !== 'all' && url.append('deliveryStatus', `${deliveryStatus}`);
+  pageSize && url.append('limit', `${pageSize}`);
+  console.log(url.toString());
+  const { data } = await serverReq.get(`/orders?${url.toString()}`);
   return data;
 }
 

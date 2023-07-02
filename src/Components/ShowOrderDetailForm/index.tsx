@@ -39,8 +39,8 @@ const columns: GridColDef[] = [
     align: 'center',
   },
 ];
-
 function ShowOrderDetailForm({ orderInfo }: { orderInfo: IOrder }) {
+  console.log(orderInfo.deliveryStatus);
   const { mutate } = useEndDelivery();
   return (
     <Box sx={{ height: '450px' }}>
@@ -85,8 +85,8 @@ function ShowOrderDetailForm({ orderInfo }: { orderInfo: IOrder }) {
       <Button
         fullWidth
         variant="contained"
-        disabled={!orderInfo.deliveryStatus && true}
-        color={!orderInfo.deliveryStatus ? 'success' : 'primary'}
+        disabled={orderInfo.deliveryStatus && true}
+        color={orderInfo.deliveryStatus ? 'success' : 'primary'}
         onClick={() => mutate(orderInfo._id)}
       >
         تحویل داده شد

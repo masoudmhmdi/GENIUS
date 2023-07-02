@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 async function editDeliveryByIdService(id: string) {
   try {
     const res = await serverReq.patch(`/orders/${id}`, {
-      deliveryStatus: false,
+      deliveryStatus: true,
     });
     toast('محصول با موفقیت تحویل داده شد');
     return res.data;
