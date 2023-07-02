@@ -29,7 +29,7 @@ async function editProductService(
     formData.append('subcategory', subcategory);
 
     images?.map((i: Blob) => formData.append('images', i));
-    console.log(images);
+
     const res = await serverReq.patch(`products/${id}`, formData);
     toast('محصول با موفقیت ویرایش شد', {
       style: { backgroundColor: '#A4D0A4' },

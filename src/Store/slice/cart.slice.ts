@@ -51,7 +51,7 @@ const cartSlice = createSlice({
               'شما حداکتر موجودی این محصول را  به سبد خرید خود اضافه کرده اید'
             );
           }
-          console.log(newItem.count);
+
           return newItem;
         }
         return item;
@@ -99,7 +99,6 @@ const cartSlice = createSlice({
     },
     deleteProduct: (state, action) => {
       const deletedProducts = state.allCart.filter((product) => {
-        console.log(product.product._id, '===', action.payload);
         return product.product._id !== action.payload;
       });
       const total = deletedProducts.reduce((acc, item) => {

@@ -1,4 +1,3 @@
-import ProductCard from '@/Components/card';
 import useGetProductByCategory from '@/api/services/getProductByCategory';
 import getProductByCategoryService from '@/api/services/getProductByCategory/getProductByCategoryService';
 import { theme } from '@/theme';
@@ -7,7 +6,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import FilterBar from '@/Components/FilterBar';
 import { serverReq } from '@/api/constants';
 import { useGetCategoryById } from '@/api/services/useGetCategoryById';
@@ -16,23 +15,50 @@ import getCategoryByIdService from '@/api/services/useGetCategoryById/getCategor
 import { useDispatch } from 'react-redux';
 import { handleSortingProducts } from '@/Store/slice/products.slice';
 import { brandSetter, priceSetter } from '@/Store/slice/singleCategory.slice';
+import { ProductCard } from '@/Components/card';
 
 function SingleCategoryPage({ id, query }: { id: string; query: any }) {
   const { data: category } = useGetCategoryById(id);
-  console.log(category);
+
   const dispatch = useDispatch();
 
-  const { data: productData, isLoading } = useGetProductByCategory(id, '8');
+  const {
+    data: productData,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+    status,
+    error,
+  } = useGetProductByCategory(id, '4');
 
   useEffect(() => {
-    console.log(query);
     dispatch(priceSetter(query.sort));
     dispatch(brandSetter(query.brand));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const intObserver = useRef<any>();
+  const lastPostRef = useCallback(
+    (product: IProductFromBack) => {
+      if (isFetchingNextPage) return;
+      if (intObserver.current) intObserver.current.disconnect();
+
+      intObserver.current = new IntersectionObserver((product) => {
+        console.log(hasNextPage);
+        if (product[0].isIntersecting && hasNextPage) {
+          console.log('last post');
+          fetchNextPage();
+        }
+      });
+
+      if (product) intObserver.current.observe(product);
+    },
+    [fetchNextPage, hasNextPage, isFetchingNextPage]
+  );
+
   return (
     <Box sx={{ minHeight: '100vh' }}>
+      <Button onClick={() => console.log(intObserver)}>click</Button>
       <Typography sx={{ marginBottom: '50px' }}>
         جینیس شاپ/{category?.data.category.name}
       </Typography>
@@ -73,8 +99,24 @@ function SingleCategoryPage({ id, query }: { id: string; query: any }) {
               marginLeft: 'auto',
             }}
           >
-            {productData?.data.products.map((product: IProductFromBack) => {
-              return <ProductCard key={product._id} productData={product} />;
+            {productData?.pages.map((pg) => {
+              return pg.data.products.map(
+                (product: IProductFromBack, i: number) => {
+                  if (pg.data.products.length === i + 1) {
+                    return (
+                      <ProductCard
+                        ref={lastPostRef}
+                        key={product._id}
+                        productData={product}
+                      />
+                    );
+                  } else {
+                    return (
+                      <ProductCard key={product._id} productData={product} />
+                    );
+                  }
+                }
+              );
             })}
           </Box>
         </Box>
@@ -95,7 +137,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { id } = params as IProductParams;
-  console.log(query);
 
   const queryClient = new QueryClient();
 

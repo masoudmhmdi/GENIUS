@@ -10,7 +10,6 @@ function useLoginUser(
     unknown
   >
 ) {
-  console.log('post');
   return useMutation({
     ...options,
     mutationFn: loginService,

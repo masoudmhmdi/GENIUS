@@ -17,7 +17,6 @@ async function getProductService({
     URL += `&sort=${sortValue}`;
   }
 
-  console.log(URL);
   const res = await serverReq(URL);
 
   return res.data;

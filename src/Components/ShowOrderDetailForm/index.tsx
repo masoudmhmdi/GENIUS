@@ -14,7 +14,6 @@ const columns: GridColDef[] = [
     headerAlign: 'center',
     align: 'center',
     renderCell: ({ row }) => {
-      console.log(row);
       return <Typography>{row.product.name}</Typography>;
     },
   },
@@ -27,7 +26,6 @@ const columns: GridColDef[] = [
     headerAlign: 'center',
     align: 'center',
     renderCell: ({ row }) => {
-      console.log(row);
       return <Typography>{row.product.price}</Typography>;
     },
   },

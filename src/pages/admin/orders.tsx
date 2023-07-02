@@ -79,7 +79,6 @@ export default function Orders() {
   const dispatch = useDispatch();
   const { data, isLoading } = useGetOrders();
   if (isLoading) return <PanelAdminSkeleton />;
-  console.log(data);
 
   return (
     <Box sx={{ marginTop: '40px', paddingX: '12px' }}>

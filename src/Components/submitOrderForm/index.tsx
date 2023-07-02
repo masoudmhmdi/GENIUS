@@ -11,7 +11,7 @@ import { setDeliveryDate } from '@/Store/slice/cart.slice';
 function SubmitOrderForm() {
   const { user } = window && JSON.parse(localStorage.getItem('data')!);
   const dispatch = useDispatch();
-  console.log(user);
+
   return (
     <Box
       component={'form'}
@@ -33,7 +33,6 @@ function SubmitOrderForm() {
           <DatePicker
             calendar={persian}
             onChange={(e) => {
-              console.log(e?.valueOf());
               dispatch(setDeliveryDate(e?.valueOf()));
             }}
             locale={persian_fa}

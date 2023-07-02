@@ -25,7 +25,6 @@ export async function addNewProductService(
   formData.append('price', `${price}`);
   formData.append('quantity', `${quantity}`);
   formData.append('subcategory', subcategory);
-  console.log(images);
 
   images!.map((i) => formData.append('images', i));
 
@@ -39,7 +38,6 @@ export async function addNewProductService(
   } catch (error) {
     const err = error as AxiosError<{ message: string; status: string }>;
     const { data } = err.response!;
-    console.log(data);
     toast(data.message);
   }
 }

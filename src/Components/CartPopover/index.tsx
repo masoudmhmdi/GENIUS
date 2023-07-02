@@ -29,7 +29,7 @@ export default function CartPopover() {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-  console.log(router.pathname);
+
   return (
     <Box
       sx={{

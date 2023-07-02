@@ -58,8 +58,6 @@ function EditProductForm({
   });
   const { mutate } = useEditSingleProduct({ setOpen });
 
-  console.log(initialCategory);
-
   const {
     register,
     handleSubmit,
@@ -91,8 +89,6 @@ function EditProductForm({
     return getValues('description');
   };
 
-  console.log(getValues('category'));
-
   const setImageData = (data: any) => {
     setValue('images', data);
     setImagePreview((prev) => {
@@ -100,7 +96,6 @@ function EditProductForm({
     });
   };
 
-  console.log(getValues('images'));
   return (
     <Box
       component={'form'}

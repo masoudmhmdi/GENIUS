@@ -15,7 +15,6 @@ const productsSlice = createSlice({
     },
     handleSortingProducts: (state, { payload }) => {
       const [payloadObj] = payload;
-      console.log(payloadObj);
 
       if (payloadObj) {
         return { ...state, field: payloadObj.field, sort: payloadObj.sort };

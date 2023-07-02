@@ -5,7 +5,7 @@ import ShowOrderDetailForm from '../ShowOrderDetailForm';
 
 function ShowOrderDownDrawer({ orderInfo }: any) {
   const [open, setOpen] = useState(false);
-  console.log(orderInfo);
+
   return (
     <Box>
       <Box>

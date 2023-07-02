@@ -51,7 +51,6 @@ function UploadImage({
   >;
 }) {
   const [files, setFiles] = useState<(any & { preview: string })[]>([]);
-  console.log(files);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {

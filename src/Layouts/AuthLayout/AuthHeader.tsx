@@ -37,7 +37,7 @@ function HideOnScroll(props: Props) {
 
 export default function AuthHeader(props: Props) {
   const router = useRouter();
-  console.log(router.pathname);
+
   return (
     <React.Fragment>
       <HideOnScroll {...props}>

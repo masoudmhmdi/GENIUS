@@ -98,9 +98,8 @@ export default function Product() {
   const { data, isLoading } = useGetProducts();
 
   if (isLoading) return <PanelAdminSkeleton />;
-  console.log(data);
+
   const products = data.data.products;
-  console.log(orderPaginate);
 
   return (
     <Box sx={{ marginTop: '40px', paddingX: '12px' }}>

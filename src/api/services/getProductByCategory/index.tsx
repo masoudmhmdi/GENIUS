@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import React from 'react';
 import getProductByCategoryService from './getProductByCategoryService';
 import { useSelector } from 'react-redux';
@@ -12,15 +12,17 @@ function useGetProductByCategory(id: string, limit: string) {
 
   if (params?.brand) queryParams['brand'] = params?.brand;
   if (params?.sort) queryParams['sort'] = params?.sort;
-  console.log(router.asPath);
 
   const url = new URLSearchParams({ ...queryParams });
   const q = url.toString() ? '?' + url.toString() : '';
-  console.log(router);
-  return useQuery({
-    queryKey: ['getProductByCategory', id, params.brand, params.sort],
 
-    queryFn: () => getProductByCategoryService(id, limit, params),
+  return useInfiniteQuery({
+    queryKey: ['getProductByCategory', id, params.brand, params.sort],
+    queryFn: ({ pageParam }) =>
+      getProductByCategoryService(id, limit, params, pageParam),
+    getNextPageParam: (lastPage, allPage) => {
+      return lastPage.data.products.length ? allPage.length + 1 : undefined;
+    },
     onSuccess: () => {
       router.replace(`${id}${q}`, undefined, {
         shallow: true,

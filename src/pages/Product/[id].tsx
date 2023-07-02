@@ -62,7 +62,7 @@ function SingleProductPage({
     });
     dispatch(minusCount(productData._id));
   };
-  console.log(isExistInCart);
+
   return (
     <Box
       sx={{

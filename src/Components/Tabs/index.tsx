@@ -22,16 +22,14 @@ export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
   const [isAdmin, setIsAdmin] = React.useState(false);
   const router = useRouter();
-  console.log(router.pathname);
+
   React.useEffect(() => {
     const { user } = getUserData();
-    console.log(user.role);
     if (user.role === 'ADMIN') {
       setIsAdmin(true);
     }
 
     const pathName = router.pathname;
-    console.log(pathName);
 
     switch (pathName) {
       case '/':

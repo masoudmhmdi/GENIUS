@@ -7,7 +7,6 @@ function useDeleteProduct() {
   return useMutation({
     mutationFn: (id: string) => deleteProductService(id),
     onSuccess: (x) => {
-      console.log(x);
       queryClient.invalidateQueries({ queryKey: ['GetProduct'] });
     },
   });

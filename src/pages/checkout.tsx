@@ -17,7 +17,6 @@ function Checkout({ deliveryStatus }: any) {
 
   useEffect(() => {
     const id = setInterval(() => {
-      console.log(tempCounter);
       if (tempCounter > 0) {
         setCounter((prev) => prev - 1);
         tempCounter -= 1;
@@ -26,14 +25,12 @@ function Checkout({ deliveryStatus }: any) {
         router.push('/');
       }
     }, 1000);
-    console.log(id);
 
     return () => clearInterval(id);
   }, []);
 
   // use effect for set request
   useEffect(() => {
-    console.log(deliveryStatus);
     if (deliveryStatus === 'true') {
       mutate();
     }
@@ -120,7 +117,7 @@ export default Checkout;
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { deliveryStatus } = query;
-  console.log(query);
+
   return {
     props: {
       deliveryStatus: query.delivery,

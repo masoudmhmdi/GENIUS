@@ -12,7 +12,6 @@ function CartPage() {
   const { cartSlice } = useSelector(
     (state: RootState) => state.persistedReducer
   );
-  console.log(cartSlice);
 
   return (
     <Box

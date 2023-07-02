@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 import { useRouter } from 'next/router';
 import Cookie from 'js-cookie';
-import ProductCard from '@/Components/card';
+
 import Slider from '@/Components/slider';
 import useGetCategory from '@/api/services/useGetCategory';
 import Image from 'next/image';
@@ -21,9 +21,9 @@ import { QueryClient, dehydrate } from '@tanstack/react-query';
 import getProductByCategoryService from '@/api/services/getProductByCategory/getProductByCategoryService';
 import Link from 'next/link';
 import { theme } from '@/theme';
+import { ProductCard } from '@/Components/card';
 
 export default function Home({ data }: any) {
-  console.log(data);
   const { data: allCategory } = useGetCategory();
   const mobileData: IProductFromBack[] =
     data.queries[0].state.data.data.products;
