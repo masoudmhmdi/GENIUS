@@ -31,6 +31,7 @@ export default function FilterBar() {
   const { brand, sort } = useSelector(
     (state: RootState) => state.singleCategory
   );
+  console.log(brand);
 
   const handleRadioPriceChange = (value: string) => {
     dispatch(priceSetter(value));
@@ -58,7 +59,7 @@ export default function FilterBar() {
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
               onChange={(e) => handleRadioPriceChange(e.target.value)}
-              defaultValue={sort}
+              value={sort}
             >
               <FormControlLabel
                 value="-price"
@@ -89,7 +90,7 @@ export default function FilterBar() {
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
             onChange={(e) => handleRadioBrandChange(e.target.value)}
-            defaultValue={brand}
+            value={brand}
           >
             <FormControlLabel value="" control={<Radio />} label="همه" />
             <FormControlLabel value="apple" control={<Radio />} label="اپل" />
@@ -103,11 +104,7 @@ export default function FilterBar() {
               control={<Radio />}
               label="شیائومی"
             />
-            <FormControlLabel
-              value="xiaomi"
-              control={<Radio />}
-              label="شیائومی"
-            />
+            <FormControlLabel value="hp" control={<Radio />} label="اچ پی" />
             <FormControlLabel
               value="huawei"
               control={<Radio />}

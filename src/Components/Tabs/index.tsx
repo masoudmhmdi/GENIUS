@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useRouter } from 'next/router';
 import getUserData from '@/utils/getUserData';
-
+import HomeIcon from '@mui/icons-material/Home';
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -64,7 +64,11 @@ export default function BasicTabs() {
         onChange={handleChange}
         aria-label="basic tabs example"
       >
-        <Tab onClick={() => router.push('/')} label=" خانه" {...a11yProps(0)} />
+        <Tab
+          onClick={() => router.push('/')}
+          icon={<HomeIcon />}
+          {...a11yProps(0)}
+        />
         <Tab
           onClick={() => router.push('/cart')}
           label="سبد خرید"

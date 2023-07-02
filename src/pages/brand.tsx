@@ -1,7 +1,7 @@
 import useGetProductByCategory from '@/api/services/getProductByCategory';
 import getProductByCategoryService from '@/api/services/getProductByCategory/getProductByCategoryService';
 import { theme } from '@/theme';
-import { IProductFromBack } from '@/types';
+import { IProductFromBack, RootState } from '@/types';
 import { Box, Button, Typography } from '@mui/material';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
@@ -12,15 +12,16 @@ import { serverReq } from '@/api/constants';
 import { useGetCategoryById } from '@/api/services/useGetCategoryById';
 import FilteringDownDrawer from '@/Components/filteringDownDrawer';
 import getCategoryByIdService from '@/api/services/useGetCategoryById/getCategoryByIdService';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { handleSortingProducts } from '@/Store/slice/products.slice';
 import { brandSetter, priceSetter } from '@/Store/slice/singleCategory.slice';
 import { ProductCard } from '@/Components/card';
+import useGetProductByBrandName from '@/api/services/useGetProductByBrand';
+import getProductByBrandName from '@/api/services/useGetProductByBrand/getProductByCategoryService';
 
-function SingleCategoryPage({ id, query }: { id: string; query: any }) {
-  const { data: category } = useGetCategoryById(id);
-
+function SingleCategoryPage({ query }: { brandName: string; query: any }) {
   const dispatch = useDispatch();
+  const { brand } = useSelector((state: RootState) => state.singleCategory);
 
   const {
     data: productData,
@@ -29,7 +30,7 @@ function SingleCategoryPage({ id, query }: { id: string; query: any }) {
     isFetchingNextPage,
     status,
     error,
-  } = useGetProductByCategory(id, '4');
+  } = useGetProductByBrandName('4');
 
   useEffect(() => {
     dispatch(priceSetter(query.sort));
@@ -58,9 +59,7 @@ function SingleCategoryPage({ id, query }: { id: string; query: any }) {
 
   return (
     <Box sx={{ minHeight: '100vh' }}>
-      <Typography sx={{ marginBottom: '50px' }}>
-        جینیس شاپ/{category?.data.category.name}
-      </Typography>
+      <Typography sx={{ marginBottom: '50px' }}>جینیس شاپ/{brand}</Typography>
       <Box sx={{ display: 'flex', gap: '50px', height: '100%' }}>
         <Box
           sx={{
@@ -135,21 +134,16 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { id } = params as IProductParams;
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['getProductByCategory', id], () =>
-    getProductByCategoryService(id, '8', query as any)
-  );
-  await queryClient.prefetchQuery(['categoryInfo', id], () =>
-    getCategoryByIdService(id)
+  await queryClient.prefetchQuery(['getProductBtBrandName'], () =>
+    getProductByBrandName('8', query as any)
   );
 
   return {
     props: {
       data: dehydrate(queryClient),
-      id,
       query,
     },
   };
