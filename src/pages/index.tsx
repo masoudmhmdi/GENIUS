@@ -22,6 +22,7 @@ import getProductByCategoryService from '@/api/services/getProductByCategory/get
 import Link from 'next/link';
 import { theme } from '@/theme';
 import { ProductCard } from '@/Components/card';
+import AppleIcon from '@mui/icons-material/Apple';
 
 export default function Home({ data }: any) {
   const { data: allCategory } = useGetCategory();
@@ -40,33 +41,95 @@ export default function Home({ data }: any) {
       </Head>
       <Box sx={{ width: '100%' }}>
         <Slider />
-        <Typography sx={{ marginY: '20px' }} align="left" variant="h4">
-          برند ها
-        </Typography>
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'space-between',
+            flexDirection: {
+              xs: 'row',
+              md: 'column',
+            },
+            marginY: 4,
+            gap: '100px',
             width: '100%',
           }}
         >
-          {allCategory?.data.categories.map((category: Category) => {
-            return (
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Link href={'/brand?brand=apple'}>
               <Button
-                key={category._id}
                 color="secondary"
                 variant="contained"
-                sx={{ width: '100px', height: '100px', borderRadius: '100%' }}
+                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
               >
-                <Image
-                  src={`http://localhost:8000/images/categories/icons/${category.icon}`}
-                  alt=""
-                  width={50}
-                  height={50}
-                />
+                <AppleIcon />
               </Button>
-            );
-          })}
+            </Link>
+            <Link href={'/brand?brand=apple'}>
+              <Button
+                color="secondary"
+                variant="contained"
+                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+              >
+                <AppleIcon />
+              </Button>
+            </Link>
+            <Link href={'/brand?brand=apple'}>
+              <Button
+                color="secondary"
+                variant="contained"
+                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+              >
+                <AppleIcon />
+              </Button>
+            </Link>
+            <Link href={'/brand?brand=apple'}>
+              <Button
+                color="secondary"
+                variant="contained"
+                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+              >
+                <AppleIcon />
+              </Button>
+            </Link>
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            {' '}
+            <Link href={'/brand?brand=apple'}>
+              <Button
+                color="secondary"
+                variant="contained"
+                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+              >
+                <AppleIcon />
+              </Button>
+            </Link>
+            <Link href={'/brand?brand=apple'}>
+              <Button
+                color="secondary"
+                variant="contained"
+                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+              >
+                <AppleIcon />
+              </Button>
+            </Link>
+            <Link href={'/brand?brand=apple'}>
+              <Button
+                color="secondary"
+                variant="contained"
+                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+              >
+                <AppleIcon />
+              </Button>
+            </Link>
+            <Link href={'/brand?brand=apple'}>
+              <Button
+                color="secondary"
+                variant="contained"
+                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+              >
+                <AppleIcon />
+              </Button>
+            </Link>
+          </Box>
         </Box>
         <Box sx={{ display: 'flex', marginY: '50px' }}>
           <Box sx={{ flexGrow: '1' }}>
