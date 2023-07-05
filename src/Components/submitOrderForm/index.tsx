@@ -31,6 +31,7 @@ function SubmitOrderForm() {
         >
           <TextField disabled value={user.firstname} label={'نام'} fullWidth />
           <DatePicker
+            minDate={new Date()}
             calendar={persian}
             onChange={(e) => {
               dispatch(setDeliveryDate(e?.valueOf()));

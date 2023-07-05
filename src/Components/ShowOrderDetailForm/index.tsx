@@ -89,7 +89,15 @@ function ShowOrderDetailForm({ orderInfo }: { orderInfo: IOrder }) {
         color={orderInfo.deliveryStatus ? 'success' : 'primary'}
         onClick={() => mutate(orderInfo._id)}
       >
-        تحویل داده شد
+        {orderInfo.deliveryStatus
+          ? new Date(orderInfo.deliveryDate).toLocaleString('fa-IR', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            }) + ' تحویل داده شده است '
+          : 'تحویل داده شد'}
       </Button>
     </Box>
   );
