@@ -71,8 +71,10 @@ export const ProductCard = forwardRef(
             <CardContent
               sx={{ display: 'flex', gap: '6px', flexDirection: 'column' }}
             >
-              <Box>
-                <Typography align="left">{productData.name}</Typography>
+              <Box sx={{ flex: '1' }}>
+                <Typography align="left" className="card-text">
+                  {productData.name}
+                </Typography>
                 <Typography align="left" fontWeight={'bold'}>
                   {productData.price}
                   تومان

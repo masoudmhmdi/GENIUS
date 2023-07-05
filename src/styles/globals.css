@@ -94,3 +94,10 @@ body {
   background-color: #7e7e7e !important;
   color: #fff;
 }
+
+.card-text {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
