@@ -14,7 +14,17 @@ import { forwardRef } from 'react';
 export const ProductCard = forwardRef(
   ({ productData }: { productData: IProductFromBack }, ref) => {
     const content = ref ? (
-      <Card ref={ref as any} variant="outlined" sx={{ minWidth: '235px' }}>
+      <Card
+        ref={ref as any}
+        variant="outlined"
+        sx={{
+          maxWidth: 235,
+          minWidth: {
+            xs: '100%',
+            sm: '235px',
+          },
+        }}
+      >
         <CardActionArea sx={{ width: '100%', height: '100%' }}>
           <Link
             style={{
@@ -54,7 +64,16 @@ export const ProductCard = forwardRef(
         </CardActionArea>
       </Card>
     ) : (
-      <Card variant="outlined" sx={{ maxWidth: 235 }}>
+      <Card
+        variant="outlined"
+        sx={{
+          maxWidth: 235,
+          minWidth: {
+            xs: '100%',
+            sm: '235px',
+          },
+        }}
+      >
         <CardActionArea sx={{ width: '100%', height: '100%' }}>
           <Link
             style={{
