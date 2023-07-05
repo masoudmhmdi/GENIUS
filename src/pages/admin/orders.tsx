@@ -131,6 +131,3 @@ export default function Orders() {
 Orders.getLayout = function pageLayout(page: React.ReactNode) {
   return <AdminLayout>{page}</AdminLayout>;
 };
-
-// background: rgb(33,37,41);
-// background:
