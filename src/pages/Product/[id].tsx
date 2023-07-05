@@ -67,17 +67,31 @@ function SingleProductPage({
     <Box
       sx={{
         display: 'flex',
+        flexDirection: {
+          xs: 'column',
+          md: 'row',
+        },
         marginY: '60px',
         justifyContent: 'space-between',
         gap: '100px',
       }}
     >
-      <Box sx={{ width: '50%' }}>
+      <Box
+        sx={{
+          width: {
+            xs: '100%',
+            md: '50%',
+          },
+        }}
+      >
         <SingleProductSlider images={productData.images} />
       </Box>
       <Box
         sx={{
-          width: '50%',
+          width: {
+            xs: '100%',
+            md: '50%',
+          },
           display: 'flex',
           gap: '20px',
           flexDirection: 'column',
