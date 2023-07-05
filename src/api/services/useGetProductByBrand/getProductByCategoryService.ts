@@ -6,7 +6,7 @@ async function getProductByBrandName(
   page?: string
 ) {
   const queryParams: any = {
-    page,
+    page: page || '1',
     limit: limit,
   };
 

@@ -44,92 +44,56 @@ export default function Home({ data }: any) {
         <Box
           sx={{
             display: 'flex',
-            flexDirection: {
-              xs: 'row',
-              md: 'column',
-            },
-            marginY: 4,
-            gap: '100px',
-            width: '100%',
+            justifyContent: 'space-between',
+            marginY: '16px',
           }}
         >
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Link href={'/brand?brand=apple'}>
-              <Button
-                color="secondary"
-                variant="contained"
-                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
-              >
-                <AppleIcon />
-              </Button>
-            </Link>
-            <Link href={'/brand?brand=apple'}>
-              <Button
-                color="secondary"
-                variant="contained"
-                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
-              >
-                <AppleIcon />
-              </Button>
-            </Link>
-            <Link href={'/brand?brand=apple'}>
-              <Button
-                color="secondary"
-                variant="contained"
-                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
-              >
-                <AppleIcon />
-              </Button>
-            </Link>
-            <Link href={'/brand?brand=apple'}>
-              <Button
-                color="secondary"
-                variant="contained"
-                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
-              >
-                <AppleIcon />
-              </Button>
-            </Link>
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            {' '}
-            <Link href={'/brand?brand=apple'}>
-              <Button
-                color="secondary"
-                variant="contained"
-                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
-              >
-                <AppleIcon />
-              </Button>
-            </Link>
-            <Link href={'/brand?brand=apple'}>
-              <Button
-                color="secondary"
-                variant="contained"
-                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
-              >
-                <AppleIcon />
-              </Button>
-            </Link>
-            <Link href={'/brand?brand=apple'}>
-              <Button
-                color="secondary"
-                variant="contained"
-                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
-              >
-                <AppleIcon />
-              </Button>
-            </Link>
-            <Link href={'/brand?brand=apple'}>
-              <Button
-                color="secondary"
-                variant="contained"
-                sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
-              >
-                <AppleIcon />
-              </Button>
-            </Link>
-          </Box>
+          <Link href={'/brand?brand=apple'}>
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+            >
+              <AppleIcon />
+            </Button>
+          </Link>
+          <Link href={'/brand?brand=sumsung'}>
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+            >
+              <Image
+                src={'/samsung.png'}
+                alt="samsung-logo"
+                width={50}
+                height={50}
+              />
+            </Button>
+          </Link>
+          <Link href={'/brand?brand=xiaomi'}>
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+            >
+              <Image
+                src={'/xiaomi.png'}
+                alt="samsung-logo"
+                width={40}
+                height={40}
+              />
+            </Button>
+          </Link>
+          <Link href={'/brand?brand=لنوو'}>
+            <Button
+              color="secondary"
+              variant="contained"
+              sx={{ width: '90px', height: '90px', borderRadius: '100%' }}
+            >
+              <AppleIcon />
+            </Button>
+          </Link>
         </Box>
         <Box sx={{ display: 'flex', marginY: '50px' }}>
           <Box sx={{ flexGrow: '1' }}>
