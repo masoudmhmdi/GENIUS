@@ -220,12 +220,13 @@ export default function Home({ data }: any) {
             justifyContent: 'space-between',
             gap: '20px',
             backdropFilter: 'unset',
+            overflow: 'auto',
           }}
         >
           <Box
             sx={{
-              width: '200px',
-              height: '200px',
+              MinWidth: '200px',
+              MinHeight: '200px',
               position: 'relative',
               borderRadius: '12px',
               overflow: 'hidden',
@@ -280,7 +281,7 @@ export default function Home({ data }: any) {
           </Box>
           <Box
             sx={{
-              width: '200px',
+              minWidth: '200px',
               height: '200px',
               position: 'relative',
               borderRadius: '12px',
@@ -337,7 +338,7 @@ export default function Home({ data }: any) {
           </Box>
           <Box
             sx={{
-              width: '200px',
+              minWidth: '200px',
               height: '200px',
               position: 'relative',
               borderRadius: '12px',
@@ -395,7 +396,7 @@ export default function Home({ data }: any) {
           </Box>
           <Box
             sx={{
-              width: '200px',
+              minWidth: '200px',
               height: '200px',
               position: 'relative',
               borderRadius: '12px',
@@ -451,7 +452,7 @@ export default function Home({ data }: any) {
           </Box>
           <Box
             sx={{
-              width: '200px',
+              minWidth: '200px',
               height: '200px',
               position: 'relative',
               borderRadius: '12px',
@@ -519,10 +520,15 @@ export default function Home({ data }: any) {
             display: 'flex',
             justifyContent: 'space-between',
             paddingY: '12px',
+            overflow: 'auto',
           }}
         >
           {mobileData.map((p) => {
-            return <ProductCard productData={p} key={p._id} />;
+            return (
+              <Box key={p._id} sx={{ minWidth: '235px', marginX: '6px' }}>
+                <ProductCard productData={p} />
+              </Box>
+            );
           })}
         </Box>
         <Box
@@ -543,10 +549,15 @@ export default function Home({ data }: any) {
             display: 'flex',
             justifyContent: 'space-between',
             paddingY: '12px',
+            overflow: 'auto',
           }}
         >
           {laptopData.map((p) => {
-            return <ProductCard productData={p} key={p._id} />;
+            return (
+              <Box key={p._id} sx={{ minWidth: '235px', marginX: '6px' }}>
+                <ProductCard productData={p} />
+              </Box>
+            );
           })}
         </Box>
       </Box>
