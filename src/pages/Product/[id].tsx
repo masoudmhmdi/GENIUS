@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { QueryClient, dehydrate } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
 import getProductByIdService from '@/api/services/useGetProductById/getProductByIdService';
 import { IProductFromBack, RootState } from '@/types';
 import { AxiosResponse } from 'axios';
-import { Box, Button, Link, Rating, Typography } from '@mui/material';
+import { Box, Button, Rating, Typography } from '@mui/material';
 import SingleProductSlider from '@/Components/singleProductSlider';
 import parse from 'html-react-parser';
-import Image from 'next/image';
 import OriginalIcon from '@/Components/icons/orginal';
 import ExpressDelivery from '@/Components/icons/expressDelivery';
 import CashNoDelivery from '@/Components/icons/cashNoDelivery';
@@ -16,7 +15,6 @@ import SevenDay from '@/Components/icons/sevenDay';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
-import { Remove } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addToCart,
@@ -24,7 +22,6 @@ import {
   minusCount,
   plusCount,
 } from '@/Store/slice/cart.slice';
-import { theme } from '@/theme';
 
 function SingleProductPage({
   data,
