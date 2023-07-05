@@ -18,6 +18,8 @@ export default function CartPopover() {
 
   const numberOfProductInCart = cartSlice.allCart.length;
   const router = useRouter();
+  const isAdmin = router.pathname.split('/')[1];
+  console.log(isAdmin);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -39,16 +41,18 @@ export default function CartPopover() {
         justifyContent: 'center',
       }}
     >
-      <Button
-        aria-describedby={id}
-        variant="contained"
-        color="secondary"
-        onClick={handleClick}
-      >
-        <Badge badgeContent={numberOfProductInCart} color="primary">
-          <ShoppingCartRoundedIcon />
-        </Badge>
-      </Button>
+      {isAdmin !== 'admin' && (
+        <Button
+          aria-describedby={id}
+          variant="contained"
+          color="secondary"
+          onClick={handleClick}
+        >
+          <Badge badgeContent={numberOfProductInCart} color="primary">
+            <ShoppingCartRoundedIcon />
+          </Badge>
+        </Button>
+      )}
       <Popover
         id={id}
         open={open}
