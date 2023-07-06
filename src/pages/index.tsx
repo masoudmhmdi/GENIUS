@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { useEffect } from 'react';
 const inter = Inter({ subsets: ['latin'] });
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import Cookie from 'js-cookie';
 
 import Slider from '@/Components/slider';
@@ -513,7 +513,17 @@ export default function Home({ data }: any) {
           <Typography align="left" variant="h4">
             موبایل ها
           </Typography>
-          <Button sx={{ opacity: '0.7', textDecoration: 'inline' }}>همه</Button>
+          <Link
+            href={'/category/647f103a8dcfc191205f4bbf'}
+            style={{
+              textDecoration: 'none',
+              color: theme.palette.primary.main,
+            }}
+          >
+            <Button sx={{ opacity: '0.7', textDecoration: 'inline' }}>
+              همه
+            </Button>
+          </Link>
         </Box>
         <Box
           sx={{
@@ -542,7 +552,17 @@ export default function Home({ data }: any) {
           <Typography align="left" variant="h4">
             لپتاپ ها
           </Typography>
-          <Button sx={{ opacity: '0.7', textDecoration: 'inline' }}>همه</Button>
+          <Link
+            href={'/category/647f103a8dcfc191205f4bbf'}
+            style={{
+              textDecoration: 'none',
+              color: theme.palette.primary.main,
+            }}
+          >
+            <Button sx={{ opacity: '0.7', textDecoration: 'inline' }}>
+              همه
+            </Button>
+          </Link>
         </Box>
         <Box
           sx={{
