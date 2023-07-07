@@ -225,14 +225,14 @@ export default function Home({ data }: any) {
         >
           <Box
             sx={{
-              MinWidth: '200px',
-              MinHeight: '200px',
+              minWidth: '200px',
+              height: '200px',
               position: 'relative',
               borderRadius: '12px',
               overflow: 'hidden',
               display: 'flex',
               justifyContent: 'center',
-              paddingBottom: '20px',
+              alignItems: 'center',
             }}
           >
             <Image
@@ -271,6 +271,8 @@ export default function Home({ data }: any) {
                   color: theme.palette.primary.main,
                   display: 'flex',
                   alignItems: 'center',
+                  width: '100%',
+                  justifyContent: 'center',
                 }}
                 href={'/category/647f0ffd8dcfc191205f4bb3'}
               >
@@ -328,6 +330,8 @@ export default function Home({ data }: any) {
                   color: theme.palette.primary.main,
                   display: 'flex',
                   alignItems: 'center',
+                  width: '100%',
+                  justifyContent: 'center',
                 }}
                 href={'/category/647f103a8dcfc191205f4bbf'}
               >
@@ -386,6 +390,8 @@ export default function Home({ data }: any) {
                   color: theme.palette.primary.main,
                   display: 'flex',
                   alignItems: 'center',
+                  width: '100%',
+                  justifyContent: 'center',
                 }}
                 href={'/category/647f10148dcfc191205f4bb7'}
               >
@@ -442,6 +448,8 @@ export default function Home({ data }: any) {
                   color: theme.palette.primary.main,
                   display: 'flex',
                   alignItems: 'center',
+                  width: '100%',
+                  justifyContent: 'center',
                 }}
                 href={'/category/647f10268dcfc191205f4bbb'}
               >
@@ -493,6 +501,8 @@ export default function Home({ data }: any) {
                   color: theme.palette.primary.main,
                   display: 'flex',
                   alignItems: 'center',
+                  width: '100%',
+                  justifyContent: 'center',
                 }}
                 href={'/category/647f10e38dcfc191205f4bc3'}
               >
