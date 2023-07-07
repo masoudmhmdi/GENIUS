@@ -25,13 +25,15 @@ const style = {
   outline: 'none',
 };
 
-export default function DeleteProductFromCartModal({ id }: any) {
-  const { deleteModal } = useSelector(
+export default function DeleteProductFromCartModal() {
+  const { deleteModal, selectedIdForDelete: id } = useSelector(
     (state: RootState) => state.modalAndToast
   );
+
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const handleClose = () => dispatch(handleDeleteModal(false));
+  console.log(id);
 
   return (
     <div>

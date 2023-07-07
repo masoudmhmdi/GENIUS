@@ -13,8 +13,7 @@ import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { useDispatch } from 'react-redux';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import { deleteProduct, minusCount, plusCount } from '@/Store/slice/cart.slice';
-import DeleteProductFromCartModal from '../deleteProductFromCartModal';
-import { handleDeleteModal } from '@/Store/slice/modalAndToast.slice';
+import { handleDeleteModal, setId } from '@/Store/slice/modalAndToast.slice';
 function CartCard({ cartProductData }: { cartProductData: Cart }) {
   const dispatch = useDispatch();
   return (
@@ -44,7 +43,12 @@ function CartCard({ cartProductData }: { cartProductData: Cart }) {
             gap: '30px',
           }}
         >
-          <Button onClick={() => dispatch(handleDeleteModal(true))}>
+          <Button
+            onClick={() => {
+              dispatch(handleDeleteModal(true));
+              dispatch(setId(cartProductData.product._id));
+            }}
+          >
             <DeleteRoundedIcon color="error" />
           </Button>
           <Typography>{cartProductData.product.name}</Typography>
@@ -101,7 +105,6 @@ function CartCard({ cartProductData }: { cartProductData: Cart }) {
           image={cartProductData.product.images[0]}
         />
       </CardActionArea>
-      <DeleteProductFromCartModal id={cartProductData?.product._id} />
     </Card>
   );
 }

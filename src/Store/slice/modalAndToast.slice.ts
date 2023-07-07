@@ -2,7 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const modalAndToast = createSlice({
   name: 'ModalAndToast',
-  initialState: { downDrawerOpen: false, deleteModal: false },
+  initialState: {
+    downDrawerOpen: false,
+    deleteModal: false,
+    selectedIdForDelete: '',
+  },
   reducers: {
     handleDowDrawer: (state, action) => {
       return { ...state, downDrawerOpen: action.payload };
@@ -10,9 +14,12 @@ const modalAndToast = createSlice({
     handleDeleteModal: (state, action) => {
       return { ...state, deleteModal: action.payload };
     },
+    setId: (state, action) => {
+      return { ...state, selectedIdForDelete: action.payload };
+    },
   },
 });
 
-export const { handleDeleteModal } = modalAndToast.actions;
+export const { handleDeleteModal, setId } = modalAndToast.actions;
 
 export default modalAndToast.reducer;

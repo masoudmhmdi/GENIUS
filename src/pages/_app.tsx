@@ -23,6 +23,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools/build/lib/devtools';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+import DeleteProductFromCartModal from '@/Components/deleteProductFromCartModal';
 
 let persistor = persistStore(store);
 
@@ -57,6 +58,7 @@ export default function MyApp(props: MyAppProps) {
                   <PersistGate persistor={persistor}>
                     <CssBaseline />
                     <NextNProgress color="#212529" />
+                    <DeleteProductFromCartModal />
                     {Component.getLayout ? (
                       Component.getLayout(<Component {...pageProps} />)
                     ) : (

@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { deleteProduct, minusCount, plusCount } from '@/Store/slice/cart.slice';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import DeleteProductFromCartModal from '../deleteProductFromCartModal';
-import { handleDeleteModal } from '@/Store/slice/modalAndToast.slice';
+import { handleDeleteModal, setId } from '@/Store/slice/modalAndToast.slice';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 function SmallCartCard({ cartProductDate }: { cartProductDate: Cart }) {
   const dispatch = useDispatch();
@@ -79,7 +79,10 @@ function SmallCartCard({ cartProductDate }: { cartProductDate: Cart }) {
             {cartProductDate.count === 1 ? (
               <Button
                 sx={{ height: '100%', minWidth: '30px', maxWidth: '30px' }}
-                onClick={() => dispatch(handleDeleteModal(true))}
+                onClick={() => {
+                  dispatch(handleDeleteModal(true));
+                  dispatch(setId(cartProductDate.product._id));
+                }}
               >
                 <DeleteOutlinedIcon sx={{ fontSize: '22px' }} color="error" />
               </Button>
@@ -112,7 +115,6 @@ function SmallCartCard({ cartProductDate }: { cartProductDate: Cart }) {
           image={cartProductDate.product.images[0]}
         />
       </CardActionArea>
-      <DeleteProductFromCartModal id={cartProductDate?.product._id} />
     </Card>
   );
 }
